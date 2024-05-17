@@ -17,10 +17,10 @@
 /*          definition              */
 /************************************/
 /* associate phyisical pin with corresponding button */
-#define PIN_BUTTON_UP_SET_LOW()     IO_RB1_SetLow()
-#define PIN_BUTTON_UP_SET_HIGH()    IO_RB1_SetHigh()
-#define PIN_BUTTON_DOWN_SET_LOW()   IO_RB2_SetLow()
-#define PIN_BUTTON_DOWN_SET_HIGH()  IO_RB3_SetHigh()
+#define PIN_BUTTON_UP_SET_LOW()         {IO_RB1_SetLow();IO_RB1_SetDigitalOutput();} // configure pin as output low
+#define PIN_BUTTON_UP_SET_HIGH_Z()      {IO_RB1_SetLow();IO_RB1_SetDigitalInput();}  // configure pin as input to get open drain high impedance
+#define PIN_BUTTON_DOWN_SET_LOW()       {IO_RB2_SetLow();IO_RB2_SetDigitalOutput();} // configure pin as output low
+#define PIN_BUTTON_DOWN_SET_HIGH_Z()    {IO_RB2_SetLow();IO_RB2_SetDigitalInput();}  // configure pin as input to get open drain high impedance
 
 
 /***********************************/
@@ -60,8 +60,8 @@ void RBT_simulateButtonPush(eRemoteButtonId_t eButtonId , uint8_t i8uNbOfPush, u
         DELAY_milliseconds(i16uPushDuration);
 
         /* release hardware pin (high Z) */
-        PIN_BUTTON_UP_SET_HIGH();
-        PIN_BUTTON_DOWN_SET_HIGH();	
+        PIN_BUTTON_UP_SET_HIGH_Z();
+        PIN_BUTTON_DOWN_SET_HIGH_Z();	
 
         __delay_ms(DELAY_AFTER_PUSH_IN_MS);
     }

@@ -12,7 +12,7 @@
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+ï¿½ [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -54,8 +54,15 @@ void PIN_MANAGER_RefreshConfig(void)
     /**
     TRISx registers (direction)
     */
-    TRISA = 0x3;
-    TRISB = 0x1;
+    /* All pin set as output except those pin on input :
+        - RA0 (on board potentiometer)
+        - RA1 (photoresistor)
+        - RB0 (on board Bp), 
+        - RB1 (open drain radio Up button)
+        - RB2 (open drain radio Up button)
+        */
+    TRISA = 0b00000011;
+    TRISB = 0b00000111;
     TRISC = 0x0;
     TRISD = 0x0;
     TRISE = 0x0;
@@ -68,7 +75,12 @@ void PIN_MANAGER_RefreshConfig(void)
     /**
     WPUx registers (Weak Pullup)
     */
-    WPUB = 0x0;
+    /* disable internal pullup on all pins */
+    WPUA = 0x00;
+    WPUB = 0x00; 
+    WPUC = 0x00; 
+    WPUD = 0x00; 
+    WPUE = 0x00; 
 
     /**
     ODx registers
