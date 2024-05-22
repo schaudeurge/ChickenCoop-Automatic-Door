@@ -749,6 +749,9 @@
 #define IO_RE2_SetAnalogMode()      do { ANSELEbits.ANS7 = 1; } while(0)
 #define IO_RE2_SetDigitalMode()     do { ANSELEbits.ANS7 = 0; } while(0)
 
+
+#define DISPLAY_LED_ARRAY       LATD    // display an int8u value on the led array (8 leds on RD0 to RD7)
+
 /**
  * @ingroup  pinsdriver
  * @brief GPIO and peripheral I/O initialization

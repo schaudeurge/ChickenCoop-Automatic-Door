@@ -22,36 +22,84 @@
 #include "./driver/timer/tmr0.h"
 #include "./driver/system/pins.h"
 #include "remoteButton.h"
+#include "motor.h"
 
 /***************************
 *       DEFINITION         *
 ****************************/
 /* luminosity threshold for SunRise and SunSet detection */
-#define SUNRISE_ADC_THRESHOLD       1023    // ADC value for threshold above which the SunRise is detected
-#define SUNSET_ADC_THRESHOLD		0		// ADC value for threshold under which the SunSet is detected
+// warning: take acount light from the house, street, full moon, position of the sensor, etc ...
+/* with divisor of Rdown=10K :
+ *  ADC = V/VREF * 1023
+ *   with V = Vref*Rdown/(Rdown+Rphoto)
+ * ADC = 1023 * Rdown/(Rdown+Rphoto)
+ * 
+ * Night luminosity at full moon (worst case) is < 5lux:
+ *      => which give a photo resistor value of ~10.5K (see abacus)
+ *      => ADC = 1023 * 10 / (10+10.5) = 499
+ * 
+ * Day luminosity with Very dark overcast (worst case) is > 100lux:
+ *      => which give a photo resistor value of ~2K (see abacus)
+ *      => ADC = 1023 * 10 / (10+2) = 853
+ */
+#define SUNRISE_ADC_THRESHOLD       650     // ADC value for threshold above which the SunRise is detected
+#define SUNSET_ADC_THRESHOLD		500		// ADC value for threshold under which the SunSet is detected
 
-#define TIME_FILTER_5_MIN (5*60000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 5min based on the main loop timer
+//#define SUN_TIME_FILTER (2*60000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 2 min based on the main loop timer
+//todo debug : change for 
+#define SUN_TIME_FILTER (5000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 5 sec based on the main loop timer
+
+/* definition for led display */
+#define LED_ARRAY_TIME_STEP     (SUN_TIME_FILTER/8)
+
+#define NB_OF_ADC_AVG 8 // calculate the filtered Adc based on average of the last 8 conversion (simplify MCU division by chosing a base 2 multiple)
+#define AVG_DIVIDER 3   // simplify MCU division by chosing a base 2 multiple: n /(2^3) = n/8
+
+/* OnBoard press button */
+#define Read_Button_SW1()   IO_SW1_GetValue()
+#define BUTTON_SW1_PRESS    LOW // Pin is at low level when Bp is pressed 
+#define DEBOUNCE_BP_DELAY   (100/MAIN_LOOP_BASE_TIME_IN_MS) // 100ms debounce
+
+typedef enum
+{
+    DOOR_POSITION_UNKNOWN,
+    DOOR_POSITION_CLOSE,
+    DOOR_POSITION_OPEN
+}eDoorPosition_t;
 
 /*********************************
 * PRIVATE FUNCTIONS DECLARATION  *
 **********************************/
 static void Timer0_OverflowCallback(void);
-uint16_t getAdcFiltered(adc_channel_t channel); 
+uint16_t getAdcFiltered(uint16_t i16uAdcUnfiltered);
 bool detectSunRise(void);
 bool detectSunSet(void);
+void manageSoftTimerTick(void);
 
 /*********************************
 * GLOBALE VARIABLES DECLARATION  *
 **********************************/
 volatile bool bIsMainLoopTimingIsOver = false;
+uint16_t i16uLuminosityAdcUnFiltered = 0;
+uint16_t i16uLuminosityAdcFiltered = 0;
+uint16_t ti16uLuminosityAdcHistory[NB_OF_ADC_AVG]={0};
+eDoorPosition_t eDoorPosition = DOOR_POSITION_UNKNOWN;
+uint16_t i16uCntLuminosityLow = 0;
+uint16_t i16uCntLuminosityHigh = 0;
+
 uint16_t i16uDebug = 0;
-uint16_t i16uLuminosityAdc = 0;
 
 /****************************
 *      MAIN APPLICATION     *
 *****************************/
 int main(void)
 {
+    static uint8_t i8uNbOfLedToSet = 0;
+    static uint8_t i8uBpSw1Debounce = 0;
+    static bool bBpManualPress = 0;
+    uint8_t i8uBarGraphValue = 0;
+    uint8_t i = 0;
+
     /* Initialization of hardware pin, clock and peripherals */
     SYSTEM_Initialize(); ///@todo changer config pin RemoteBp en OpenDrain
     Timer0_OverflowCallbackRegister(Timer0_OverflowCallback); // register the callback for Timer0 interrupt
@@ -60,43 +108,106 @@ int main(void)
     INTERRUPT_GlobalInterruptEnable(); 
     INTERRUPT_PeripheralInterruptEnable();
 
-    //IO_LED5_SetHigh(); debug 
+    /* initialize the Adc table used for average calculation */
+    for( i=0 ; i<NB_OF_ADC_AVG ; i++ )
+    {   
+        CLRWDT(); // periodic watchdog clear to avoid timeout reset
+        //i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_POT); //debug : use potentiometer instead of photo resistor
+        i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGHT);
+        i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosityAdcUnFiltered);
+        __delay_ms(1);
+    }
     
-    /* infinite loop */
+    /* -- infinite loop -- */
     while(1)
     {
-        /* waiting for main loop timing synchronization (10ms)*/
+        /* -- waiting for main loop timing synchronization (10ms) -- */
         while ( bIsMainLoopTimingIsOver == true )
         {
             bIsMainLoopTimingIsOver = false; // clear flag            
             CLRWDT(); // periodic watchdog clear to avoid timeout reset
             PIN_MANAGER_RefreshConfig(); // Refresh pin config for EMC robustness
             
-            /* debug: apply ADC result of potentiometer on Led strip */
-        //    i16uDebug = ADC_GetConversion(AN_POT);
-        //    LATD = (uint8_t)(i16uDebug & 0x00FF);
             
-            /* read luminosity sensor */
-            i16uLuminosityAdc = getAdcFiltered(AN_POT);
-
+            /* -- read luminosity sensor  -- */
+            //i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_POT); //debug : use potentiometer instead of photo resistor
+            i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGHT);
+            i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosityAdcUnFiltered);
+            
+            /* -- detect the sun position to activate the door -- */
             if ( detectSunRise() == true )
             {
+                MOT_SwitchOnMotor();  // Switch On motor power to receive the radio order and rotate        
                 RBT_simulateButtonPush(REMOTE_BUTTON_UP,3,SHORT_PUSH_DURATION_IN_MS); // open the door
+                eDoorPosition = DOOR_POSITION_OPEN;
             }
             else if( detectSunSet() == true )
             {
+                MOT_SwitchOnMotor();  // Switch On motor power to receive the radio order and rotate
                 RBT_simulateButtonPush(REMOTE_BUTTON_DOWN,3,SHORT_PUSH_DURATION_IN_MS); // close the door
+                eDoorPosition = DOOR_POSITION_CLOSE;
             }
             else
             {
                 /* nothing to do */
             }
                 
+            /* -- display the progression of luminosity threshold detection on the led array -- */
+            if ( i16uCntLuminosityLow > i16uCntLuminosityHigh )
+            {
+                i8uNbOfLedToSet = (uint8_t) (i16uCntLuminosityLow / LED_ARRAY_TIME_STEP);
+            }
+            else
+            {
+                i8uNbOfLedToSet = (uint8_t) (i16uCntLuminosityHigh / LED_ARRAY_TIME_STEP);
+            }
+            i8uBarGraphValue = 0;
+            if (i8uNbOfLedToSet != 0 )
+            {
+                for ( i=0 ; i<i8uNbOfLedToSet ; i++ )
+                {
+                    /* convert the Nb of led to Set to value to get bar graph effect */
+                    i8uBarGraphValue += (1<<i);
+                }
+            }
+            else{}
+            DISPLAY_LED_ARRAY = i8uBarGraphValue;
                 
-                
-                
+            /* -- Keep the BP pressed for manual switch on of the motor power relay  */
+            if ( Read_Button_SW1() == BUTTON_SW1_PRESS )
+            {                 
+                /* debounce button */
+                if( i8uBpSw1Debounce < DEBOUNCE_BP_DELAY )
+                {
+                    i8uBpSw1Debounce++;
+                }
+                else
+                {
+                    /* Button is press: swith on the relay */
+                    SWITCH_ON_MOTOR_RELAY();                    
+                    DISPLAY_LED_ARRAY = 0xFF; // All Led On
+                    bBpManualPress = 1;
+                }
+            }
+            else // Bp release
+            {                 
+                i8uBpSw1Debounce = 0; // clear debounce timing
+                if ( bBpManualPress == 1 ) /* check if Bp was previously pressed */
+                {
+                    bBpManualPress = 0; // clear flag
+                    DISPLAY_LED_ARRAY = 0x00; // All Led Off
+                    SWITCH_OFF_MOTOR_RELAY();
+                }
+                else{}
+            }
+            
+            /* -- Manage software timers -- */
+            manageSoftTimerTick();
+            
+            /* -- DEBUG FUNCTIONS -- */
+#if 0
             /*debug : blink led with 1sec period */
-            if(i16uDebug<10)
+            if(i16uDebug < (500/MAIN_LOOP_BASE_TIME_IN_MS) )
             {
                 i16uDebug++;
             }
@@ -105,6 +216,12 @@ int main(void)
                 i16uDebug=0;
                 IO_LED1_Toggle();
             }
+#endif
+            
+#if 0
+            /* debug: apply ADC result of potentiometer on Led strip */
+            DISPLAY_LED_ARRAY = (i16uLuminosityAdc & 0x00FF);
+#endif            
 
         } // while ( bIsMainLoopTimingIsOver == true )
         
@@ -130,48 +247,39 @@ static void Timer0_OverflowCallback(void)
 
 /*********************************************************************
     @function: uint16_t getAdcFiltered(adc_channel_t channel)
-    @summary: get ADC value from the specified channel and filter it with average value 
+    @summary: filter ADC value with moving average calculation
     @parameters:
-            channel : ADC channel to convert
+            uint16_t : last ADC value to filter
     @returns: void
 **********************************************************************/
-uint16_t getAdcFiltered(adc_channel_t channel)
+uint16_t getAdcFiltered(uint16_t i16uAdcUnfiltered)
 {
-    uint16_t debug = ADC_GetConversion(channel);
+    static uint8_t i8uHistoryIndex = 0;
+    uint16_t i16uAdcfiltered = 0;
+    uint8_t i = 0;
+            
+    /* replace the oldest adc value by the last one */
+    ti16uLuminosityAdcHistory[i8uHistoryIndex] = i16uAdcUnfiltered;
     
-    /* if avg not ready , fill end of buffer with the current value ? non */
+    /* prepare the next index for next execution of filter */
+    if( i8uHistoryIndex < (uint8_t)(NB_OF_ADC_AVG-1) )
+    {
+        i8uHistoryIndex++;
+    }
+    else
+    {
+        i8uHistoryIndex = 0; // return to 1st index
+    }
     
-#if 0
+    /* calculate the average value */
+    i16uAdcfiltered = 0;
+    for(i=0; i<NB_OF_ADC_AVG ; i++)
+    {
+      i16uAdcfiltered +=  ti16uLuminosityAdcHistory[i];
+    }
+    i16uAdcfiltered = (uint16_t)(i16uAdcfiltered >> AVG_DIVIDER);
     
- uint8_t i8uAdcAverageReady = 0;
- uint16_t i16uAdcResult[NB_OF_ADC_FILTER] = {0};
- 
- 
-     // start ADC
-			// wait end of conversion
-			// get result: ADC = V/VREF * 1023  => V = ADC / 1023 * Vref
-			// filter ADC : avg of the last 8 measures
-			
-			i8utAdcResult[i++] = ADC;
-			if ( i >= NB_OF_ADC_FILTER )
-			{
-				i8uAdcAverageReady = TRUE;
-				i = 0;
-			}
-			else{}
-			
-			/* process luminosity only if we have enought measure to calculate the average */
-			if ( i8uAdcAverageReady == TRUE )
-			{
-				/* calculate the average ADC value */
-				i32uAdcAverage = 0;
-				for(j=0; j<NB_OF_ADC_FILTER; j++)
-				{
-					i32uAdcAverage += i8utAdcResult[j];
-				}
-#endif
-    
-    return debug;
+    return i16uAdcfiltered;
 }
             
 /*********************************************************************
@@ -182,28 +290,35 @@ uint16_t getAdcFiltered(adc_channel_t channel)
 **********************************************************************/
 bool detectSunRise(void)
 {
-    static uint16_t i16uCntLuminosityHigh = 0;
 	bool bReturnVal = false; 
-	 
-	/* detect value above threshold during 5 consecutive minutes */
-	if ( i16uLuminosityAdc > SUNRISE_ADC_THRESHOLD )
-	{
-		/* time filter */ 
-		if ( i16uCntLuminosityHigh < TIME_FILTER_5_MIN )
-		{
-			i16uCntLuminosityHigh++;
-		}
-		else
-		{
-			/* time reach */
-			bReturnVal = true;
-		}
+	
+    /* detect sunrise only when the door is not already opened */
+    if ( eDoorPosition != DOOR_POSITION_OPEN)
+    {
+        /* detect value above threshold during a minimum timer duration */
+        if ( i16uLuminosityAdcFiltered > SUNRISE_ADC_THRESHOLD )
+        {
+            /* time filter */ 
+            if ( i16uCntLuminosityHigh < SUN_TIME_FILTER )
+            {
+                i16uCntLuminosityHigh++;
+            }
+            else
+            {
+                /* time reach */
+                bReturnVal = true;
+            }
+        }
+        else
+        {
+            i16uCntLuminosityHigh = 0; // reset the time counter
+        }
     }
-	else
-	{
-		i16uCntLuminosityHigh = 0; // reset the time counter
-	}
-	return bReturnVal;
+    else
+    {
+        i16uCntLuminosityHigh = 0; // reset the time counter
+    }
+        return bReturnVal;
 }
                 
 /*********************************************************************
@@ -214,26 +329,44 @@ bool detectSunRise(void)
 **********************************************************************/
 bool detectSunSet(void)
 {
-    static uint16_t i16uCntLuminosityLow = 0;
     bool bReturnVal = false; 
-	 
-    /* detect value bellow threshold during 5 consecutive minutes */
- 	if ( i16uLuminosityAdc < SUNSET_ADC_THRESHOLD )
-	{
-		/* time filter */ 
-		if ( i16uCntLuminosityLow < TIME_FILTER_5_MIN )
-		{
-			i16uCntLuminosityLow++;
-		}
-		else
-		{
-			/* time reach */
-			bReturnVal = true;
-		}
-	}
-	else
-	{
-		i16uCntLuminosityLow = 0; // reset the time counter
-	}
+	
+     /* detect sunrise only when the door is not already opened */
+    if ( eDoorPosition != DOOR_POSITION_CLOSE)
+    {
+        /* detect value bellow threshold during 5 consecutive minutes */
+        if ( i16uLuminosityAdcFiltered < SUNSET_ADC_THRESHOLD )
+        {
+            /* time filter */ 
+            if ( i16uCntLuminosityLow < SUN_TIME_FILTER )
+            {
+                i16uCntLuminosityLow++;
+            }
+            else
+            {
+                /* time reach */
+                bReturnVal = true;
+            }
+        }
+        else
+        {
+            i16uCntLuminosityLow = 0; // reset the time counter
+        }
+    }
+    else
+    {
+        i16uCntLuminosityLow = 0; // reset the time counter
+    }
 	return bReturnVal;
+}
+
+/*********************************************************************
+   @function: void manageSoftTimerTick(void)
+   @summary: decrement the software timeout and trig associated action when it's over
+   @parameters:None
+   @returns: None
+**********************************************************************/
+void manageSoftTimerTick(void)
+{
+    MOT_manageMotorSoftwareTimer(); // software timer for Motor
 }

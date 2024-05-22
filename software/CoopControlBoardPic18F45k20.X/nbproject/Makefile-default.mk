@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=source/driver/adc/src/adc.c source/driver/system/src/clock.c source/driver/system/src/config_bits.c source/driver/system/src/interrupt.c source/driver/system/src/pins.c source/driver/system/src/system.c source/driver/system/src/watchdog.c source/driver/timer/src/delay.c source/driver/timer/src/tmr0.c source/main.c source/remoteButton.c
+SOURCEFILES_QUOTED_IF_SPACED=source/driver/adc/src/adc.c source/driver/system/src/clock.c source/driver/system/src/config_bits.c source/driver/system/src/interrupt.c source/driver/system/src/pins.c source/driver/system/src/system.c source/driver/system/src/watchdog.c source/driver/timer/src/delay.c source/driver/timer/src/tmr0.c source/main.c source/remoteButton.c source/motor.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/source/driver/adc/src/adc.p1 ${OBJECTDIR}/source/driver/system/src/clock.p1 ${OBJECTDIR}/source/driver/system/src/config_bits.p1 ${OBJECTDIR}/source/driver/system/src/interrupt.p1 ${OBJECTDIR}/source/driver/system/src/pins.p1 ${OBJECTDIR}/source/driver/system/src/system.p1 ${OBJECTDIR}/source/driver/system/src/watchdog.p1 ${OBJECTDIR}/source/driver/timer/src/delay.p1 ${OBJECTDIR}/source/driver/timer/src/tmr0.p1 ${OBJECTDIR}/source/main.p1 ${OBJECTDIR}/source/remoteButton.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/source/driver/adc/src/adc.p1.d ${OBJECTDIR}/source/driver/system/src/clock.p1.d ${OBJECTDIR}/source/driver/system/src/config_bits.p1.d ${OBJECTDIR}/source/driver/system/src/interrupt.p1.d ${OBJECTDIR}/source/driver/system/src/pins.p1.d ${OBJECTDIR}/source/driver/system/src/system.p1.d ${OBJECTDIR}/source/driver/system/src/watchdog.p1.d ${OBJECTDIR}/source/driver/timer/src/delay.p1.d ${OBJECTDIR}/source/driver/timer/src/tmr0.p1.d ${OBJECTDIR}/source/main.p1.d ${OBJECTDIR}/source/remoteButton.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/source/driver/adc/src/adc.p1 ${OBJECTDIR}/source/driver/system/src/clock.p1 ${OBJECTDIR}/source/driver/system/src/config_bits.p1 ${OBJECTDIR}/source/driver/system/src/interrupt.p1 ${OBJECTDIR}/source/driver/system/src/pins.p1 ${OBJECTDIR}/source/driver/system/src/system.p1 ${OBJECTDIR}/source/driver/system/src/watchdog.p1 ${OBJECTDIR}/source/driver/timer/src/delay.p1 ${OBJECTDIR}/source/driver/timer/src/tmr0.p1 ${OBJECTDIR}/source/main.p1 ${OBJECTDIR}/source/remoteButton.p1 ${OBJECTDIR}/source/motor.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/source/driver/adc/src/adc.p1.d ${OBJECTDIR}/source/driver/system/src/clock.p1.d ${OBJECTDIR}/source/driver/system/src/config_bits.p1.d ${OBJECTDIR}/source/driver/system/src/interrupt.p1.d ${OBJECTDIR}/source/driver/system/src/pins.p1.d ${OBJECTDIR}/source/driver/system/src/system.p1.d ${OBJECTDIR}/source/driver/system/src/watchdog.p1.d ${OBJECTDIR}/source/driver/timer/src/delay.p1.d ${OBJECTDIR}/source/driver/timer/src/tmr0.p1.d ${OBJECTDIR}/source/main.p1.d ${OBJECTDIR}/source/remoteButton.p1.d ${OBJECTDIR}/source/motor.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/source/driver/adc/src/adc.p1 ${OBJECTDIR}/source/driver/system/src/clock.p1 ${OBJECTDIR}/source/driver/system/src/config_bits.p1 ${OBJECTDIR}/source/driver/system/src/interrupt.p1 ${OBJECTDIR}/source/driver/system/src/pins.p1 ${OBJECTDIR}/source/driver/system/src/system.p1 ${OBJECTDIR}/source/driver/system/src/watchdog.p1 ${OBJECTDIR}/source/driver/timer/src/delay.p1 ${OBJECTDIR}/source/driver/timer/src/tmr0.p1 ${OBJECTDIR}/source/main.p1 ${OBJECTDIR}/source/remoteButton.p1
+OBJECTFILES=${OBJECTDIR}/source/driver/adc/src/adc.p1 ${OBJECTDIR}/source/driver/system/src/clock.p1 ${OBJECTDIR}/source/driver/system/src/config_bits.p1 ${OBJECTDIR}/source/driver/system/src/interrupt.p1 ${OBJECTDIR}/source/driver/system/src/pins.p1 ${OBJECTDIR}/source/driver/system/src/system.p1 ${OBJECTDIR}/source/driver/system/src/watchdog.p1 ${OBJECTDIR}/source/driver/timer/src/delay.p1 ${OBJECTDIR}/source/driver/timer/src/tmr0.p1 ${OBJECTDIR}/source/main.p1 ${OBJECTDIR}/source/remoteButton.p1 ${OBJECTDIR}/source/motor.p1
 
 # Source Files
-SOURCEFILES=source/driver/adc/src/adc.c source/driver/system/src/clock.c source/driver/system/src/config_bits.c source/driver/system/src/interrupt.c source/driver/system/src/pins.c source/driver/system/src/system.c source/driver/system/src/watchdog.c source/driver/timer/src/delay.c source/driver/timer/src/tmr0.c source/main.c source/remoteButton.c
+SOURCEFILES=source/driver/adc/src/adc.c source/driver/system/src/clock.c source/driver/system/src/config_bits.c source/driver/system/src/interrupt.c source/driver/system/src/pins.c source/driver/system/src/system.c source/driver/system/src/watchdog.c source/driver/timer/src/delay.c source/driver/timer/src/tmr0.c source/main.c source/remoteButton.c source/motor.c
 
 
 
@@ -176,6 +176,14 @@ ${OBJECTDIR}/source/remoteButton.p1: source/remoteButton.c  nbproject/Makefile-$
 	@-${MV} ${OBJECTDIR}/source/remoteButton.d ${OBJECTDIR}/source/remoteButton.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/source/remoteButton.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/source/motor.p1: source/motor.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/source" 
+	@${RM} ${OBJECTDIR}/source/motor.p1.d 
+	@${RM} ${OBJECTDIR}/source/motor.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit3   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/source/motor.p1 source/motor.c 
+	@-${MV} ${OBJECTDIR}/source/motor.d ${OBJECTDIR}/source/motor.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/source/motor.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/source/driver/adc/src/adc.p1: source/driver/adc/src/adc.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/source/driver/adc/src" 
@@ -264,6 +272,14 @@ ${OBJECTDIR}/source/remoteButton.p1: source/remoteButton.c  nbproject/Makefile-$
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/source/remoteButton.p1 source/remoteButton.c 
 	@-${MV} ${OBJECTDIR}/source/remoteButton.d ${OBJECTDIR}/source/remoteButton.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/source/remoteButton.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/source/motor.p1: source/motor.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/source" 
+	@${RM} ${OBJECTDIR}/source/motor.p1.d 
+	@${RM} ${OBJECTDIR}/source/motor.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/source/motor.p1 source/motor.c 
+	@-${MV} ${OBJECTDIR}/source/motor.d ${OBJECTDIR}/source/motor.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/source/motor.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

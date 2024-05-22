@@ -1,0 +1,3243 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Wed May 22 23:40:15 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F45K20
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+     6                           	psect	nvCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     7                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     8                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     9                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+    10                           	psect	text0,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    14                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    15                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    16                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    17                           	psect	text7,global,reloc=2,class=CODE,delta=1,group=1
+    18                           	psect	text8,global,reloc=2,class=CODE,delta=1
+    19                           	psect	text9,global,reloc=2,class=CODE,delta=1
+    20                           	psect	text10,global,reloc=2,class=CODE,delta=1
+    21                           	psect	text11,global,reloc=2,class=CODE,delta=1
+    22                           	psect	text12,global,reloc=2,class=CODE,delta=1
+    23                           	psect	text13,global,reloc=2,class=CODE,delta=1
+    24                           	psect	text14,global,reloc=2,class=CODE,delta=1
+    25                           	psect	text15,global,reloc=2,class=CODE,delta=1
+    26                           	psect	text16,global,reloc=2,class=CODE,delta=1
+    27                           	psect	text17,global,reloc=2,class=CODE,delta=1
+    28                           	psect	text18,global,reloc=2,class=CODE,delta=1
+    29                           	psect	text19,global,reloc=2,class=CODE,delta=1
+    30                           	psect	text20,global,reloc=2,class=CODE,delta=1
+    31                           	psect	text21,global,reloc=2,class=CODE,delta=1
+    32                           	psect	text22,global,reloc=2,class=CODE,delta=1
+    33                           	psect	intcode,global,reloc=2,class=CODE,delta=1
+    34                           	psect	text24,global,reloc=2,class=CODE,delta=1
+    35                           	psect	text25,global,reloc=2,class=CODE,delta=1
+    36                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    37                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    38                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1,lowdata
+    39                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=1,noexec
+    40   000000                     
+    41                           ; Generated 12/10/2023 GMT
+    42                           ; 
+    43                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    44                           ; All rights reserved.
+    45                           ; 
+    46                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    47                           ; 
+    48                           ; Redistribution and use in source and binary forms, with or without modification, are
+    49                           ; permitted provided that the following conditions are met:
+    50                           ; 
+    51                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    52                           ;        conditions and the following disclaimer.
+    53                           ; 
+    54                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    55                           ;        of conditions and the following disclaimer in the documentation and/or other
+    56                           ;        materials provided with the distribution. Publication is not required when
+    57                           ;        this file is used in an embedded application.
+    58                           ; 
+    59                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    60                           ;        software without specific prior written permission.
+    61                           ; 
+    62                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    63                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    64                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    65                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    66                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    67                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    68                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    69                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    70                           ; 
+    71                           ; 
+    72                           ; Code-generator required, PIC18F45K20 Definitions
+    73                           ; 
+    74                           ; SFR Addresses
+    75   000000                     
+    76 ;; Function _INT0_DefaultInterruptHandler is unused but had its address taken
+    77   000000                     
+    78 ;; Function _INT1_DefaultInterruptHandler is unused but had its address taken
+    79   000000                     
+    80 ;; Function _INT2_DefaultInterruptHandler is unused but had its address taken
+    81   000000                     
+    82 ;; Function _Timer0_Start is unused but had its address taken
+    83   000000                     
+    84 ;; Function _Timer0_Stop is unused but had its address taken
+    85   000000                     
+    86 ;; Function _Timer0_PeriodCountSet is unused but had its address taken
+    87   000000                     
+    88                           	psect	smallconst
+    89   000600                     __psmallconst:
+    90                           	callstack 0
+    91   000600  00                 	db	0
+    92   000601                     _Timer0:
+    93                           	callstack 0
+    94   000601  6E                 	db	low _Timer0_Initialize
+    95   000602  0B                 	db	high _Timer0_Initialize
+    96   000603  00                 	db	0
+    97   000604  00                 	db	0
+    98   000605  00                 	db	0
+    99   000606  00                 	db	0
+   100   000607  00                 	db	0
+   101   000608  00                 	db	0
+   102   000609  14                 	db	low _Timer0_OverflowCallbackRegister
+   103   00060A  0C                 	db	high _Timer0_OverflowCallbackRegister
+   104   00060B  00                 	db	0
+   105   00060C  00                 	db	0
+   106   00060D                     __end_of_Timer0:
+   107                           	callstack 0
+   108   000000                     _TMR0L	set	4054
+   109   000000                     _TMR0H	set	4055
+   110   000000                     _IOCB	set	3965
+   111   000000                     _ADCON0	set	4034
+   112   000000                     _ADRESL	set	4035
+   113   00060D  00                 	db	0	; dummy byte at the end
+   114   000000                     
+   115                           	psect	nvCOMRAM
+   116   000033                     __pnvCOMRAM:
+   117                           	callstack 0
+   118   000033                     _Timer0_OverflowCallback:
+   119                           	callstack 0
+   120   000033                     	ds	2
+   121   000035                     _INT2_InterruptHandler:
+   122                           	callstack 0
+   123   000035                     	ds	2
+   124   000037                     _INT1_InterruptHandler:
+   125                           	callstack 0
+   126   000037                     	ds	2
+   127   000039                     _INT0_InterruptHandler:
+   128                           	callstack 0
+   129   000039                     	ds	2
+   130   000000                     _TRISBbits	set	3987
+   131   000000                     _LATBbits	set	3978
+   132   000000                     _T0CON	set	4053
+   133   000000                     _ADCON0bits	set	4034
+   134   000000                     _WPUB	set	3964
+   135   000000                     _ANSEL	set	3966
+   136   000000                     _LATA	set	3977
+   137   000000                     _OSCTUNE	set	3995
+   138   000000                     _PIR1bits	set	3998
+   139   000000                     _ADCON2	set	4032
+   140   000000                     _ADCON1	set	4033
+   141   000000                     _RCONbits	set	4048
+   142   000000                     _OSCCON	set	4051
+   143   000000                     _ADRESH	set	4036
+   144   000000                     _T0CONbits	set	4053
+   145   000000                     _INTCON3bits	set	4080
+   146   000000                     _INTCON2bits	set	4081
+   147   000000                     _INTCONbits	set	4082
+   148   000000                     _WDTCON	set	4049
+   149   000000                     _TRISA	set	3986
+   150   000000                     _LATE	set	3981
+   151   000000                     _LATD	set	3980
+   152   000000                     _LATC	set	3979
+   153   000000                     _LATB	set	3978
+   154   000000                     _TRISE	set	3990
+   155   000000                     _TRISD	set	3989
+   156   000000                     _TRISC	set	3988
+   157   000000                     _TRISB	set	3987
+   158   000000                     _PORTBbits	set	3969
+   159   000000                     _ANSELH	set	3967
+   160                           
+   161                           ; #config settings
+   162                           
+   163                           	psect	cinit
+   164   000BAE                     __pcinit:
+   165                           	callstack 0
+   166   000BAE                     start_initialization:
+   167                           	callstack 0
+   168   000BAE                     __initialization:
+   169                           	callstack 0
+   170                           
+   171                           ; Clear objects allocated to COMRAM (36 bytes)
+   172   000BAE  EE00  F001         	lfsr	0,__pbssCOMRAM
+   173   000BB2  0E24               	movlw	36
+   174   000BB4                     clear_0:
+   175   000BB4  6AEE               	clrf	postinc0,c
+   176   000BB6  06E8               	decf	wreg,f,c
+   177   000BB8  E1FD               	bnz	clear_0
+   178   000BBA                     end_of_initialization:
+   179                           	callstack 0
+   180   000BBA                     __end_of__initialization:
+   181                           	callstack 0
+   182   000BBA  903B               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   183   000BBC  923B               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+   184   000BBE  0E00               	movlw	low (__Lmediumconst shr (0+16))
+   185   000BC0  6EF8               	movwf	tblptru,c
+   186   000BC2  0100               	movlb	0
+   187   000BC4  EF07  F003         	goto	_main	;jump to C main() function
+   188                           
+   189                           	psect	bssCOMRAM
+   190   000001                     __pbssCOMRAM:
+   191                           	callstack 0
+   192   000001                     _ti16uLuminosityAdcHistory:
+   193                           	callstack 0
+   194   000001                     	ds	16
+   195   000011                     _i16uMotorSwitchDelay:
+   196                           	callstack 0
+   197   000011                     	ds	2
+   198   000013                     _i16uDebug:
+   199                           	callstack 0
+   200   000013                     	ds	2
+   201   000015                     _i16uCntLuminosityHigh:
+   202                           	callstack 0
+   203   000015                     	ds	2
+   204   000017                     _i16uCntLuminosityLow:
+   205                           	callstack 0
+   206   000017                     	ds	2
+   207   000019                     _i16uLuminosityAdcFiltered:
+   208                           	callstack 0
+   209   000019                     	ds	2
+   210   00001B                     _i16uLuminosityAdcUnFiltered:
+   211                           	callstack 0
+   212   00001B                     	ds	2
+   213   00001D                     _timer0ReloadVal:
+   214                           	callstack 0
+   215   00001D                     	ds	2
+   216   00001F                     getAdcFiltered@i8uHistoryIndex:
+   217                           	callstack 0
+   218   00001F                     	ds	1
+   219   000020                     main@bBpManualPress:
+   220                           	callstack 0
+   221   000020                     	ds	1
+   222   000021                     main@i8uBpSw1Debounce:
+   223                           	callstack 0
+   224   000021                     	ds	1
+   225   000022                     main@i8uNbOfLedToSet:
+   226                           	callstack 0
+   227   000022                     	ds	1
+   228   000023                     _eDoorPosition:
+   229                           	callstack 0
+   230   000023                     	ds	1
+   231   000024                     _bIsMainLoopTimingIsOver:
+   232                           	callstack 0
+   233   000024                     	ds	1
+   234                           
+   235                           	psect	cstackCOMRAM
+   236   000025                     __pcstackCOMRAM:
+   237                           	callstack 0
+   238   000025                     ??_INTERRUPT_InterruptManager:
+   239   000025                     
+   240                           ; 2 bytes @ 0x0
+   241   000025                     	ds	2
+   242   000027                     ??_Timer0_Initialize:
+   243   000027                     ??_MOT_SwitchOnMotor:
+   244   000027                     ?_getAdcFiltered:
+   245                           	callstack 0
+   246   000027                     ?_ADC_GetConversion:
+   247                           	callstack 0
+   248   000027                     ?___lwdiv:
+   249                           	callstack 0
+   250   000027                     detectSunRise@bReturnVal:
+   251                           	callstack 0
+   252   000027                     detectSunSet@bReturnVal:
+   253                           	callstack 0
+   254   000027                     RBT_simulateButtonPush@i8uNbOfPush:
+   255                           	callstack 0
+   256   000027                     INT0_SetInterruptHandler@InterruptHandler:
+   257                           	callstack 0
+   258   000027                     INT1_SetInterruptHandler@InterruptHandler:
+   259                           	callstack 0
+   260   000027                     INT2_SetInterruptHandler@InterruptHandler:
+   261                           	callstack 0
+   262   000027                     Timer0_OverflowCallbackRegister@CallbackHandler:
+   263                           	callstack 0
+   264   000027                     getAdcFiltered@i16uAdcUnfiltered:
+   265                           	callstack 0
+   266   000027                     ___lwdiv@dividend:
+   267                           	callstack 0
+   268                           
+   269                           ; 2 bytes @ 0x2
+   270   000027                     	ds	1
+   271   000028                     RBT_simulateButtonPush@i16uPushDuration:
+   272                           	callstack 0
+   273                           
+   274                           ; 2 bytes @ 0x3
+   275   000028                     	ds	1
+   276   000029                     ??_getAdcFiltered:
+   277   000029                     ??_ADC_GetConversion:
+   278   000029                     ___lwdiv@divisor:
+   279                           	callstack 0
+   280                           
+   281                           ; 2 bytes @ 0x4
+   282   000029                     	ds	1
+   283   00002A                     ??_RBT_simulateButtonPush:
+   284                           
+   285                           ; 1 bytes @ 0x5
+   286   00002A                     	ds	1
+   287   00002B                     ADC_GetConversion@channel:
+   288                           	callstack 0
+   289   00002B                     getAdcFiltered@i16uAdcfiltered:
+   290                           	callstack 0
+   291   00002B                     ___lwdiv@quotient:
+   292                           	callstack 0
+   293                           
+   294                           ; 2 bytes @ 0x6
+   295   00002B                     	ds	1
+   296   00002C                     RBT_simulateButtonPush@eButtonId:
+   297                           	callstack 0
+   298                           
+   299                           ; 1 bytes @ 0x7
+   300   00002C                     	ds	1
+   301   00002D                     getAdcFiltered@i:
+   302                           	callstack 0
+   303   00002D                     RBT_simulateButtonPush@i8uBackupLedArray:
+   304                           	callstack 0
+   305   00002D                     ___lwdiv@counter:
+   306                           	callstack 0
+   307                           
+   308                           ; 1 bytes @ 0x8
+   309   00002D                     	ds	1
+   310   00002E                     RBT_simulateButtonPush@i:
+   311                           	callstack 0
+   312                           
+   313                           ; 1 bytes @ 0x9
+   314   00002E                     	ds	1
+   315   00002F                     ??_main:
+   316                           
+   317                           ; 1 bytes @ 0xA
+   318   00002F                     	ds	2
+   319   000031                     main@i8uBarGraphValue:
+   320                           	callstack 0
+   321                           
+   322                           ; 1 bytes @ 0xC
+   323   000031                     	ds	1
+   324   000032                     main@i:
+   325                           	callstack 0
+   326                           
+   327                           ; 1 bytes @ 0xD
+   328   000032                     	ds	1
+   329                           
+   330 ;;
+   331 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   332 ;;
+   333 ;; *************** function _main *****************
+   334 ;; Defined at:
+   335 ;;		line 95 in file "source/main.c"
+   336 ;; Parameters:    Size  Location     Type
+   337 ;;		None
+   338 ;; Auto vars:     Size  Location     Type
+   339 ;;  i               1   13[COMRAM] unsigned char 
+   340 ;;  i8uBarGraphV    1   12[COMRAM] unsigned char 
+   341 ;; Return value:  Size  Location     Type
+   342 ;;                  2  315[None  ] int 
+   343 ;; Registers used:
+   344 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+   345 ;; Tracked objects:
+   346 ;;		On entry : 0/0
+   347 ;;		On exit  : 0/0
+   348 ;;		Unchanged: 0/0
+   349 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   350 ;;      Params:         0       0       0       0       0       0       0
+   351 ;;      Locals:         2       0       0       0       0       0       0
+   352 ;;      Temps:          2       0       0       0       0       0       0
+   353 ;;      Totals:         4       0       0       0       0       0       0
+   354 ;;Total ram usage:        4 bytes
+   355 ;; Hardware stack levels required when called: 6
+   356 ;; This function calls:
+   357 ;;		_ADC_GetConversion
+   358 ;;		_MOT_SwitchOnMotor
+   359 ;;		_PIN_MANAGER_RefreshConfig
+   360 ;;		_RBT_simulateButtonPush
+   361 ;;		_SYSTEM_Initialize
+   362 ;;		_Timer0_OverflowCallbackRegister
+   363 ;;		___lwdiv
+   364 ;;		_detectSunRise
+   365 ;;		_detectSunSet
+   366 ;;		_getAdcFiltered
+   367 ;;		_manageSoftTimerTick
+   368 ;; This function is called by:
+   369 ;;		Startup code after reset
+   370 ;; This function uses a non-reentrant model
+   371 ;;
+   372                           
+   373                           	psect	text0
+   374   00060E                     __ptext0:
+   375                           	callstack 0
+   376   00060E                     _main:
+   377                           	callstack 25
+   378   00060E                     
+   379                           ;source/main.c: 101:     uint8_t i = 0;
+   380   00060E  0E00               	movlw	0
+   381   000610  6E32               	movwf	main@i^0,c
+   382   000612                     
+   383                           ;source/main.c: 104:     SYSTEM_Initialize();
+   384   000612  ECE4  F005         	call	_SYSTEM_Initialize	;wreg free
+   385   000616                     
+   386                           ;source/main.c: 105:     Timer0_OverflowCallbackRegister(Timer0_OverflowCallback);
+   387   000616  0E52               	movlw	low _Timer0_OverflowCallback@main$F694
+   388   000618  6E27               	movwf	Timer0_OverflowCallbackRegister@CallbackHandler^0,c
+   389   00061A  0E0C               	movlw	high _Timer0_OverflowCallback@main$F694
+   390   00061C  6E28               	movwf	(Timer0_OverflowCallbackRegister@CallbackHandler+1)^0,c
+   391   00061E  EC0A  F006         	call	_Timer0_OverflowCallbackRegister	;wreg free
+   392   000622                     
+   393                           ;source/main.c: 108:     (INTCONbits.GIE = 1);
+   394   000622  8EF2               	bsf	242,7,c	;volatile
+   395   000624                     
+   396                           ;source/main.c: 109:     (INTCONbits.PEIE = 1);
+   397   000624  8CF2               	bsf	242,6,c	;volatile
+   398                           
+   399                           ;source/main.c: 112:     for( i=0 ; i<8 ; i++ )
+   400   000626  0E00               	movlw	0
+   401   000628  6E32               	movwf	main@i^0,c
+   402   00062A                     l322:
+   403   00062A  0004               	clrwdt		;# 
+   404   00062C                     
+   405                           ;source/main.c: 116:         i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGHT);
+   406   00062C  0E01               	movlw	1
+   407   00062E  EC35  F005         	call	_ADC_GetConversion
+   408   000632  C027  F01B         	movff	?_ADC_GetConversion,_i16uLuminosityAdcUnFiltered
+   409   000636  C028  F01C         	movff	?_ADC_GetConversion+1,_i16uLuminosityAdcUnFiltered+1
+   410   00063A                     
+   411                           ;source/main.c: 117:         i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosityAd
+      +                          cUnFiltered);
+   412   00063A  C01B  F027         	movff	_i16uLuminosityAdcUnFiltered,getAdcFiltered@i16uAdcUnfiltered
+   413   00063E  C01C  F028         	movff	_i16uLuminosityAdcUnFiltered+1,getAdcFiltered@i16uAdcUnfiltered+1
+   414   000642  EC56  F004         	call	_getAdcFiltered	;wreg free
+   415   000646  C027  F019         	movff	?_getAdcFiltered,_i16uLuminosityAdcFiltered
+   416   00064A  C028  F01A         	movff	?_getAdcFiltered+1,_i16uLuminosityAdcFiltered+1
+   417   00064E                     
+   418                           ;source/main.c: 118:         _delay((unsigned long)((1)*(1000000/4000.0)));
+   419   00064E  0E53               	movlw	83
+   420   000650                     u597:
+   421   000650  2EE8               	decfsz	wreg,f,c
+   422   000652  D7FE               	bra	u597
+   423   000654  0000               	nop	
+   424   000656                     
+   425                           ;source/main.c: 119:     }
+   426   000656  2A32               	incf	main@i^0,f,c
+   427   000658  0E07               	movlw	7
+   428   00065A  6432               	cpfsgt	main@i^0,c
+   429   00065C  EF32  F003         	goto	u481
+   430   000660  EF34  F003         	goto	u480
+   431   000664                     u481:
+   432   000664  EF15  F003         	goto	l322
+   433   000668                     u480:
+   434   000668  EFF2  F003         	goto	l1676
+   435   00066C                     l1618:
+   436                           
+   437                           ;source/main.c: 126:         {;source/main.c: 127:             bIsMainLoopTimingIsOver =
+      +                           0;
+   438   00066C  0E00               	movlw	0
+   439   00066E  6E24               	movwf	_bIsMainLoopTimingIsOver^0,c	;volatile
+   440   000670  0004               	clrwdt		;# 
+   441   000672                     
+   442                           ;source/main.c: 129:             PIN_MANAGER_RefreshConfig();
+   443   000672  ECA3  F005         	call	_PIN_MANAGER_RefreshConfig	;wreg free
+   444   000676                     
+   445                           ;source/main.c: 134:             i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGH
+      +                          T);
+   446   000676  0E01               	movlw	1
+   447   000678  EC35  F005         	call	_ADC_GetConversion
+   448   00067C  C027  F01B         	movff	?_ADC_GetConversion,_i16uLuminosityAdcUnFiltered
+   449   000680  C028  F01C         	movff	?_ADC_GetConversion+1,_i16uLuminosityAdcUnFiltered+1
+   450   000684                     
+   451                           ;source/main.c: 135:             i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosi
+      +                          tyAdcUnFiltered);
+   452   000684  C01B  F027         	movff	_i16uLuminosityAdcUnFiltered,getAdcFiltered@i16uAdcUnfiltered
+   453   000688  C01C  F028         	movff	_i16uLuminosityAdcUnFiltered+1,getAdcFiltered@i16uAdcUnfiltered+1
+   454   00068C  EC56  F004         	call	_getAdcFiltered	;wreg free
+   455   000690  C027  F019         	movff	?_getAdcFiltered,_i16uLuminosityAdcFiltered
+   456   000694  C028  F01A         	movff	?_getAdcFiltered+1,_i16uLuminosityAdcFiltered+1
+   457   000698                     
+   458                           ;source/main.c: 138:             if ( detectSunRise() == 1 )
+   459   000698  ECD8  F004         	call	_detectSunRise	;wreg free
+   460   00069C  06E8               	decf	wreg,f,c
+   461   00069E  A4D8               	btfss	status,2,c
+   462   0006A0  EF54  F003         	goto	u491
+   463   0006A4  EF56  F003         	goto	u490
+   464   0006A8                     u491:
+   465   0006A8  EF65  F003         	goto	l1634
+   466   0006AC                     u490:
+   467   0006AC                     
+   468                           ;source/main.c: 139:             {;source/main.c: 140:                 MOT_SwitchOnMotor
+      +                          ();
+   469   0006AC  ECC7  F005         	call	_MOT_SwitchOnMotor	;wreg free
+   470   0006B0                     
+   471                           ;source/main.c: 141:                 RBT_simulateButtonPush(REMOTE_BUTTON_UP,3,500);
+   472   0006B0  0E03               	movlw	3
+   473   0006B2  6E27               	movwf	RBT_simulateButtonPush@i8uNbOfPush^0,c
+   474   0006B4  0E01               	movlw	1
+   475   0006B6  6E29               	movwf	(RBT_simulateButtonPush@i16uPushDuration+1)^0,c
+   476   0006B8  0EF4               	movlw	244
+   477   0006BA  6E28               	movwf	RBT_simulateButtonPush@i16uPushDuration^0,c
+   478   0006BC  0E00               	movlw	0
+   479   0006BE  ECFF  F003         	call	_RBT_simulateButtonPush
+   480   0006C2                     
+   481                           ;source/main.c: 142:                 eDoorPosition = DOOR_POSITION_OPEN;
+   482   0006C2  0E02               	movlw	2
+   483   0006C4  6E23               	movwf	_eDoorPosition^0,c
+   484                           
+   485                           ;source/main.c: 143:             }
+   486   0006C6  EF7C  F003         	goto	l1642
+   487   0006CA                     l1634:
+   488   0006CA  EC07  F005         	call	_detectSunSet	;wreg free
+   489   0006CE  06E8               	decf	wreg,f,c
+   490   0006D0  A4D8               	btfss	status,2,c
+   491   0006D2  EF6D  F003         	goto	u501
+   492   0006D6  EF6F  F003         	goto	u500
+   493   0006DA                     u501:
+   494   0006DA  EF7C  F003         	goto	l1642
+   495   0006DE                     u500:
+   496   0006DE                     
+   497                           ;source/main.c: 145:             {;source/main.c: 146:                 MOT_SwitchOnMotor
+      +                          ();
+   498   0006DE  ECC7  F005         	call	_MOT_SwitchOnMotor	;wreg free
+   499   0006E2                     
+   500                           ;source/main.c: 147:                 RBT_simulateButtonPush(REMOTE_BUTTON_DOWN,3,500);
+   501   0006E2  0E03               	movlw	3
+   502   0006E4  6E27               	movwf	RBT_simulateButtonPush@i8uNbOfPush^0,c
+   503   0006E6  0E01               	movlw	1
+   504   0006E8  6E29               	movwf	(RBT_simulateButtonPush@i16uPushDuration+1)^0,c
+   505   0006EA  0EF4               	movlw	244
+   506   0006EC  6E28               	movwf	RBT_simulateButtonPush@i16uPushDuration^0,c
+   507   0006EE  0E01               	movlw	1
+   508   0006F0  ECFF  F003         	call	_RBT_simulateButtonPush
+   509   0006F4                     
+   510                           ;source/main.c: 148:                 eDoorPosition = DOOR_POSITION_CLOSE;
+   511   0006F4  0E01               	movlw	1
+   512   0006F6  6E23               	movwf	_eDoorPosition^0,c
+   513   0006F8                     l1642:
+   514                           
+   515                           ;source/main.c: 156:             if ( i16uCntLuminosityLow > i16uCntLuminosityHigh )
+   516   0006F8  5017               	movf	_i16uCntLuminosityLow^0,w,c
+   517   0006FA  5C15               	subwf	_i16uCntLuminosityHigh^0,w,c
+   518   0006FC  5018               	movf	(_i16uCntLuminosityLow+1)^0,w,c
+   519   0006FE  5816               	subwfb	(_i16uCntLuminosityHigh+1)^0,w,c
+   520   000700  B0D8               	btfsc	status,0,c
+   521   000702  EF85  F003         	goto	u511
+   522   000706  EF87  F003         	goto	u510
+   523   00070A                     u511:
+   524   00070A  EF95  F003         	goto	l1646
+   525   00070E                     u510:
+   526   00070E                     
+   527                           ;source/main.c: 157:             {;source/main.c: 158:                 i8uNbOfLedToSet =
+      +                           (uint8_t) (i16uCntLuminosityLow / ((5000/10)/8));
+   528   00070E  C017  F027         	movff	_i16uCntLuminosityLow,___lwdiv@dividend
+   529   000712  C018  F028         	movff	_i16uCntLuminosityLow+1,___lwdiv@dividend+1
+   530   000716  0E00               	movlw	0
+   531   000718  6E2A               	movwf	(___lwdiv@divisor+1)^0,c
+   532   00071A  0E3E               	movlw	62
+   533   00071C  6E29               	movwf	___lwdiv@divisor^0,c
+   534   00071E  EC9E  F004         	call	___lwdiv	;wreg free
+   535   000722  5027               	movf	?___lwdiv^0,w,c
+   536   000724  6E22               	movwf	main@i8uNbOfLedToSet^0,c
+   537                           
+   538                           ;source/main.c: 159:             }
+   539   000726  EFA1  F003         	goto	l1648
+   540   00072A                     l1646:
+   541                           
+   542                           ;source/main.c: 161:             {;source/main.c: 162:                 i8uNbOfLedToSet =
+      +                           (uint8_t) (i16uCntLuminosityHigh / ((5000/10)/8));
+   543   00072A  C015  F027         	movff	_i16uCntLuminosityHigh,___lwdiv@dividend
+   544   00072E  C016  F028         	movff	_i16uCntLuminosityHigh+1,___lwdiv@dividend+1
+   545   000732  0E00               	movlw	0
+   546   000734  6E2A               	movwf	(___lwdiv@divisor+1)^0,c
+   547   000736  0E3E               	movlw	62
+   548   000738  6E29               	movwf	___lwdiv@divisor^0,c
+   549   00073A  EC9E  F004         	call	___lwdiv	;wreg free
+   550   00073E  5027               	movf	?___lwdiv^0,w,c
+   551   000740  6E22               	movwf	main@i8uNbOfLedToSet^0,c
+   552   000742                     l1648:
+   553                           
+   554                           ;source/main.c: 164:             i8uBarGraphValue = 0;
+   555   000742  0E00               	movlw	0
+   556   000744  6E31               	movwf	main@i8uBarGraphValue^0,c
+   557   000746                     
+   558                           ;source/main.c: 165:             if (i8uNbOfLedToSet != 0 )
+   559   000746  5022               	movf	main@i8uNbOfLedToSet^0,w,c
+   560   000748  B4D8               	btfsc	status,2,c
+   561   00074A  EFA9  F003         	goto	u521
+   562   00074E  EFAB  F003         	goto	u520
+   563   000752                     u521:
+   564   000752  EFC7  F003         	goto	l337
+   565   000756                     u520:
+   566   000756                     
+   567                           ;source/main.c: 166:             {;source/main.c: 167:                 for ( i=0 ; i<i8u
+      +                          NbOfLedToSet ; i++ )
+   568   000756  0E00               	movlw	0
+   569   000758  6E32               	movwf	main@i^0,c
+   570   00075A  EFBE  F003         	goto	l1658
+   571   00075E                     l1654:
+   572                           
+   573                           ;source/main.c: 168:                 {;source/main.c: 170:                     i8uBarGra
+      +                          phValue += (1<<i);
+   574   00075E  C032  F02F         	movff	main@i,??_main
+   575   000762  0E01               	movlw	1
+   576   000764  6E30               	movwf	(??_main+1)^0,c
+   577   000766  2A2F               	incf	??_main^0,f,c
+   578   000768  EFB8  F003         	goto	u534
+   579   00076C                     u535:
+   580   00076C  90D8               	bcf	status,0,c
+   581   00076E  3630               	rlcf	(??_main+1)^0,f,c
+   582   000770                     u534:
+   583   000770  2E2F               	decfsz	??_main^0,f,c
+   584   000772  EFB6  F003         	goto	u535
+   585   000776  5030               	movf	(??_main+1)^0,w,c
+   586   000778  2631               	addwf	main@i8uBarGraphValue^0,f,c
+   587   00077A                     
+   588                           ;source/main.c: 171:                 }
+   589   00077A  2A32               	incf	main@i^0,f,c
+   590   00077C                     l1658:
+   591   00077C  5022               	movf	main@i8uNbOfLedToSet^0,w,c
+   592   00077E  5C32               	subwf	main@i^0,w,c
+   593   000780  A0D8               	btfss	status,0,c
+   594   000782  EFC5  F003         	goto	u541
+   595   000786  EFC7  F003         	goto	u540
+   596   00078A                     u541:
+   597   00078A  EFAF  F003         	goto	l1654
+   598   00078E                     u540:
+   599   00078E                     l337:
+   600                           
+   601                           ;source/main.c: 174:             LATD = i8uBarGraphValue;
+   602   00078E  C031  FF8C         	movff	main@i8uBarGraphValue,3980	;volatile
+   603                           
+   604                           ;source/main.c: 177:             if ( PORTBbits.RB0 == 0 )
+   605   000792  B081               	btfsc	129,0,c	;volatile
+   606   000794  EFCE  F003         	goto	u551
+   607   000798  EFD0  F003         	goto	u550
+   608   00079C                     u551:
+   609   00079C  EFE1  F003         	goto	l1666
+   610   0007A0                     u550:
+   611   0007A0                     
+   612                           ;source/main.c: 178:             {;source/main.c: 180:                 if( i8uBpSw1Debou
+      +                          nce < (100/10) )
+   613   0007A0  0E0A               	movlw	10
+   614   0007A2  6021               	cpfslt	main@i8uBpSw1Debounce^0,c
+   615   0007A4  EFD6  F003         	goto	u561
+   616   0007A8  EFD8  F003         	goto	u560
+   617   0007AC                     u561:
+   618   0007AC  EFDB  F003         	goto	l341
+   619   0007B0                     u560:
+   620   0007B0                     
+   621                           ;source/main.c: 181:                 {;source/main.c: 182:                     i8uBpSw1D
+      +                          ebounce++;
+   622   0007B0  2A21               	incf	main@i8uBpSw1Debounce^0,f,c
+   623                           
+   624                           ;source/main.c: 183:                 }
+   625   0007B2  EFF0  F003         	goto	l1674
+   626   0007B6                     l341:
+   627   0007B6  868A               	bsf	138,3,c	;volatile
+   628   0007B8                     
+   629                           ;source/main.c: 188:                     LATD = 0xFF;
+   630   0007B8  688C               	setf	140,c	;volatile
+   631   0007BA                     
+   632                           ;source/main.c: 189:                     bBpManualPress = 1;
+   633   0007BA  0E01               	movlw	1
+   634   0007BC  6E20               	movwf	main@bBpManualPress^0,c
+   635   0007BE  EFF0  F003         	goto	l1674
+   636   0007C2                     l1666:
+   637                           
+   638                           ;source/main.c: 193:             {;source/main.c: 194:                 i8uBpSw1Debounce 
+      +                          = 0;
+   639   0007C2  0E00               	movlw	0
+   640   0007C4  6E21               	movwf	main@i8uBpSw1Debounce^0,c
+   641   0007C6                     
+   642                           ;source/main.c: 195:                 if ( bBpManualPress == 1 )
+   643   0007C6  0420               	decf	main@bBpManualPress^0,w,c
+   644   0007C8  A4D8               	btfss	status,2,c
+   645   0007CA  EFE9  F003         	goto	u571
+   646   0007CE  EFEB  F003         	goto	u570
+   647   0007D2                     u571:
+   648   0007D2  EFF0  F003         	goto	l1674
+   649   0007D6                     u570:
+   650   0007D6                     
+   651                           ;source/main.c: 196:                 {;source/main.c: 197:                     bBpManual
+      +                          Press = 0;
+   652   0007D6  0E00               	movlw	0
+   653   0007D8  6E20               	movwf	main@bBpManualPress^0,c
+   654                           
+   655                           ;source/main.c: 198:                     LATD = 0x00;
+   656   0007DA  0E00               	movlw	0
+   657   0007DC  6E8C               	movwf	140,c	;volatile
+   658   0007DE  968A               	bcf	138,3,c	;volatile
+   659   0007E0                     l1674:
+   660                           
+   661                           ;source/main.c: 205:             manageSoftTimerTick();
+   662   0007E0  EC23  F006         	call	_manageSoftTimerTick	;wreg free
+   663   0007E4                     l1676:
+   664                           
+   665                           ;source/main.c: 125:         while ( bIsMainLoopTimingIsOver == 1 )
+   666   0007E4  0424               	decf	_bIsMainLoopTimingIsOver^0,w,c	;volatile
+   667   0007E6  B4D8               	btfsc	status,2,c
+   668   0007E8  EFF8  F003         	goto	u581
+   669   0007EC  EFFA  F003         	goto	u580
+   670   0007F0                     u581:
+   671   0007F0  EF36  F003         	goto	l1618
+   672   0007F4                     u580:
+   673   0007F4  0003               	sleep		;# 
+   674   0007F6  EFF2  F003         	goto	l1676
+   675   0007FA  EF26  F000         	goto	start
+   676   0007FE                     __end_of_main:
+   677                           	callstack 0
+   678                           
+   679 ;; *************** function _manageSoftTimerTick *****************
+   680 ;; Defined at:
+   681 ;;		line 369 in file "source/main.c"
+   682 ;; Parameters:    Size  Location     Type
+   683 ;;		None
+   684 ;; Auto vars:     Size  Location     Type
+   685 ;;		None
+   686 ;; Return value:  Size  Location     Type
+   687 ;;                  1    wreg      void 
+   688 ;; Registers used:
+   689 ;;		wreg, status,2, status,0, cstack
+   690 ;; Tracked objects:
+   691 ;;		On entry : 0/0
+   692 ;;		On exit  : 0/0
+   693 ;;		Unchanged: 0/0
+   694 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   695 ;;      Params:         0       0       0       0       0       0       0
+   696 ;;      Locals:         0       0       0       0       0       0       0
+   697 ;;      Temps:          0       0       0       0       0       0       0
+   698 ;;      Totals:         0       0       0       0       0       0       0
+   699 ;;Total ram usage:        0 bytes
+   700 ;; Hardware stack levels used: 1
+   701 ;; Hardware stack levels required when called: 5
+   702 ;; This function calls:
+   703 ;;		_MOT_manageMotorSoftwareTimer
+   704 ;; This function is called by:
+   705 ;;		_main
+   706 ;; This function uses a non-reentrant model
+   707 ;;
+   708                           
+   709                           	psect	text1
+   710   000C46                     __ptext1:
+   711                           	callstack 0
+   712   000C46                     _manageSoftTimerTick:
+   713                           	callstack 25
+   714   000C46                     
+   715                           ;source/main.c: 371:     MOT_manageMotorSoftwareTimer();
+   716   000C46  EC8A  F005         	call	_MOT_manageMotorSoftwareTimer	;wreg free
+   717   000C4A  0012               	return		;funcret
+   718   000C4C                     __end_of_manageSoftTimerTick:
+   719                           	callstack 0
+   720                           
+   721 ;; *************** function _MOT_manageMotorSoftwareTimer *****************
+   722 ;; Defined at:
+   723 ;;		line 66 in file "source/motor.c"
+   724 ;; Parameters:    Size  Location     Type
+   725 ;;		None
+   726 ;; Auto vars:     Size  Location     Type
+   727 ;;		None
+   728 ;; Return value:  Size  Location     Type
+   729 ;;                  1    wreg      void 
+   730 ;; Registers used:
+   731 ;;		wreg, status,2, status,0, cstack
+   732 ;; Tracked objects:
+   733 ;;		On entry : 0/0
+   734 ;;		On exit  : 0/0
+   735 ;;		Unchanged: 0/0
+   736 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   737 ;;      Params:         0       0       0       0       0       0       0
+   738 ;;      Locals:         0       0       0       0       0       0       0
+   739 ;;      Temps:          0       0       0       0       0       0       0
+   740 ;;      Totals:         0       0       0       0       0       0       0
+   741 ;;Total ram usage:        0 bytes
+   742 ;; Hardware stack levels used: 1
+   743 ;; Hardware stack levels required when called: 4
+   744 ;; This function calls:
+   745 ;;		_MOT_SwitchOffMotor
+   746 ;; This function is called by:
+   747 ;;		_manageSoftTimerTick
+   748 ;; This function uses a non-reentrant model
+   749 ;;
+   750                           
+   751                           	psect	text2
+   752   000B14                     __ptext2:
+   753                           	callstack 0
+   754   000B14                     _MOT_manageMotorSoftwareTimer:
+   755                           	callstack 25
+   756   000B14                     
+   757                           ;source/motor.c: 68:     if ( i16uMotorSwitchDelay > 0 )
+   758   000B14  5011               	movf	_i16uMotorSwitchDelay^0,w,c
+   759   000B16  1012               	iorwf	(_i16uMotorSwitchDelay+1)^0,w,c
+   760   000B18  B4D8               	btfsc	status,2,c
+   761   000B1A  EF91  F005         	goto	u11
+   762   000B1E  EF93  F005         	goto	u10
+   763   000B22                     u11:
+   764   000B22  EFA2  F005         	goto	l444
+   765   000B26                     u10:
+   766   000B26  868A               	bsf	138,3,c	;volatile
+   767   000B28                     
+   768                           ;source/motor.c: 71:         i16uMotorSwitchDelay--;
+   769   000B28  0611               	decf	_i16uMotorSwitchDelay^0,f,c
+   770   000B2A  A0D8               	btfss	status,0,c
+   771   000B2C  0612               	decf	(_i16uMotorSwitchDelay+1)^0,f,c
+   772   000B2E                     
+   773                           ;source/motor.c: 72:         if ( i16uMotorSwitchDelay == 0 )
+   774   000B2E  5011               	movf	_i16uMotorSwitchDelay^0,w,c
+   775   000B30  1012               	iorwf	(_i16uMotorSwitchDelay+1)^0,w,c
+   776   000B32  A4D8               	btfss	status,2,c
+   777   000B34  EF9E  F005         	goto	u21
+   778   000B38  EFA0  F005         	goto	u20
+   779   000B3C                     u21:
+   780   000B3C  EFA2  F005         	goto	l444
+   781   000B40                     u20:
+   782   000B40                     
+   783                           ;source/motor.c: 73:         {;source/motor.c: 75:             MOT_SwitchOffMotor();
+   784   000B40  EC2C  F006         	call	_MOT_SwitchOffMotor	;wreg free
+   785   000B44                     l444:
+   786   000B44  0012               	return		;funcret
+   787   000B46                     __end_of_MOT_manageMotorSoftwareTimer:
+   788                           	callstack 0
+   789                           
+   790 ;; *************** function _MOT_SwitchOffMotor *****************
+   791 ;; Defined at:
+   792 ;;		line 54 in file "source/motor.c"
+   793 ;; Parameters:    Size  Location     Type
+   794 ;;		None
+   795 ;; Auto vars:     Size  Location     Type
+   796 ;;		None
+   797 ;; Return value:  Size  Location     Type
+   798 ;;                  1    wreg      void 
+   799 ;; Registers used:
+   800 ;;		None
+   801 ;; Tracked objects:
+   802 ;;		On entry : 0/0
+   803 ;;		On exit  : 0/0
+   804 ;;		Unchanged: 0/0
+   805 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   806 ;;      Params:         0       0       0       0       0       0       0
+   807 ;;      Locals:         0       0       0       0       0       0       0
+   808 ;;      Temps:          0       0       0       0       0       0       0
+   809 ;;      Totals:         0       0       0       0       0       0       0
+   810 ;;Total ram usage:        0 bytes
+   811 ;; Hardware stack levels used: 1
+   812 ;; Hardware stack levels required when called: 3
+   813 ;; This function calls:
+   814 ;;		Nothing
+   815 ;; This function is called by:
+   816 ;;		_MOT_manageMotorSoftwareTimer
+   817 ;; This function uses a non-reentrant model
+   818 ;;
+   819                           
+   820                           	psect	text3
+   821   000C58                     __ptext3:
+   822                           	callstack 0
+   823   000C58                     _MOT_SwitchOffMotor:
+   824                           	callstack 25
+   825   000C58  968A               	bcf	138,3,c	;volatile
+   826   000C5A  0012               	return		;funcret
+   827   000C5C                     __end_of_MOT_SwitchOffMotor:
+   828                           	callstack 0
+   829                           
+   830 ;; *************** function _getAdcFiltered *****************
+   831 ;; Defined at:
+   832 ;;		line 255 in file "source/main.c"
+   833 ;; Parameters:    Size  Location     Type
+   834 ;;  i16uAdcUnfil    2    2[COMRAM] unsigned short 
+   835 ;; Auto vars:     Size  Location     Type
+   836 ;;  i16uAdcfilte    2    6[COMRAM] unsigned short 
+   837 ;;  i               1    8[COMRAM] unsigned char 
+   838 ;; Return value:  Size  Location     Type
+   839 ;;                  2    2[COMRAM] unsigned short 
+   840 ;; Registers used:
+   841 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
+   842 ;; Tracked objects:
+   843 ;;		On entry : 0/0
+   844 ;;		On exit  : 0/0
+   845 ;;		Unchanged: 0/0
+   846 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   847 ;;      Params:         2       0       0       0       0       0       0
+   848 ;;      Locals:         3       0       0       0       0       0       0
+   849 ;;      Temps:          2       0       0       0       0       0       0
+   850 ;;      Totals:         7       0       0       0       0       0       0
+   851 ;;Total ram usage:        7 bytes
+   852 ;; Hardware stack levels used: 1
+   853 ;; Hardware stack levels required when called: 3
+   854 ;; This function calls:
+   855 ;;		Nothing
+   856 ;; This function is called by:
+   857 ;;		_main
+   858 ;; This function uses a non-reentrant model
+   859 ;;
+   860                           
+   861                           	psect	text4
+   862   0008AC                     __ptext4:
+   863                           	callstack 0
+   864   0008AC                     _getAdcFiltered:
+   865                           	callstack 27
+   866   0008AC                     
+   867                           ;source/main.c: 259:     uint8_t i = 0;
+   868   0008AC  0E00               	movlw	0
+   869   0008AE  6E2D               	movwf	getAdcFiltered@i^0,c
+   870   0008B0                     
+   871                           ;source/main.c: 262:     ti16uLuminosityAdcHistory[i8uHistoryIndex] = i16uAdcUnfiltered;
+   872   0008B0  501F               	movf	getAdcFiltered@i8uHistoryIndex^0,w,c
+   873   0008B2  0D02               	mullw	2
+   874   0008B4  50F3               	movf	243,w,c
+   875   0008B6  0F01               	addlw	low _ti16uLuminosityAdcHistory
+   876   0008B8  6ED9               	movwf	fsr2l,c
+   877   0008BA  6ADA               	clrf	fsr2h,c
+   878   0008BC  C027  FFDE         	movff	getAdcFiltered@i16uAdcUnfiltered,postinc2
+   879   0008C0  C028  FFDD         	movff	getAdcFiltered@i16uAdcUnfiltered+1,postdec2
+   880   0008C4                     
+   881                           ;source/main.c: 265:     if( i8uHistoryIndex < (uint8_t)(8 -1) )
+   882   0008C4  0E07               	movlw	7
+   883   0008C6  601F               	cpfslt	getAdcFiltered@i8uHistoryIndex^0,c
+   884   0008C8  EF68  F004         	goto	u421
+   885   0008CC  EF6A  F004         	goto	u420
+   886   0008D0                     u421:
+   887   0008D0  EF6D  F004         	goto	l1526
+   888   0008D4                     u420:
+   889   0008D4                     
+   890                           ;source/main.c: 266:     {;source/main.c: 267:         i8uHistoryIndex++;
+   891   0008D4  2A1F               	incf	getAdcFiltered@i8uHistoryIndex^0,f,c
+   892                           
+   893                           ;source/main.c: 268:     }
+   894   0008D6  EF6F  F004         	goto	l360
+   895   0008DA                     l1526:
+   896                           
+   897                           ;source/main.c: 270:     {;source/main.c: 271:         i8uHistoryIndex = 0;
+   898   0008DA  0E00               	movlw	0
+   899   0008DC  6E1F               	movwf	getAdcFiltered@i8uHistoryIndex^0,c
+   900   0008DE                     l360:
+   901                           
+   902                           ;source/main.c: 275:     i16uAdcfiltered = 0;
+   903   0008DE  0E00               	movlw	0
+   904   0008E0  6E2C               	movwf	(getAdcFiltered@i16uAdcfiltered+1)^0,c
+   905   0008E2  0E00               	movlw	0
+   906   0008E4  6E2B               	movwf	getAdcFiltered@i16uAdcfiltered^0,c
+   907                           
+   908                           ;source/main.c: 276:     for(i=0; i<8 ; i++)
+   909   0008E6  0E00               	movlw	0
+   910   0008E8  6E2D               	movwf	getAdcFiltered@i^0,c
+   911   0008EA                     l1532:
+   912                           
+   913                           ;source/main.c: 277:     {;source/main.c: 278:       i16uAdcfiltered += ti16uLuminosityA
+      +                          dcHistory[i];
+   914   0008EA  502D               	movf	getAdcFiltered@i^0,w,c
+   915   0008EC  0D02               	mullw	2
+   916   0008EE  50F3               	movf	243,w,c
+   917   0008F0  0F01               	addlw	low _ti16uLuminosityAdcHistory
+   918   0008F2  6ED9               	movwf	fsr2l,c
+   919   0008F4  6ADA               	clrf	fsr2h,c
+   920   0008F6  50DE               	movf	postinc2,w,c
+   921   0008F8  262B               	addwf	getAdcFiltered@i16uAdcfiltered^0,f,c
+   922   0008FA  50DD               	movf	postdec2,w,c
+   923   0008FC  222C               	addwfc	(getAdcFiltered@i16uAdcfiltered+1)^0,f,c
+   924   0008FE                     
+   925                           ;source/main.c: 279:     }
+   926   0008FE  2A2D               	incf	getAdcFiltered@i^0,f,c
+   927   000900  0E07               	movlw	7
+   928   000902  642D               	cpfsgt	getAdcFiltered@i^0,c
+   929   000904  EF86  F004         	goto	u431
+   930   000908  EF88  F004         	goto	u430
+   931   00090C                     u431:
+   932   00090C  EF75  F004         	goto	l1532
+   933   000910                     u430:
+   934   000910                     
+   935                           ;source/main.c: 280:     i16uAdcfiltered = (uint16_t)(i16uAdcfiltered >> 3);
+   936   000910  C02B  F029         	movff	getAdcFiltered@i16uAdcfiltered,??_getAdcFiltered
+   937   000914  C02C  F02A         	movff	getAdcFiltered@i16uAdcfiltered+1,??_getAdcFiltered+1
+   938   000918  90D8               	bcf	status,0,c
+   939   00091A  322A               	rrcf	(??_getAdcFiltered+1)^0,f,c
+   940   00091C  3229               	rrcf	??_getAdcFiltered^0,f,c
+   941   00091E  90D8               	bcf	status,0,c
+   942   000920  322A               	rrcf	(??_getAdcFiltered+1)^0,f,c
+   943   000922  3229               	rrcf	??_getAdcFiltered^0,f,c
+   944   000924  90D8               	bcf	status,0,c
+   945   000926  322A               	rrcf	(??_getAdcFiltered+1)^0,f,c
+   946   000928  3229               	rrcf	??_getAdcFiltered^0,f,c
+   947   00092A  C029  F02B         	movff	??_getAdcFiltered,getAdcFiltered@i16uAdcfiltered
+   948   00092E  C02A  F02C         	movff	??_getAdcFiltered+1,getAdcFiltered@i16uAdcfiltered+1
+   949   000932                     
+   950                           ;source/main.c: 282:     return i16uAdcfiltered;
+   951   000932  C02B  F027         	movff	getAdcFiltered@i16uAdcfiltered,?_getAdcFiltered
+   952   000936  C02C  F028         	movff	getAdcFiltered@i16uAdcfiltered+1,?_getAdcFiltered+1
+   953   00093A  0012               	return		;funcret
+   954   00093C                     __end_of_getAdcFiltered:
+   955                           	callstack 0
+   956                           
+   957 ;; *************** function _detectSunSet *****************
+   958 ;; Defined at:
+   959 ;;		line 330 in file "source/main.c"
+   960 ;; Parameters:    Size  Location     Type
+   961 ;;		None
+   962 ;; Auto vars:     Size  Location     Type
+   963 ;;  bReturnVal      1    2[COMRAM] _Bool 
+   964 ;; Return value:  Size  Location     Type
+   965 ;;                  1    wreg      _Bool 
+   966 ;; Registers used:
+   967 ;;		wreg, status,2, status,0
+   968 ;; Tracked objects:
+   969 ;;		On entry : 0/0
+   970 ;;		On exit  : 0/0
+   971 ;;		Unchanged: 0/0
+   972 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   973 ;;      Params:         0       0       0       0       0       0       0
+   974 ;;      Locals:         1       0       0       0       0       0       0
+   975 ;;      Temps:          0       0       0       0       0       0       0
+   976 ;;      Totals:         1       0       0       0       0       0       0
+   977 ;;Total ram usage:        1 bytes
+   978 ;; Hardware stack levels used: 1
+   979 ;; Hardware stack levels required when called: 3
+   980 ;; This function calls:
+   981 ;;		Nothing
+   982 ;; This function is called by:
+   983 ;;		_main
+   984 ;; This function uses a non-reentrant model
+   985 ;;
+   986                           
+   987                           	psect	text5
+   988   000A0E                     __ptext5:
+   989                           	callstack 0
+   990   000A0E                     _detectSunSet:
+   991                           	callstack 27
+   992   000A0E                     
+   993                           ;source/main.c: 332:     _Bool bReturnVal = 0;
+   994   000A0E  0E00               	movlw	0
+   995   000A10  6E27               	movwf	detectSunSet@bReturnVal^0,c
+   996   000A12                     
+   997                           ;source/main.c: 335:     if ( eDoorPosition != DOOR_POSITION_CLOSE)
+   998   000A12  0423               	decf	_eDoorPosition^0,w,c
+   999   000A14  B4D8               	btfsc	status,2,c
+  1000   000A16  EF0F  F005         	goto	u121
+  1001   000A1A  EF11  F005         	goto	u120
+  1002   000A1E                     u121:
+  1003   000A1E  EF2F  F005         	goto	l1288
+  1004   000A22                     u120:
+  1005   000A22                     
+  1006                           ;source/main.c: 336:     {;source/main.c: 338:         if ( i16uLuminosityAdcFiltered < 
+      +                          500 )
+  1007   000A22  0EF4               	movlw	244
+  1008   000A24  5C19               	subwf	_i16uLuminosityAdcFiltered^0,w,c
+  1009   000A26  0E01               	movlw	1
+  1010   000A28  581A               	subwfb	(_i16uLuminosityAdcFiltered+1)^0,w,c
+  1011   000A2A  B0D8               	btfsc	status,0,c
+  1012   000A2C  EF1A  F005         	goto	u131
+  1013   000A30  EF1C  F005         	goto	u130
+  1014   000A34                     u131:
+  1015   000A34  EF2F  F005         	goto	l1288
+  1016   000A38                     u130:
+  1017   000A38                     
+  1018                           ;source/main.c: 339:         {;source/main.c: 341:             if ( i16uCntLuminosityLow
+      +                           < (5000/10) )
+  1019   000A38  0EF4               	movlw	244
+  1020   000A3A  5C17               	subwf	_i16uCntLuminosityLow^0,w,c
+  1021   000A3C  0E01               	movlw	1
+  1022   000A3E  5818               	subwfb	(_i16uCntLuminosityLow+1)^0,w,c
+  1023   000A40  B0D8               	btfsc	status,0,c
+  1024   000A42  EF25  F005         	goto	u141
+  1025   000A46  EF27  F005         	goto	u140
+  1026   000A4A                     u141:
+  1027   000A4A  EF2B  F005         	goto	l1286
+  1028   000A4E                     u140:
+  1029   000A4E                     
+  1030                           ;source/main.c: 342:             {;source/main.c: 343:                 i16uCntLuminosity
+      +                          Low++;
+  1031   000A4E  4A17               	infsnz	_i16uCntLuminosityLow^0,f,c
+  1032   000A50  2A18               	incf	(_i16uCntLuminosityLow+1)^0,f,c
+  1033                           
+  1034                           ;source/main.c: 344:             }
+  1035   000A52  EF33  F005         	goto	l380
+  1036   000A56                     l1286:
+  1037                           
+  1038                           ;source/main.c: 346:             {;source/main.c: 348:                 bReturnVal = 1;
+  1039   000A56  0E01               	movlw	1
+  1040   000A58  6E27               	movwf	detectSunSet@bReturnVal^0,c
+  1041   000A5A  EF33  F005         	goto	l380
+  1042   000A5E                     l1288:
+  1043                           
+  1044                           ;source/main.c: 352:         {;source/main.c: 353:             i16uCntLuminosityLow = 0;
+  1045   000A5E  0E00               	movlw	0
+  1046   000A60  6E18               	movwf	(_i16uCntLuminosityLow+1)^0,c
+  1047   000A62  0E00               	movlw	0
+  1048   000A64  6E17               	movwf	_i16uCntLuminosityLow^0,c
+  1049   000A66                     l380:
+  1050                           
+  1051                           ;source/main.c: 360:  return bReturnVal;
+  1052   000A66  5027               	movf	detectSunSet@bReturnVal^0,w,c
+  1053   000A68  0012               	return		;funcret
+  1054   000A6A                     __end_of_detectSunSet:
+  1055                           	callstack 0
+  1056                           
+  1057 ;; *************** function _detectSunRise *****************
+  1058 ;; Defined at:
+  1059 ;;		line 291 in file "source/main.c"
+  1060 ;; Parameters:    Size  Location     Type
+  1061 ;;		None
+  1062 ;; Auto vars:     Size  Location     Type
+  1063 ;;  bReturnVal      1    2[COMRAM] _Bool 
+  1064 ;; Return value:  Size  Location     Type
+  1065 ;;                  1    wreg      _Bool 
+  1066 ;; Registers used:
+  1067 ;;		wreg, status,2, status,0
+  1068 ;; Tracked objects:
+  1069 ;;		On entry : 0/0
+  1070 ;;		On exit  : 0/0
+  1071 ;;		Unchanged: 0/0
+  1072 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1073 ;;      Params:         0       0       0       0       0       0       0
+  1074 ;;      Locals:         1       0       0       0       0       0       0
+  1075 ;;      Temps:          0       0       0       0       0       0       0
+  1076 ;;      Totals:         1       0       0       0       0       0       0
+  1077 ;;Total ram usage:        1 bytes
+  1078 ;; Hardware stack levels used: 1
+  1079 ;; Hardware stack levels required when called: 3
+  1080 ;; This function calls:
+  1081 ;;		Nothing
+  1082 ;; This function is called by:
+  1083 ;;		_main
+  1084 ;; This function uses a non-reentrant model
+  1085 ;;
+  1086                           
+  1087                           	psect	text6
+  1088   0009B0                     __ptext6:
+  1089                           	callstack 0
+  1090   0009B0                     _detectSunRise:
+  1091                           	callstack 27
+  1092   0009B0                     
+  1093                           ;source/main.c: 293:  _Bool bReturnVal = 0;
+  1094   0009B0  0E00               	movlw	0
+  1095   0009B2  6E27               	movwf	detectSunRise@bReturnVal^0,c
+  1096   0009B4                     
+  1097                           ;source/main.c: 296:     if ( eDoorPosition != DOOR_POSITION_OPEN)
+  1098   0009B4  0E02               	movlw	2
+  1099   0009B6  1823               	xorwf	_eDoorPosition^0,w,c
+  1100   0009B8  B4D8               	btfsc	status,2,c
+  1101   0009BA  EFE1  F004         	goto	u81
+  1102   0009BE  EFE3  F004         	goto	u80
+  1103   0009C2                     u81:
+  1104   0009C2  EF01  F005         	goto	l1238
+  1105   0009C6                     u80:
+  1106   0009C6                     
+  1107                           ;source/main.c: 297:     {;source/main.c: 299:         if ( i16uLuminosityAdcFiltered > 
+      +                          650 )
+  1108   0009C6  0E8B               	movlw	139
+  1109   0009C8  5C19               	subwf	_i16uLuminosityAdcFiltered^0,w,c
+  1110   0009CA  0E02               	movlw	2
+  1111   0009CC  581A               	subwfb	(_i16uLuminosityAdcFiltered+1)^0,w,c
+  1112   0009CE  A0D8               	btfss	status,0,c
+  1113   0009D0  EFEC  F004         	goto	u91
+  1114   0009D4  EFEE  F004         	goto	u90
+  1115   0009D8                     u91:
+  1116   0009D8  EF01  F005         	goto	l1238
+  1117   0009DC                     u90:
+  1118   0009DC                     
+  1119                           ;source/main.c: 300:         {;source/main.c: 302:             if ( i16uCntLuminosityHig
+      +                          h < (5000/10) )
+  1120   0009DC  0EF4               	movlw	244
+  1121   0009DE  5C15               	subwf	_i16uCntLuminosityHigh^0,w,c
+  1122   0009E0  0E01               	movlw	1
+  1123   0009E2  5816               	subwfb	(_i16uCntLuminosityHigh+1)^0,w,c
+  1124   0009E4  B0D8               	btfsc	status,0,c
+  1125   0009E6  EFF7  F004         	goto	u101
+  1126   0009EA  EFF9  F004         	goto	u100
+  1127   0009EE                     u101:
+  1128   0009EE  EFFD  F004         	goto	l1236
+  1129   0009F2                     u100:
+  1130   0009F2                     
+  1131                           ;source/main.c: 303:             {;source/main.c: 304:                 i16uCntLuminosity
+      +                          High++;
+  1132   0009F2  4A15               	infsnz	_i16uCntLuminosityHigh^0,f,c
+  1133   0009F4  2A16               	incf	(_i16uCntLuminosityHigh+1)^0,f,c
+  1134                           
+  1135                           ;source/main.c: 305:             }
+  1136   0009F6  EF05  F005         	goto	l371
+  1137   0009FA                     l1236:
+  1138                           
+  1139                           ;source/main.c: 307:             {;source/main.c: 309:                 bReturnVal = 1;
+  1140   0009FA  0E01               	movlw	1
+  1141   0009FC  6E27               	movwf	detectSunRise@bReturnVal^0,c
+  1142   0009FE  EF05  F005         	goto	l371
+  1143   000A02                     l1238:
+  1144                           
+  1145                           ;source/main.c: 313:         {;source/main.c: 314:             i16uCntLuminosityHigh = 0
+      +                          ;
+  1146   000A02  0E00               	movlw	0
+  1147   000A04  6E16               	movwf	(_i16uCntLuminosityHigh+1)^0,c
+  1148   000A06  0E00               	movlw	0
+  1149   000A08  6E15               	movwf	_i16uCntLuminosityHigh^0,c
+  1150   000A0A                     l371:
+  1151                           
+  1152                           ;source/main.c: 321:         return bReturnVal;
+  1153   000A0A  5027               	movf	detectSunRise@bReturnVal^0,w,c
+  1154   000A0C  0012               	return		;funcret
+  1155   000A0E                     __end_of_detectSunRise:
+  1156                           	callstack 0
+  1157                           
+  1158 ;; *************** function ___lwdiv *****************
+  1159 ;; Defined at:
+  1160 ;;		line 7 in file "C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\lwdiv.c"
+  1161 ;; Parameters:    Size  Location     Type
+  1162 ;;  dividend        2    2[COMRAM] unsigned int 
+  1163 ;;  divisor         2    4[COMRAM] unsigned int 
+  1164 ;; Auto vars:     Size  Location     Type
+  1165 ;;  quotient        2    6[COMRAM] unsigned int 
+  1166 ;;  counter         1    8[COMRAM] unsigned char 
+  1167 ;; Return value:  Size  Location     Type
+  1168 ;;                  2    2[COMRAM] unsigned int 
+  1169 ;; Registers used:
+  1170 ;;		wreg, status,2, status,0
+  1171 ;; Tracked objects:
+  1172 ;;		On entry : 0/0
+  1173 ;;		On exit  : 0/0
+  1174 ;;		Unchanged: 0/0
+  1175 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1176 ;;      Params:         4       0       0       0       0       0       0
+  1177 ;;      Locals:         3       0       0       0       0       0       0
+  1178 ;;      Temps:          0       0       0       0       0       0       0
+  1179 ;;      Totals:         7       0       0       0       0       0       0
+  1180 ;;Total ram usage:        7 bytes
+  1181 ;; Hardware stack levels used: 1
+  1182 ;; Hardware stack levels required when called: 3
+  1183 ;; This function calls:
+  1184 ;;		Nothing
+  1185 ;; This function is called by:
+  1186 ;;		_main
+  1187 ;; This function uses a non-reentrant model
+  1188 ;;
+  1189                           
+  1190                           	psect	text7
+  1191   00093C                     __ptext7:
+  1192                           	callstack 0
+  1193   00093C                     ___lwdiv:
+  1194                           	callstack 27
+  1195   00093C  0E00               	movlw	0
+  1196   00093E  6E2C               	movwf	(___lwdiv@quotient+1)^0,c
+  1197   000940  0E00               	movlw	0
+  1198   000942  6E2B               	movwf	___lwdiv@quotient^0,c
+  1199   000944  5029               	movf	___lwdiv@divisor^0,w,c
+  1200   000946  102A               	iorwf	(___lwdiv@divisor+1)^0,w,c
+  1201   000948  B4D8               	btfsc	status,2,c
+  1202   00094A  EFA9  F004         	goto	u451
+  1203   00094E  EFAB  F004         	goto	u450
+  1204   000952                     u451:
+  1205   000952  EFD3  F004         	goto	l938
+  1206   000956                     u450:
+  1207   000956  0E01               	movlw	1
+  1208   000958  6E2D               	movwf	___lwdiv@counter^0,c
+  1209   00095A  EFB3  F004         	goto	l1580
+  1210   00095E                     l1578:
+  1211   00095E  90D8               	bcf	status,0,c
+  1212   000960  3629               	rlcf	___lwdiv@divisor^0,f,c
+  1213   000962  362A               	rlcf	(___lwdiv@divisor+1)^0,f,c
+  1214   000964  2A2D               	incf	___lwdiv@counter^0,f,c
+  1215   000966                     l1580:
+  1216   000966  AE2A               	btfss	(___lwdiv@divisor+1)^0,7,c
+  1217   000968  EFB8  F004         	goto	u461
+  1218   00096C  EFBA  F004         	goto	u460
+  1219   000970                     u461:
+  1220   000970  EFAF  F004         	goto	l1578
+  1221   000974                     u460:
+  1222   000974                     l1582:
+  1223   000974  90D8               	bcf	status,0,c
+  1224   000976  362B               	rlcf	___lwdiv@quotient^0,f,c
+  1225   000978  362C               	rlcf	(___lwdiv@quotient+1)^0,f,c
+  1226   00097A  5029               	movf	___lwdiv@divisor^0,w,c
+  1227   00097C  5C27               	subwf	___lwdiv@dividend^0,w,c
+  1228   00097E  502A               	movf	(___lwdiv@divisor+1)^0,w,c
+  1229   000980  5828               	subwfb	(___lwdiv@dividend+1)^0,w,c
+  1230   000982  A0D8               	btfss	status,0,c
+  1231   000984  EFC6  F004         	goto	u471
+  1232   000988  EFC8  F004         	goto	u470
+  1233   00098C                     u471:
+  1234   00098C  EFCD  F004         	goto	l1590
+  1235   000990                     u470:
+  1236   000990  5029               	movf	___lwdiv@divisor^0,w,c
+  1237   000992  5E27               	subwf	___lwdiv@dividend^0,f,c
+  1238   000994  502A               	movf	(___lwdiv@divisor+1)^0,w,c
+  1239   000996  5A28               	subwfb	(___lwdiv@dividend+1)^0,f,c
+  1240   000998  802B               	bsf	___lwdiv@quotient^0,0,c
+  1241   00099A                     l1590:
+  1242   00099A  90D8               	bcf	status,0,c
+  1243   00099C  322A               	rrcf	(___lwdiv@divisor+1)^0,f,c
+  1244   00099E  3229               	rrcf	___lwdiv@divisor^0,f,c
+  1245   0009A0  2E2D               	decfsz	___lwdiv@counter^0,f,c
+  1246   0009A2  EFBA  F004         	goto	l1582
+  1247   0009A6                     l938:
+  1248   0009A6  C02B  F027         	movff	___lwdiv@quotient,?___lwdiv
+  1249   0009AA  C02C  F028         	movff	___lwdiv@quotient+1,?___lwdiv+1
+  1250   0009AE  0012               	return		;funcret
+  1251   0009B0                     __end_of___lwdiv:
+  1252                           	callstack 0
+  1253                           
+  1254 ;; *************** function _Timer0_OverflowCallbackRegister *****************
+  1255 ;; Defined at:
+  1256 ;;		line 141 in file "source/driver/timer/src/tmr0.c"
+  1257 ;; Parameters:    Size  Location     Type
+  1258 ;;  CallbackHand    2    2[COMRAM] PTR FTN()void 
+  1259 ;;		 -> Timer0_OverflowCallback@main$F694(1), 
+  1260 ;; Auto vars:     Size  Location     Type
+  1261 ;;		None
+  1262 ;; Return value:  Size  Location     Type
+  1263 ;;                  1    wreg      void 
+  1264 ;; Registers used:
+  1265 ;;		wreg, status,2, status,0
+  1266 ;; Tracked objects:
+  1267 ;;		On entry : 0/0
+  1268 ;;		On exit  : 0/0
+  1269 ;;		Unchanged: 0/0
+  1270 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1271 ;;      Params:         2       0       0       0       0       0       0
+  1272 ;;      Locals:         0       0       0       0       0       0       0
+  1273 ;;      Temps:          0       0       0       0       0       0       0
+  1274 ;;      Totals:         2       0       0       0       0       0       0
+  1275 ;;Total ram usage:        2 bytes
+  1276 ;; Hardware stack levels used: 1
+  1277 ;; Hardware stack levels required when called: 3
+  1278 ;; This function calls:
+  1279 ;;		Nothing
+  1280 ;; This function is called by:
+  1281 ;;		_main
+  1282 ;; This function uses a non-reentrant model
+  1283 ;;
+  1284                           
+  1285                           	psect	text8
+  1286   000C14                     __ptext8:
+  1287                           	callstack 0
+  1288   000C14                     _Timer0_OverflowCallbackRegister:
+  1289                           	callstack 27
+  1290   000C14                     
+  1291                           ;source/driver/timer/src/tmr0.c: 141: void Timer0_OverflowCallbackRegister(void (*Callba
+      +                          ckHandler)(void));source/driver/timer/src/tmr0.c: 142: {;source/driver/timer/src/tmr0.c:
+      +                           143:     Timer0_OverflowCallback = CallbackHandler;
+  1292   000C14  C027  F033         	movff	Timer0_OverflowCallbackRegister@CallbackHandler,_Timer0_OverflowCallback
+  1293   000C18  C028  F034         	movff	Timer0_OverflowCallbackRegister@CallbackHandler+1,_Timer0_OverflowCallback+1
+  1294   000C1C  0012               	return		;funcret
+  1295   000C1E                     __end_of_Timer0_OverflowCallbackRegister:
+  1296                           	callstack 0
+  1297                           
+  1298 ;; *************** function _SYSTEM_Initialize *****************
+  1299 ;; Defined at:
+  1300 ;;		line 37 in file "source/driver/system/src/system.c"
+  1301 ;; Parameters:    Size  Location     Type
+  1302 ;;		None
+  1303 ;; Auto vars:     Size  Location     Type
+  1304 ;;		None
+  1305 ;; Return value:  Size  Location     Type
+  1306 ;;                  1    wreg      void 
+  1307 ;; Registers used:
+  1308 ;;		wreg, status,2, status,0, cstack
+  1309 ;; Tracked objects:
+  1310 ;;		On entry : 0/0
+  1311 ;;		On exit  : 0/0
+  1312 ;;		Unchanged: 0/0
+  1313 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1314 ;;      Params:         0       0       0       0       0       0       0
+  1315 ;;      Locals:         0       0       0       0       0       0       0
+  1316 ;;      Temps:          0       0       0       0       0       0       0
+  1317 ;;      Totals:         0       0       0       0       0       0       0
+  1318 ;;Total ram usage:        0 bytes
+  1319 ;; Hardware stack levels used: 1
+  1320 ;; Hardware stack levels required when called: 5
+  1321 ;; This function calls:
+  1322 ;;		_ADC_Initialize
+  1323 ;;		_CLOCK_Initialize
+  1324 ;;		_INTERRUPT_Initialize
+  1325 ;;		_PIN_MANAGER_Initialize
+  1326 ;;		_Timer0_Initialize
+  1327 ;;		_WDT_Initialize
+  1328 ;; This function is called by:
+  1329 ;;		_main
+  1330 ;; This function uses a non-reentrant model
+  1331 ;;
+  1332                           
+  1333                           	psect	text9
+  1334   000BC8                     __ptext9:
+  1335                           	callstack 0
+  1336   000BC8                     _SYSTEM_Initialize:
+  1337                           	callstack 25
+  1338   000BC8                     
+  1339                           ;source/driver/system/src/system.c: 39:     CLOCK_Initialize();
+  1340   000BC8  EC1E  F006         	call	_CLOCK_Initialize	;wreg free
+  1341                           
+  1342                           ;source/driver/system/src/system.c: 40:     PIN_MANAGER_Initialize();
+  1343   000BCC  ECF1  F005         	call	_PIN_MANAGER_Initialize	;wreg free
+  1344                           
+  1345                           ;source/driver/system/src/system.c: 41:     ADC_Initialize();
+  1346   000BD0  ECFE  F005         	call	_ADC_Initialize	;wreg free
+  1347                           
+  1348                           ;source/driver/system/src/system.c: 42:     Timer0_Initialize();
+  1349   000BD4  ECB7  F005         	call	_Timer0_Initialize	;wreg free
+  1350                           
+  1351                           ;source/driver/system/src/system.c: 43:     WDT_Initialize();
+  1352   000BD8  EC26  F006         	call	_WDT_Initialize	;wreg free
+  1353   000BDC                     
+  1354                           ;source/driver/system/src/system.c: 44:     INTERRUPT_Initialize();
+  1355   000BDC  EC70  F005         	call	_INTERRUPT_Initialize	;wreg free
+  1356   000BE0  0012               	return		;funcret
+  1357   000BE2                     __end_of_SYSTEM_Initialize:
+  1358                           	callstack 0
+  1359                           
+  1360 ;; *************** function _WDT_Initialize *****************
+  1361 ;; Defined at:
+  1362 ;;		line 36 in file "source/driver/system/src/watchdog.c"
+  1363 ;; Parameters:    Size  Location     Type
+  1364 ;;		None
+  1365 ;; Auto vars:     Size  Location     Type
+  1366 ;;		None
+  1367 ;; Return value:  Size  Location     Type
+  1368 ;;                  1    wreg      void 
+  1369 ;; Registers used:
+  1370 ;;		wreg, status,2
+  1371 ;; Tracked objects:
+  1372 ;;		On entry : 0/0
+  1373 ;;		On exit  : 0/0
+  1374 ;;		Unchanged: 0/0
+  1375 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1376 ;;      Params:         0       0       0       0       0       0       0
+  1377 ;;      Locals:         0       0       0       0       0       0       0
+  1378 ;;      Temps:          0       0       0       0       0       0       0
+  1379 ;;      Totals:         0       0       0       0       0       0       0
+  1380 ;;Total ram usage:        0 bytes
+  1381 ;; Hardware stack levels used: 1
+  1382 ;; Hardware stack levels required when called: 3
+  1383 ;; This function calls:
+  1384 ;;		Nothing
+  1385 ;; This function is called by:
+  1386 ;;		_SYSTEM_Initialize
+  1387 ;; This function uses a non-reentrant model
+  1388 ;;
+  1389                           
+  1390                           	psect	text10
+  1391   000C4C                     __ptext10:
+  1392                           	callstack 0
+  1393   000C4C                     _WDT_Initialize:
+  1394                           	callstack 26
+  1395   000C4C                     
+  1396                           ;source/driver/system/src/watchdog.c: 39:     WDTCON = 0x1;
+  1397   000C4C  0E01               	movlw	1
+  1398   000C4E  6ED1               	movwf	209,c	;volatile
+  1399   000C50  0012               	return		;funcret
+  1400   000C52                     __end_of_WDT_Initialize:
+  1401                           	callstack 0
+  1402                           
+  1403 ;; *************** function _Timer0_Initialize *****************
+  1404 ;; Defined at:
+  1405 ;;		line 50 in file "source/driver/timer/src/tmr0.c"
+  1406 ;; Parameters:    Size  Location     Type
+  1407 ;;		None
+  1408 ;; Auto vars:     Size  Location     Type
+  1409 ;;		None
+  1410 ;; Return value:  Size  Location     Type
+  1411 ;;                  1    wreg      void 
+  1412 ;; Registers used:
+  1413 ;;		wreg, status,2
+  1414 ;; Tracked objects:
+  1415 ;;		On entry : 0/0
+  1416 ;;		On exit  : 0/0
+  1417 ;;		Unchanged: 0/0
+  1418 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1419 ;;      Params:         0       0       0       0       0       0       0
+  1420 ;;      Locals:         0       0       0       0       0       0       0
+  1421 ;;      Temps:          2       0       0       0       0       0       0
+  1422 ;;      Totals:         2       0       0       0       0       0       0
+  1423 ;;Total ram usage:        2 bytes
+  1424 ;; Hardware stack levels used: 1
+  1425 ;; Hardware stack levels required when called: 3
+  1426 ;; This function calls:
+  1427 ;;		Nothing
+  1428 ;; This function is called by:
+  1429 ;;		_SYSTEM_Initialize
+  1430 ;; This function uses a non-reentrant model
+  1431 ;;
+  1432                           
+  1433                           	psect	text11
+  1434   000B6E                     __ptext11:
+  1435                           	callstack 0
+  1436   000B6E                     _Timer0_Initialize:
+  1437                           	callstack 26
+  1438   000B6E                     
+  1439                           ;source/driver/timer/src/tmr0.c: 56:     T0CONbits.T08BIT = 0;
+  1440   000B6E  9CD5               	bcf	213,6,c	;volatile
+  1441   000B70                     
+  1442                           ;source/driver/timer/src/tmr0.c: 59:     TMR0H = 0xF6;
+  1443   000B70  0EF6               	movlw	246
+  1444   000B72  6ED7               	movwf	215,c	;volatile
+  1445                           
+  1446                           ;source/driver/timer/src/tmr0.c: 62:     TMR0L = 0x3C;
+  1447   000B74  0E3C               	movlw	60
+  1448   000B76  6ED6               	movwf	214,c	;volatile
+  1449                           
+  1450                           ;source/driver/timer/src/tmr0.c: 65:     timer0ReloadVal = ((uint16_t)TMR0H << 8) | TMR0
+      +                          L;
+  1451   000B78  50D7               	movf	215,w,c	;volatile
+  1452   000B7A  6E27               	movwf	??_Timer0_Initialize^0,c
+  1453   000B7C  50D6               	movf	214,w,c	;volatile
+  1454   000B7E  6E1D               	movwf	_timer0ReloadVal^0,c	;volatile
+  1455   000B80  C027  F01E         	movff	??_Timer0_Initialize,_timer0ReloadVal+1	;volatile
+  1456   000B84                     
+  1457                           ;source/driver/timer/src/tmr0.c: 68:     INTCONbits.TMR0IF = 0;
+  1458   000B84  94F2               	bcf	242,2,c	;volatile
+  1459   000B86                     
+  1460                           ;source/driver/timer/src/tmr0.c: 71:     INTCONbits.TMR0IE = 1;
+  1461   000B86  8AF2               	bsf	242,5,c	;volatile
+  1462                           
+  1463                           ;source/driver/timer/src/tmr0.c: 74:     T0CON = 0x98;
+  1464   000B88  0E98               	movlw	152
+  1465   000B8A  6ED5               	movwf	213,c	;volatile
+  1466   000B8C  0012               	return		;funcret
+  1467   000B8E                     __end_of_Timer0_Initialize:
+  1468                           	callstack 0
+  1469                           
+  1470 ;; *************** function _PIN_MANAGER_Initialize *****************
+  1471 ;; Defined at:
+  1472 ;;		line 38 in file "source/driver/system/src/pins.c"
+  1473 ;; Parameters:    Size  Location     Type
+  1474 ;;		None
+  1475 ;; Auto vars:     Size  Location     Type
+  1476 ;;		None
+  1477 ;; Return value:  Size  Location     Type
+  1478 ;;                  1    wreg      void 
+  1479 ;; Registers used:
+  1480 ;;		wreg, status,2, cstack
+  1481 ;; Tracked objects:
+  1482 ;;		On entry : 0/0
+  1483 ;;		On exit  : 0/0
+  1484 ;;		Unchanged: 0/0
+  1485 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1486 ;;      Params:         0       0       0       0       0       0       0
+  1487 ;;      Locals:         0       0       0       0       0       0       0
+  1488 ;;      Temps:          0       0       0       0       0       0       0
+  1489 ;;      Totals:         0       0       0       0       0       0       0
+  1490 ;;Total ram usage:        0 bytes
+  1491 ;; Hardware stack levels used: 1
+  1492 ;; Hardware stack levels required when called: 4
+  1493 ;; This function calls:
+  1494 ;;		_PIN_MANAGER_RefreshConfig
+  1495 ;; This function is called by:
+  1496 ;;		_SYSTEM_Initialize
+  1497 ;; This function uses a non-reentrant model
+  1498 ;;
+  1499                           
+  1500                           	psect	text12
+  1501   000BE2                     __ptext12:
+  1502                           	callstack 0
+  1503   000BE2                     _PIN_MANAGER_Initialize:
+  1504                           	callstack 25
+  1505   000BE2                     
+  1506                           ;source/driver/system/src/pins.c: 43:     LATA = 0x0;
+  1507   000BE2  0E00               	movlw	0
+  1508   000BE4  6E89               	movwf	137,c	;volatile
+  1509                           
+  1510                           ;source/driver/system/src/pins.c: 44:     LATB = 0x0;
+  1511   000BE6  0E00               	movlw	0
+  1512   000BE8  6E8A               	movwf	138,c	;volatile
+  1513                           
+  1514                           ;source/driver/system/src/pins.c: 45:     LATC = 0x0;
+  1515   000BEA  0E00               	movlw	0
+  1516   000BEC  6E8B               	movwf	139,c	;volatile
+  1517                           
+  1518                           ;source/driver/system/src/pins.c: 46:     LATD = 0x0;
+  1519   000BEE  0E00               	movlw	0
+  1520   000BF0  6E8C               	movwf	140,c	;volatile
+  1521                           
+  1522                           ;source/driver/system/src/pins.c: 47:     LATE = 0x0;
+  1523   000BF2  0E00               	movlw	0
+  1524   000BF4  6E8D               	movwf	141,c	;volatile
+  1525   000BF6                     
+  1526                           ;source/driver/system/src/pins.c: 49:     PIN_MANAGER_RefreshConfig();
+  1527   000BF6  ECA3  F005         	call	_PIN_MANAGER_RefreshConfig	;wreg free
+  1528   000BFA  0012               	return		;funcret
+  1529   000BFC                     __end_of_PIN_MANAGER_Initialize:
+  1530                           	callstack 0
+  1531                           
+  1532 ;; *************** function _PIN_MANAGER_RefreshConfig *****************
+  1533 ;; Defined at:
+  1534 ;;		line 52 in file "source/driver/system/src/pins.c"
+  1535 ;; Parameters:    Size  Location     Type
+  1536 ;;		None
+  1537 ;; Auto vars:     Size  Location     Type
+  1538 ;;		None
+  1539 ;; Return value:  Size  Location     Type
+  1540 ;;                  1    wreg      void 
+  1541 ;; Registers used:
+  1542 ;;		wreg, status,2
+  1543 ;; Tracked objects:
+  1544 ;;		On entry : 0/0
+  1545 ;;		On exit  : 0/0
+  1546 ;;		Unchanged: 0/0
+  1547 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1548 ;;      Params:         0       0       0       0       0       0       0
+  1549 ;;      Locals:         0       0       0       0       0       0       0
+  1550 ;;      Temps:          0       0       0       0       0       0       0
+  1551 ;;      Totals:         0       0       0       0       0       0       0
+  1552 ;;Total ram usage:        0 bytes
+  1553 ;; Hardware stack levels used: 1
+  1554 ;; Hardware stack levels required when called: 3
+  1555 ;; This function calls:
+  1556 ;;		Nothing
+  1557 ;; This function is called by:
+  1558 ;;		_PIN_MANAGER_Initialize
+  1559 ;;		_main
+  1560 ;; This function uses a non-reentrant model
+  1561 ;;
+  1562                           
+  1563                           	psect	text13
+  1564   000B46                     __ptext13:
+  1565                           	callstack 0
+  1566   000B46                     _PIN_MANAGER_RefreshConfig:
+  1567                           	callstack 25
+  1568   000B46                     
+  1569                           ;source/driver/system/src/pins.c: 64:     TRISA = 0b00000011;
+  1570   000B46  0E03               	movlw	3
+  1571   000B48  6E92               	movwf	146,c	;volatile
+  1572                           
+  1573                           ;source/driver/system/src/pins.c: 65:     TRISB = 0b00000111;
+  1574   000B4A  0E07               	movlw	7
+  1575   000B4C  6E93               	movwf	147,c	;volatile
+  1576                           
+  1577                           ;source/driver/system/src/pins.c: 66:     TRISC = 0x0;
+  1578   000B4E  0E00               	movlw	0
+  1579   000B50  6E94               	movwf	148,c	;volatile
+  1580                           
+  1581                           ;source/driver/system/src/pins.c: 67:     TRISD = 0x0;
+  1582   000B52  0E00               	movlw	0
+  1583   000B54  6E95               	movwf	149,c	;volatile
+  1584                           
+  1585                           ;source/driver/system/src/pins.c: 68:     TRISE = 0x0;
+  1586   000B56  0E00               	movlw	0
+  1587   000B58  6E96               	movwf	150,c	;volatile
+  1588                           
+  1589                           ;source/driver/system/src/pins.c: 87:     ANSEL = 0x03;
+  1590   000B5A  0E03               	movlw	3
+  1591   000B5C  6E7E               	movwf	126,c	;volatile
+  1592                           
+  1593                           ;source/driver/system/src/pins.c: 88:     ANSELH = 0x00;
+  1594   000B5E  0E00               	movlw	0
+  1595   000B60  6E7F               	movwf	127,c	;volatile
+  1596                           
+  1597                           ;source/driver/system/src/pins.c: 94:     WPUB = 0x00;
+  1598   000B62  0E00               	movlw	0
+  1599   000B64  6E7C               	movwf	124,c	;volatile
+  1600                           
+  1601                           ;source/driver/system/src/pins.c: 117:     IOCB = 0x0;
+  1602   000B66  0E00               	movlw	0
+  1603   000B68  6E7D               	movwf	125,c	;volatile
+  1604   000B6A                     
+  1605                           ;source/driver/system/src/pins.c: 124:     INTCONbits.RBIE = 0;
+  1606   000B6A  96F2               	bcf	242,3,c	;volatile
+  1607   000B6C  0012               	return		;funcret
+  1608   000B6E                     __end_of_PIN_MANAGER_RefreshConfig:
+  1609                           	callstack 0
+  1610                           
+  1611 ;; *************** function _INTERRUPT_Initialize *****************
+  1612 ;; Defined at:
+  1613 ;;		line 42 in file "source/driver/system/src/interrupt.c"
+  1614 ;; Parameters:    Size  Location     Type
+  1615 ;;		None
+  1616 ;; Auto vars:     Size  Location     Type
+  1617 ;;		None
+  1618 ;; Return value:  Size  Location     Type
+  1619 ;;                  1    wreg      void 
+  1620 ;; Registers used:
+  1621 ;;		wreg, status,2, status,0, cstack
+  1622 ;; Tracked objects:
+  1623 ;;		On entry : 0/0
+  1624 ;;		On exit  : 0/0
+  1625 ;;		Unchanged: 0/0
+  1626 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1627 ;;      Params:         0       0       0       0       0       0       0
+  1628 ;;      Locals:         0       0       0       0       0       0       0
+  1629 ;;      Temps:          0       0       0       0       0       0       0
+  1630 ;;      Totals:         0       0       0       0       0       0       0
+  1631 ;;Total ram usage:        0 bytes
+  1632 ;; Hardware stack levels used: 1
+  1633 ;; Hardware stack levels required when called: 4
+  1634 ;; This function calls:
+  1635 ;;		_INT0_SetInterruptHandler
+  1636 ;;		_INT1_SetInterruptHandler
+  1637 ;;		_INT2_SetInterruptHandler
+  1638 ;; This function is called by:
+  1639 ;;		_SYSTEM_Initialize
+  1640 ;; This function uses a non-reentrant model
+  1641 ;;
+  1642                           
+  1643                           	psect	text14
+  1644   000AE0                     __ptext14:
+  1645                           	callstack 0
+  1646   000AE0                     _INTERRUPT_Initialize:
+  1647                           	callstack 25
+  1648   000AE0                     
+  1649                           ;source/driver/system/src/interrupt.c: 45:     RCONbits.IPEN = 0;
+  1650   000AE0  9ED0               	bcf	208,7,c	;volatile
+  1651                           
+  1652                           ;source/driver/system/src/interrupt.c: 49:     (INTCONbits.INT0IF = 0);
+  1653   000AE2  92F2               	bcf	242,1,c	;volatile
+  1654                           
+  1655                           ;source/driver/system/src/interrupt.c: 50:     (INTCON2bits.INTEDG0 = 1);
+  1656   000AE4  8CF1               	bsf	241,6,c	;volatile
+  1657   000AE6                     
+  1658                           ;source/driver/system/src/interrupt.c: 52:     INT0_SetInterruptHandler(INT0_DefaultInte
+      +                          rruptHandler);
+  1659   000AE6  0E00               	movlw	0
+  1660   000AE8  6E27               	movwf	INT0_SetInterruptHandler@InterruptHandler^0,c
+  1661   000AEA  0E00               	movlw	0
+  1662   000AEC  6E28               	movwf	(INT0_SetInterruptHandler@InterruptHandler+1)^0,c
+  1663   000AEE  EC19  F006         	call	_INT0_SetInterruptHandler	;wreg free
+  1664   000AF2                     
+  1665                           ;source/driver/system/src/interrupt.c: 57:     (INTCON3bits.INT1IF = 0);
+  1666   000AF2  90F0               	bcf	240,0,c	;volatile
+  1667   000AF4                     
+  1668                           ;source/driver/system/src/interrupt.c: 58:     (INTCON2bits.INTEDG1 = 1);
+  1669   000AF4  8AF1               	bsf	241,5,c	;volatile
+  1670                           
+  1671                           ;source/driver/system/src/interrupt.c: 60:     INT1_SetInterruptHandler(INT1_DefaultInte
+      +                          rruptHandler);
+  1672   000AF6  0E00               	movlw	0
+  1673   000AF8  6E27               	movwf	INT1_SetInterruptHandler@InterruptHandler^0,c
+  1674   000AFA  0E00               	movlw	0
+  1675   000AFC  6E28               	movwf	(INT1_SetInterruptHandler@InterruptHandler+1)^0,c
+  1676   000AFE  EC14  F006         	call	_INT1_SetInterruptHandler	;wreg free
+  1677   000B02                     
+  1678                           ;source/driver/system/src/interrupt.c: 65:     (INTCON3bits.INT2IF = 0);
+  1679   000B02  92F0               	bcf	240,1,c	;volatile
+  1680   000B04                     
+  1681                           ;source/driver/system/src/interrupt.c: 66:     (INTCON2bits.INTEDG2 = 1);
+  1682   000B04  88F1               	bsf	241,4,c	;volatile
+  1683                           
+  1684                           ;source/driver/system/src/interrupt.c: 68:     INT2_SetInterruptHandler(INT2_DefaultInte
+      +                          rruptHandler);
+  1685   000B06  0E00               	movlw	0
+  1686   000B08  6E27               	movwf	INT2_SetInterruptHandler@InterruptHandler^0,c
+  1687   000B0A  0E00               	movlw	0
+  1688   000B0C  6E28               	movwf	(INT2_SetInterruptHandler@InterruptHandler+1)^0,c
+  1689   000B0E  EC0F  F006         	call	_INT2_SetInterruptHandler	;wreg free
+  1690   000B12  0012               	return		;funcret
+  1691   000B14                     __end_of_INTERRUPT_Initialize:
+  1692                           	callstack 0
+  1693                           
+  1694 ;; *************** function _INT2_SetInterruptHandler *****************
+  1695 ;; Defined at:
+  1696 ;;		line 170 in file "source/driver/system/src/interrupt.c"
+  1697 ;; Parameters:    Size  Location     Type
+  1698 ;;  InterruptHan    2    2[COMRAM] PTR FTN()void 
+  1699 ;;		 -> INT2_DefaultInterruptHandler(1), 
+  1700 ;; Auto vars:     Size  Location     Type
+  1701 ;;		None
+  1702 ;; Return value:  Size  Location     Type
+  1703 ;;                  1    wreg      void 
+  1704 ;; Registers used:
+  1705 ;;		wreg, status,2, status,0
+  1706 ;; Tracked objects:
+  1707 ;;		On entry : 0/0
+  1708 ;;		On exit  : 0/0
+  1709 ;;		Unchanged: 0/0
+  1710 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1711 ;;      Params:         2       0       0       0       0       0       0
+  1712 ;;      Locals:         0       0       0       0       0       0       0
+  1713 ;;      Temps:          0       0       0       0       0       0       0
+  1714 ;;      Totals:         2       0       0       0       0       0       0
+  1715 ;;Total ram usage:        2 bytes
+  1716 ;; Hardware stack levels used: 1
+  1717 ;; Hardware stack levels required when called: 3
+  1718 ;; This function calls:
+  1719 ;;		Nothing
+  1720 ;; This function is called by:
+  1721 ;;		_INTERRUPT_Initialize
+  1722 ;; This function uses a non-reentrant model
+  1723 ;;
+  1724                           
+  1725                           	psect	text15
+  1726   000C1E                     __ptext15:
+  1727                           	callstack 0
+  1728   000C1E                     _INT2_SetInterruptHandler:
+  1729                           	callstack 25
+  1730   000C1E                     
+  1731                           ;source/driver/system/src/interrupt.c: 171:     INT2_InterruptHandler = InterruptHandler
+      +                          ;
+  1732   000C1E  C027  F035         	movff	INT2_SetInterruptHandler@InterruptHandler,_INT2_InterruptHandler
+  1733   000C22  C028  F036         	movff	INT2_SetInterruptHandler@InterruptHandler+1,_INT2_InterruptHandler+1
+  1734   000C26  0012               	return		;funcret
+  1735   000C28                     __end_of_INT2_SetInterruptHandler:
+  1736                           	callstack 0
+  1737                           
+  1738 ;; *************** function _INT1_SetInterruptHandler *****************
+  1739 ;; Defined at:
+  1740 ;;		line 144 in file "source/driver/system/src/interrupt.c"
+  1741 ;; Parameters:    Size  Location     Type
+  1742 ;;  InterruptHan    2    2[COMRAM] PTR FTN()void 
+  1743 ;;		 -> INT1_DefaultInterruptHandler(1), 
+  1744 ;; Auto vars:     Size  Location     Type
+  1745 ;;		None
+  1746 ;; Return value:  Size  Location     Type
+  1747 ;;                  1    wreg      void 
+  1748 ;; Registers used:
+  1749 ;;		wreg, status,2, status,0
+  1750 ;; Tracked objects:
+  1751 ;;		On entry : 0/0
+  1752 ;;		On exit  : 0/0
+  1753 ;;		Unchanged: 0/0
+  1754 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1755 ;;      Params:         2       0       0       0       0       0       0
+  1756 ;;      Locals:         0       0       0       0       0       0       0
+  1757 ;;      Temps:          0       0       0       0       0       0       0
+  1758 ;;      Totals:         2       0       0       0       0       0       0
+  1759 ;;Total ram usage:        2 bytes
+  1760 ;; Hardware stack levels used: 1
+  1761 ;; Hardware stack levels required when called: 3
+  1762 ;; This function calls:
+  1763 ;;		Nothing
+  1764 ;; This function is called by:
+  1765 ;;		_INTERRUPT_Initialize
+  1766 ;; This function uses a non-reentrant model
+  1767 ;;
+  1768                           
+  1769                           	psect	text16
+  1770   000C28                     __ptext16:
+  1771                           	callstack 0
+  1772   000C28                     _INT1_SetInterruptHandler:
+  1773                           	callstack 25
+  1774   000C28                     
+  1775                           ;source/driver/system/src/interrupt.c: 145:     INT1_InterruptHandler = InterruptHandler
+      +                          ;
+  1776   000C28  C027  F037         	movff	INT1_SetInterruptHandler@InterruptHandler,_INT1_InterruptHandler
+  1777   000C2C  C028  F038         	movff	INT1_SetInterruptHandler@InterruptHandler+1,_INT1_InterruptHandler+1
+  1778   000C30  0012               	return		;funcret
+  1779   000C32                     __end_of_INT1_SetInterruptHandler:
+  1780                           	callstack 0
+  1781                           
+  1782 ;; *************** function _INT0_SetInterruptHandler *****************
+  1783 ;; Defined at:
+  1784 ;;		line 118 in file "source/driver/system/src/interrupt.c"
+  1785 ;; Parameters:    Size  Location     Type
+  1786 ;;  InterruptHan    2    2[COMRAM] PTR FTN()void 
+  1787 ;;		 -> INT0_DefaultInterruptHandler(1), 
+  1788 ;; Auto vars:     Size  Location     Type
+  1789 ;;		None
+  1790 ;; Return value:  Size  Location     Type
+  1791 ;;                  1    wreg      void 
+  1792 ;; Registers used:
+  1793 ;;		wreg, status,2, status,0
+  1794 ;; Tracked objects:
+  1795 ;;		On entry : 0/0
+  1796 ;;		On exit  : 0/0
+  1797 ;;		Unchanged: 0/0
+  1798 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1799 ;;      Params:         2       0       0       0       0       0       0
+  1800 ;;      Locals:         0       0       0       0       0       0       0
+  1801 ;;      Temps:          0       0       0       0       0       0       0
+  1802 ;;      Totals:         2       0       0       0       0       0       0
+  1803 ;;Total ram usage:        2 bytes
+  1804 ;; Hardware stack levels used: 1
+  1805 ;; Hardware stack levels required when called: 3
+  1806 ;; This function calls:
+  1807 ;;		Nothing
+  1808 ;; This function is called by:
+  1809 ;;		_INTERRUPT_Initialize
+  1810 ;; This function uses a non-reentrant model
+  1811 ;;
+  1812                           
+  1813                           	psect	text17
+  1814   000C32                     __ptext17:
+  1815                           	callstack 0
+  1816   000C32                     _INT0_SetInterruptHandler:
+  1817                           	callstack 25
+  1818   000C32                     
+  1819                           ;source/driver/system/src/interrupt.c: 119:     INT0_InterruptHandler = InterruptHandler
+      +                          ;
+  1820   000C32  C027  F039         	movff	INT0_SetInterruptHandler@InterruptHandler,_INT0_InterruptHandler
+  1821   000C36  C028  F03A         	movff	INT0_SetInterruptHandler@InterruptHandler+1,_INT0_InterruptHandler+1
+  1822   000C3A  0012               	return		;funcret
+  1823   000C3C                     __end_of_INT0_SetInterruptHandler:
+  1824                           	callstack 0
+  1825                           
+  1826 ;; *************** function _CLOCK_Initialize *****************
+  1827 ;; Defined at:
+  1828 ;;		line 37 in file "source/driver/system/src/clock.c"
+  1829 ;; Parameters:    Size  Location     Type
+  1830 ;;		None
+  1831 ;; Auto vars:     Size  Location     Type
+  1832 ;;		None
+  1833 ;; Return value:  Size  Location     Type
+  1834 ;;                  1    wreg      void 
+  1835 ;; Registers used:
+  1836 ;;		wreg, status,2
+  1837 ;; Tracked objects:
+  1838 ;;		On entry : 0/0
+  1839 ;;		On exit  : 0/0
+  1840 ;;		Unchanged: 0/0
+  1841 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1842 ;;      Params:         0       0       0       0       0       0       0
+  1843 ;;      Locals:         0       0       0       0       0       0       0
+  1844 ;;      Temps:          0       0       0       0       0       0       0
+  1845 ;;      Totals:         0       0       0       0       0       0       0
+  1846 ;;Total ram usage:        0 bytes
+  1847 ;; Hardware stack levels used: 1
+  1848 ;; Hardware stack levels required when called: 3
+  1849 ;; This function calls:
+  1850 ;;		Nothing
+  1851 ;; This function is called by:
+  1852 ;;		_SYSTEM_Initialize
+  1853 ;; This function uses a non-reentrant model
+  1854 ;;
+  1855                           
+  1856                           	psect	text18
+  1857   000C3C                     __ptext18:
+  1858                           	callstack 0
+  1859   000C3C                     _CLOCK_Initialize:
+  1860                           	callstack 26
+  1861   000C3C                     
+  1862                           ;source/driver/system/src/clock.c: 41:     OSCCON = 0xB2;
+  1863   000C3C  0EB2               	movlw	178
+  1864   000C3E  6ED3               	movwf	211,c	;volatile
+  1865                           
+  1866                           ;source/driver/system/src/clock.c: 43:     OSCTUNE = 0x0;
+  1867   000C40  0E00               	movlw	0
+  1868   000C42  6E9B               	movwf	155,c	;volatile
+  1869   000C44  0012               	return		;funcret
+  1870   000C46                     __end_of_CLOCK_Initialize:
+  1871                           	callstack 0
+  1872                           
+  1873 ;; *************** function _ADC_Initialize *****************
+  1874 ;; Defined at:
+  1875 ;;		line 53 in file "source/driver/adc/src/adc.c"
+  1876 ;; Parameters:    Size  Location     Type
+  1877 ;;		None
+  1878 ;; Auto vars:     Size  Location     Type
+  1879 ;;		None
+  1880 ;; Return value:  Size  Location     Type
+  1881 ;;                  1    wreg      void 
+  1882 ;; Registers used:
+  1883 ;;		wreg, status,2
+  1884 ;; Tracked objects:
+  1885 ;;		On entry : 0/0
+  1886 ;;		On exit  : 0/0
+  1887 ;;		Unchanged: 0/0
+  1888 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1889 ;;      Params:         0       0       0       0       0       0       0
+  1890 ;;      Locals:         0       0       0       0       0       0       0
+  1891 ;;      Temps:          0       0       0       0       0       0       0
+  1892 ;;      Totals:         0       0       0       0       0       0       0
+  1893 ;;Total ram usage:        0 bytes
+  1894 ;; Hardware stack levels used: 1
+  1895 ;; Hardware stack levels required when called: 3
+  1896 ;; This function calls:
+  1897 ;;		Nothing
+  1898 ;; This function is called by:
+  1899 ;;		_SYSTEM_Initialize
+  1900 ;; This function uses a non-reentrant model
+  1901 ;;
+  1902                           
+  1903                           	psect	text19
+  1904   000BFC                     __ptext19:
+  1905                           	callstack 0
+  1906   000BFC                     _ADC_Initialize:
+  1907                           	callstack 26
+  1908   000BFC                     
+  1909                           ;source/driver/adc/src/adc.c: 56:     ADCON1 = 0x0;
+  1910   000BFC  0E00               	movlw	0
+  1911   000BFE  6EC1               	movwf	193,c	;volatile
+  1912                           
+  1913                           ;source/driver/adc/src/adc.c: 59:     ADCON2 = 0xB8;
+  1914   000C00  0EB8               	movlw	184
+  1915   000C02  6EC0               	movwf	192,c	;volatile
+  1916                           
+  1917                           ;source/driver/adc/src/adc.c: 62:     ADRESL = 0x0;
+  1918   000C04  0E00               	movlw	0
+  1919   000C06  6EC3               	movwf	195,c	;volatile
+  1920                           
+  1921                           ;source/driver/adc/src/adc.c: 65:     ADRESH = 0x0;
+  1922   000C08  0E00               	movlw	0
+  1923   000C0A  6EC4               	movwf	196,c	;volatile
+  1924                           
+  1925                           ;source/driver/adc/src/adc.c: 69:     ADCON0 = 0x3;
+  1926   000C0C  0E03               	movlw	3
+  1927   000C0E  6EC2               	movwf	194,c	;volatile
+  1928   000C10                     
+  1929                           ;source/driver/adc/src/adc.c: 72:     PIR1bits.ADIF = 0;
+  1930   000C10  9C9E               	bcf	158,6,c	;volatile
+  1931   000C12  0012               	return		;funcret
+  1932   000C14                     __end_of_ADC_Initialize:
+  1933                           	callstack 0
+  1934                           
+  1935 ;; *************** function _RBT_simulateButtonPush *****************
+  1936 ;; Defined at:
+  1937 ;;		line 54 in file "source/remoteButton.c"
+  1938 ;; Parameters:    Size  Location     Type
+  1939 ;;  eButtonId       1    wreg     enum E2725
+  1940 ;;  i8uNbOfPush     1    2[COMRAM] unsigned char 
+  1941 ;;  i16uPushDura    2    3[COMRAM] unsigned short 
+  1942 ;; Auto vars:     Size  Location     Type
+  1943 ;;  eButtonId       1    7[COMRAM] enum E2725
+  1944 ;;  i               1    9[COMRAM] unsigned char 
+  1945 ;;  i8uBackupLed    1    8[COMRAM] unsigned char 
+  1946 ;; Return value:  Size  Location     Type
+  1947 ;;                  1    wreg      void 
+  1948 ;; Registers used:
+  1949 ;;		wreg, status,2, status,0
+  1950 ;; Tracked objects:
+  1951 ;;		On entry : 0/0
+  1952 ;;		On exit  : 0/0
+  1953 ;;		Unchanged: 0/0
+  1954 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1955 ;;      Params:         3       0       0       0       0       0       0
+  1956 ;;      Locals:         3       0       0       0       0       0       0
+  1957 ;;      Temps:          2       0       0       0       0       0       0
+  1958 ;;      Totals:         8       0       0       0       0       0       0
+  1959 ;;Total ram usage:        8 bytes
+  1960 ;; Hardware stack levels used: 1
+  1961 ;; Hardware stack levels required when called: 3
+  1962 ;; This function calls:
+  1963 ;;		Nothing
+  1964 ;; This function is called by:
+  1965 ;;		_main
+  1966 ;; This function uses a non-reentrant model
+  1967 ;;
+  1968                           
+  1969                           	psect	text20
+  1970   0007FE                     __ptext20:
+  1971                           	callstack 0
+  1972   0007FE                     _RBT_simulateButtonPush:
+  1973                           	callstack 27
+  1974                           
+  1975                           ;incstack = 0
+  1976                           ;RBT_simulateButtonPush@eButtonId stored from wreg
+  1977   0007FE  6E2C               	movwf	RBT_simulateButtonPush@eButtonId^0,c
+  1978   000800                     
+  1979                           ;source/remoteButton.c: 57:     uint8_t i8uBackupLedArray = 0;
+  1980   000800  0E00               	movlw	0
+  1981   000802  6E2D               	movwf	RBT_simulateButtonPush@i8uBackupLedArray^0,c
+  1982   000804                     
+  1983                           ;source/remoteButton.c: 59:     i8uBackupLedArray = LATD;
+  1984   000804  CF8C F02D          	movff	3980,RBT_simulateButtonPush@i8uBackupLedArray	;volatile
+  1985                           
+  1986                           ;source/remoteButton.c: 61:     for (i=0; i<i8uNbOfPush; i++)
+  1987   000808  0E00               	movlw	0
+  1988   00080A  6E2E               	movwf	RBT_simulateButtonPush@i^0,c
+  1989   00080C  EF4A  F004         	goto	l395
+  1990   000810                     l1548:
+  1991                           
+  1992                           ;source/remoteButton.c: 62:     {;source/remoteButton.c: 63:         LATD = 0x00;
+  1993   000810  0E00               	movlw	0
+  1994   000812  6E8C               	movwf	140,c	;volatile
+  1995                           
+  1996                           ;source/remoteButton.c: 64:         switch (eButtonId)
+  1997   000814  EF14  F004         	goto	l1552
+  1998   000818                     l399:
+  1999   000818  928A               	bcf	138,1,c	;volatile
+  2000   00081A  9293               	bcf	147,1,c	;volatile
+  2001   00081C  EF29  F004         	goto	l403
+  2002   000820                     l405:
+  2003   000820  948A               	bcf	138,2,c	;volatile
+  2004   000822  9493               	bcf	147,2,c	;volatile
+  2005   000824  EF29  F004         	goto	l403
+  2006   000828                     l1552:
+  2007   000828  502C               	movf	RBT_simulateButtonPush@eButtonId^0,w,c
+  2008   00082A  6E2A               	movwf	??_RBT_simulateButtonPush^0,c
+  2009   00082C  6A2B               	clrf	(??_RBT_simulateButtonPush+1)^0,c
+  2010                           
+  2011                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+  2012                           ; Switch size 1, requested type "simple"
+  2013                           ; Number of cases is 1, Range of values is 0 to 0
+  2014                           ; switch strategies available:
+  2015                           ; Name         Instructions Cycles
+  2016                           ; simple_byte            4     3 (average)
+  2017                           ;	Chosen strategy is simple_byte
+  2018   00082E  502B               	movf	(??_RBT_simulateButtonPush+1)^0,w,c
+  2019   000830  0A00               	xorlw	0	; case 0
+  2020   000832  B4D8               	btfsc	status,2,c
+  2021   000834  EF1E  F004         	goto	l1682
+  2022   000838  EF29  F004         	goto	l403
+  2023   00083C                     l1682:
+  2024                           
+  2025                           ; Switch size 1, requested type "simple"
+  2026                           ; Number of cases is 2, Range of values is 0 to 1
+  2027                           ; switch strategies available:
+  2028                           ; Name         Instructions Cycles
+  2029                           ; simple_byte            7     4 (average)
+  2030                           ;	Chosen strategy is simple_byte
+  2031   00083C  502A               	movf	??_RBT_simulateButtonPush^0,w,c
+  2032   00083E  0A00               	xorlw	0	; case 0
+  2033   000840  B4D8               	btfsc	status,2,c
+  2034   000842  EF0C  F004         	goto	l399
+  2035   000846  0A01               	xorlw	1	; case 1
+  2036   000848  B4D8               	btfsc	status,2,c
+  2037   00084A  EF10  F004         	goto	l405
+  2038   00084E  EF29  F004         	goto	l403
+  2039   000852                     l403:
+  2040   000852  0004               	clrwdt		;# 
+  2041   000854                     
+  2042                           ;source/remoteButton.c: 81:         _delay((unsigned long)((500)*(1000000/4000.0)));
+  2043   000854  0EA3               	movlw	163
+  2044   000856  6E2A               	movwf	??_RBT_simulateButtonPush^0,c
+  2045   000858  0E55               	movlw	85
+  2046   00085A                     u607:
+  2047   00085A  2EE8               	decfsz	wreg,f,c
+  2048   00085C  D7FE               	bra	u607
+  2049   00085E  2E2A               	decfsz	??_RBT_simulateButtonPush^0,f,c
+  2050   000860  D7FC               	bra	u607
+  2051   000862  0000               	nop	
+  2052   000864                     
+  2053                           ;source/remoteButton.c: 82:         LATD = 0xFF;
+  2054   000864  688C               	setf	140,c	;volatile
+  2055   000866  928A               	bcf	138,1,c	;volatile
+  2056   000868  8293               	bsf	147,1,c	;volatile
+  2057   00086A  948A               	bcf	138,2,c	;volatile
+  2058   00086C  8493               	bsf	147,2,c	;volatile
+  2059   00086E  0004               	clrwdt		;# 
+  2060                           
+  2061                           ;source/remoteButton.c: 89:         _delay((unsigned long)((500)*(1000000/4000.0)));
+  2062   000870  0EA3               	movlw	163
+  2063   000872  6E2A               	movwf	??_RBT_simulateButtonPush^0,c
+  2064   000874  0E55               	movlw	85
+  2065   000876                     u617:
+  2066   000876  2EE8               	decfsz	wreg,f,c
+  2067   000878  D7FE               	bra	u617
+  2068   00087A  2E2A               	decfsz	??_RBT_simulateButtonPush^0,f,c
+  2069   00087C  D7FC               	bra	u617
+  2070   00087E  0000               	nop	
+  2071                           
+  2072                           ;source/remoteButton.c: 91:         _delay((unsigned long)((100)*(1000000/4000.0)));
+  2073   000880  0E21               	movlw	33
+  2074   000882  6E2A               	movwf	??_RBT_simulateButtonPush^0,c
+  2075   000884  0E76               	movlw	118
+  2076   000886                     u627:
+  2077   000886  2EE8               	decfsz	wreg,f,c
+  2078   000888  D7FE               	bra	u627
+  2079   00088A  2E2A               	decfsz	??_RBT_simulateButtonPush^0,f,c
+  2080   00088C  D7FC               	bra	u627
+  2081   00088E  F000 F000          	nop2	
+  2082   000892                     
+  2083                           ;source/remoteButton.c: 93:     }
+  2084   000892  2A2E               	incf	RBT_simulateButtonPush@i^0,f,c
+  2085   000894                     l395:
+  2086   000894  5027               	movf	RBT_simulateButtonPush@i8uNbOfPush^0,w,c
+  2087   000896  5C2E               	subwf	RBT_simulateButtonPush@i^0,w,c
+  2088   000898  A0D8               	btfss	status,0,c
+  2089   00089A  EF51  F004         	goto	u441
+  2090   00089E  EF53  F004         	goto	u440
+  2091   0008A2                     u441:
+  2092   0008A2  EF08  F004         	goto	l1548
+  2093   0008A6                     u440:
+  2094   0008A6                     
+  2095                           ;source/remoteButton.c: 94:     LATD = i8uBackupLedArray;
+  2096   0008A6  C02D  FF8C         	movff	RBT_simulateButtonPush@i8uBackupLedArray,3980	;volatile
+  2097   0008AA  0012               	return		;funcret
+  2098   0008AC                     __end_of_RBT_simulateButtonPush:
+  2099                           	callstack 0
+  2100                           
+  2101 ;; *************** function _MOT_SwitchOnMotor *****************
+  2102 ;; Defined at:
+  2103 ;;		line 39 in file "source/motor.c"
+  2104 ;; Parameters:    Size  Location     Type
+  2105 ;;		None
+  2106 ;; Auto vars:     Size  Location     Type
+  2107 ;;		None
+  2108 ;; Return value:  Size  Location     Type
+  2109 ;;                  1    wreg      void 
+  2110 ;; Registers used:
+  2111 ;;		wreg, status,2
+  2112 ;; Tracked objects:
+  2113 ;;		On entry : 0/0
+  2114 ;;		On exit  : 0/0
+  2115 ;;		Unchanged: 0/0
+  2116 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  2117 ;;      Params:         0       0       0       0       0       0       0
+  2118 ;;      Locals:         0       0       0       0       0       0       0
+  2119 ;;      Temps:          1       0       0       0       0       0       0
+  2120 ;;      Totals:         1       0       0       0       0       0       0
+  2121 ;;Total ram usage:        1 bytes
+  2122 ;; Hardware stack levels used: 1
+  2123 ;; Hardware stack levels required when called: 3
+  2124 ;; This function calls:
+  2125 ;;		Nothing
+  2126 ;; This function is called by:
+  2127 ;;		_main
+  2128 ;; This function uses a non-reentrant model
+  2129 ;;
+  2130                           
+  2131                           	psect	text21
+  2132   000B8E                     __ptext21:
+  2133                           	callstack 0
+  2134   000B8E                     _MOT_SwitchOnMotor:
+  2135                           	callstack 27
+  2136   000B8E  868A               	bsf	138,3,c	;volatile
+  2137   000B90                     
+  2138                           ;source/motor.c: 42:     i16uMotorSwitchDelay = (uint16_t)(30000/10);
+  2139   000B90  0E0B               	movlw	11
+  2140   000B92  6E12               	movwf	(_i16uMotorSwitchDelay+1)^0,c
+  2141   000B94  0EB8               	movlw	184
+  2142   000B96  6E11               	movwf	_i16uMotorSwitchDelay^0,c
+  2143   000B98  0004               	clrwdt		;# 
+  2144   000B9A                     
+  2145                           ;source/motor.c: 44:     _delay((unsigned long)((100)*(1000000/4000.0)));
+  2146   000B9A  0E21               	movlw	33
+  2147   000B9C  6E27               	movwf	??_MOT_SwitchOnMotor^0,c
+  2148   000B9E  0E76               	movlw	118
+  2149   000BA0                     u637:
+  2150   000BA0  2EE8               	decfsz	wreg,f,c
+  2151   000BA2  D7FE               	bra	u637
+  2152   000BA4  2E27               	decfsz	??_MOT_SwitchOnMotor^0,f,c
+  2153   000BA6  D7FC               	bra	u637
+  2154   000BA8  F000 F000          	nop2	
+  2155   000BAC  0012               	return		;funcret
+  2156   000BAE                     __end_of_MOT_SwitchOnMotor:
+  2157                           	callstack 0
+  2158                           
+  2159 ;; *************** function _ADC_GetConversion *****************
+  2160 ;; Defined at:
+  2161 ;;		line 99 in file "source/driver/adc/src/adc.c"
+  2162 ;; Parameters:    Size  Location     Type
+  2163 ;;  channel         1    wreg     enum E2730
+  2164 ;; Auto vars:     Size  Location     Type
+  2165 ;;  channel         1    6[COMRAM] enum E2730
+  2166 ;; Return value:  Size  Location     Type
+  2167 ;;                  2    2[COMRAM] unsigned short 
+  2168 ;; Registers used:
+  2169 ;;		wreg, status,2, status,0
+  2170 ;; Tracked objects:
+  2171 ;;		On entry : 0/0
+  2172 ;;		On exit  : 0/0
+  2173 ;;		Unchanged: 0/0
+  2174 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  2175 ;;      Params:         2       0       0       0       0       0       0
+  2176 ;;      Locals:         1       0       0       0       0       0       0
+  2177 ;;      Temps:          2       0       0       0       0       0       0
+  2178 ;;      Totals:         5       0       0       0       0       0       0
+  2179 ;;Total ram usage:        5 bytes
+  2180 ;; Hardware stack levels used: 1
+  2181 ;; Hardware stack levels required when called: 3
+  2182 ;; This function calls:
+  2183 ;;		Nothing
+  2184 ;; This function is called by:
+  2185 ;;		_main
+  2186 ;; This function uses a non-reentrant model
+  2187 ;;
+  2188                           
+  2189                           	psect	text22
+  2190   000A6A                     __ptext22:
+  2191                           	callstack 0
+  2192   000A6A                     _ADC_GetConversion:
+  2193                           	callstack 27
+  2194                           
+  2195                           ;incstack = 0
+  2196                           ;ADC_GetConversion@channel stored from wreg
+  2197   000A6A  6E2B               	movwf	ADC_GetConversion@channel^0,c
+  2198   000A6C                     
+  2199                           ;source/driver/adc/src/adc.c: 99: adc_result_t ADC_GetConversion(adc_channel_t channel);
+      +                          source/driver/adc/src/adc.c: 100: {;source/driver/adc/src/adc.c: 102:     ADCON0bits.CHS
+      +                           = channel;
+  2200   000A6C  C02B  F029         	movff	ADC_GetConversion@channel,??_ADC_GetConversion
+  2201   000A70  4629               	rlncf	??_ADC_GetConversion^0,f,c
+  2202   000A72  4629               	rlncf	??_ADC_GetConversion^0,f,c
+  2203   000A74  50C2               	movf	194,w,c	;volatile
+  2204   000A76  1829               	xorwf	??_ADC_GetConversion^0,w,c
+  2205   000A78  0BC3               	andlw	-61
+  2206   000A7A  1829               	xorwf	??_ADC_GetConversion^0,w,c
+  2207   000A7C  6EC2               	movwf	194,c	;volatile
+  2208   000A7E                     
+  2209                           ;source/driver/adc/src/adc.c: 104:     ADCON0bits.ADON = 1;
+  2210   000A7E  80C2               	bsf	194,0,c	;volatile
+  2211   000A80                     
+  2212                           ;source/driver/adc/src/adc.c: 107:     _delay((unsigned long)((8)*(1000000/4000000.0)));
+  2213   000A80  F000 F000          	nop2		;2 cycle nop
+  2214   000A84                     
+  2215                           ;source/driver/adc/src/adc.c: 110:     ADCON0bits.GO_nDONE = 1;
+  2216   000A84  82C2               	bsf	194,1,c	;volatile
+  2217   000A86                     l34:
+  2218                           
+  2219                           ;source/driver/adc/src/adc.c: 113:     while (ADCON0bits.GO_nDONE)
+  2220   000A86  B2C2               	btfsc	194,1,c	;volatile
+  2221   000A88  EF48  F005         	goto	u411
+  2222   000A8C  EF4A  F005         	goto	u410
+  2223   000A90                     u411:
+  2224   000A90  EF43  F005         	goto	l34
+  2225   000A94                     u410:
+  2226   000A94                     
+  2227                           ;source/driver/adc/src/adc.c: 118:     return ((adc_result_t)((ADRESH << 8) + ADRESL));
+  2228   000A94  50C4               	movf	196,w,c	;volatile
+  2229   000A96  6E2A               	movwf	(??_ADC_GetConversion+1)^0,c
+  2230   000A98  6A29               	clrf	??_ADC_GetConversion^0,c
+  2231   000A9A  50C3               	movf	195,w,c	;volatile
+  2232   000A9C  2429               	addwf	??_ADC_GetConversion^0,w,c
+  2233   000A9E  6E27               	movwf	?_ADC_GetConversion^0,c
+  2234   000AA0  0E00               	movlw	0
+  2235   000AA2  202A               	addwfc	(??_ADC_GetConversion+1)^0,w,c
+  2236   000AA4  6E28               	movwf	(?_ADC_GetConversion+1)^0,c
+  2237   000AA6  0012               	return		;funcret
+  2238   000AA8                     __end_of_ADC_GetConversion:
+  2239                           	callstack 0
+  2240                           
+  2241 ;; *************** function _INTERRUPT_InterruptManager *****************
+  2242 ;; Defined at:
+  2243 ;;		line 80 in file "source/driver/system/src/interrupt.c"
+  2244 ;; Parameters:    Size  Location     Type
+  2245 ;;		None
+  2246 ;; Auto vars:     Size  Location     Type
+  2247 ;;		None
+  2248 ;; Return value:  Size  Location     Type
+  2249 ;;                  1    wreg      void 
+  2250 ;; Registers used:
+  2251 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+  2252 ;; Tracked objects:
+  2253 ;;		On entry : 0/0
+  2254 ;;		On exit  : 0/0
+  2255 ;;		Unchanged: 0/0
+  2256 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  2257 ;;      Params:         0       0       0       0       0       0       0
+  2258 ;;      Locals:         0       0       0       0       0       0       0
+  2259 ;;      Temps:          2       0       0       0       0       0       0
+  2260 ;;      Totals:         2       0       0       0       0       0       0
+  2261 ;;Total ram usage:        2 bytes
+  2262 ;; Hardware stack levels used: 1
+  2263 ;; Hardware stack levels required when called: 2
+  2264 ;; This function calls:
+  2265 ;;		_Timer0_OverflowISR
+  2266 ;; This function is called by:
+  2267 ;;		Interrupt level 2
+  2268 ;; This function uses a non-reentrant model
+  2269 ;;
+  2270                           
+  2271                           	psect	intcode
+  2272   000008                     __pintcode:
+  2273                           	callstack 0
+  2274   000008                     _INTERRUPT_InterruptManager:
+  2275                           	callstack 25
+  2276                           
+  2277                           ;incstack = 0
+  2278   000008  823B               	bsf	int$flags,1,c	;set compiler interrupt flag (level 2)
+  2279   00000A  CFFA F025          	movff	pclath,??_INTERRUPT_InterruptManager
+  2280   00000E  CFFB F026          	movff	pclatu,??_INTERRUPT_InterruptManager+1
+  2281   000012                     
+  2282                           ;source/driver/system/src/interrupt.c: 83:     if(INTCONbits.PEIE == 1)
+  2283   000012  ACF2               	btfss	242,6,c	;volatile
+  2284   000014  EF0E  F000         	goto	i2u18_41
+  2285   000018  EF10  F000         	goto	i2u18_40
+  2286   00001C                     i2u18_41:
+  2287   00001C  EF20  F000         	goto	i2l90
+  2288   000020                     i2u18_40:
+  2289   000020                     
+  2290                           ;source/driver/system/src/interrupt.c: 84:     {;source/driver/system/src/interrupt.c: 8
+      +                          5:         if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
+  2291   000020  AAF2               	btfss	242,5,c	;volatile
+  2292   000022  EF15  F000         	goto	i2u19_41
+  2293   000026  EF17  F000         	goto	i2u19_40
+  2294   00002A                     i2u19_41:
+  2295   00002A  EF20  F000         	goto	i2l90
+  2296   00002E                     i2u19_40:
+  2297   00002E  A4F2               	btfss	242,2,c	;volatile
+  2298   000030  EF1C  F000         	goto	i2u20_41
+  2299   000034  EF1E  F000         	goto	i2u20_40
+  2300   000038                     i2u20_41:
+  2301   000038  EF20  F000         	goto	i2l90
+  2302   00003C                     i2u20_40:
+  2303   00003C                     
+  2304                           ;source/driver/system/src/interrupt.c: 86:         {;source/driver/system/src/interrupt.
+      +                          c: 87:             Timer0_OverflowISR();
+  2305   00003C  EC54  F005         	call	_Timer0_OverflowISR	;wreg free
+  2306   000040                     i2l90:
+  2307   000040  C026  FFFB         	movff	??_INTERRUPT_InterruptManager+1,pclatu
+  2308   000044  C025  FFFA         	movff	??_INTERRUPT_InterruptManager,pclath
+  2309   000048  923B               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+  2310   00004A  0011               	retfie		f
+  2311   00004C                     __end_of_INTERRUPT_InterruptManager:
+  2312                           	callstack 0
+  2313                           
+  2314 ;; *************** function _Timer0_OverflowISR *****************
+  2315 ;; Defined at:
+  2316 ;;		line 125 in file "source/driver/timer/src/tmr0.c"
+  2317 ;; Parameters:    Size  Location     Type
+  2318 ;;		None
+  2319 ;; Auto vars:     Size  Location     Type
+  2320 ;;		None
+  2321 ;; Return value:  Size  Location     Type
+  2322 ;;                  1    wreg      void 
+  2323 ;; Registers used:
+  2324 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+  2325 ;; Tracked objects:
+  2326 ;;		On entry : 0/0
+  2327 ;;		On exit  : 0/0
+  2328 ;;		Unchanged: 0/0
+  2329 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  2330 ;;      Params:         0       0       0       0       0       0       0
+  2331 ;;      Locals:         0       0       0       0       0       0       0
+  2332 ;;      Temps:          0       0       0       0       0       0       0
+  2333 ;;      Totals:         0       0       0       0       0       0       0
+  2334 ;;Total ram usage:        0 bytes
+  2335 ;; Hardware stack levels used: 1
+  2336 ;; Hardware stack levels required when called: 1
+  2337 ;; This function calls:
+  2338 ;;		NULL
+  2339 ;;		_Timer0_OverflowCallback@main$F694
+  2340 ;; This function is called by:
+  2341 ;;		_INTERRUPT_InterruptManager
+  2342 ;; This function uses a non-reentrant model
+  2343 ;;
+  2344                           
+  2345                           	psect	text24
+  2346   000AA8                     __ptext24:
+  2347                           	callstack 0
+  2348   000AA8                     _Timer0_OverflowISR:
+  2349                           	callstack 25
+  2350   000AA8                     
+  2351                           ;source/driver/timer/src/tmr0.c: 128:     INTCONbits.TMR0IF = 0;
+  2352   000AA8  94F2               	bcf	242,2,c	;volatile
+  2353   000AAA                     
+  2354                           ;source/driver/timer/src/tmr0.c: 132:     TMR0H = timer0ReloadVal >> 8;
+  2355   000AAA  501E               	movf	(_timer0ReloadVal+1)^0,w,c	;volatile
+  2356   000AAC  6ED7               	movwf	215,c	;volatile
+  2357   000AAE                     
+  2358                           ;source/driver/timer/src/tmr0.c: 133:     TMR0L = (uint8_t) timer0ReloadVal;
+  2359   000AAE  C01D  FFD6         	movff	_timer0ReloadVal,4054	;volatile
+  2360   000AB2                     
+  2361                           ;source/driver/timer/src/tmr0.c: 135:     if(Timer0_OverflowCallback)
+  2362   000AB2  5033               	movf	_Timer0_OverflowCallback^0,w,c
+  2363   000AB4  1034               	iorwf	(_Timer0_OverflowCallback+1)^0,w,c
+  2364   000AB6  B4D8               	btfsc	status,2,c
+  2365   000AB8  EF60  F005         	goto	i2u4_41
+  2366   000ABC  EF62  F005         	goto	i2u4_40
+  2367   000AC0                     i2u4_41:
+  2368   000AC0  EF6F  F005         	goto	i2l255
+  2369   000AC4                     i2u4_40:
+  2370   000AC4                     
+  2371                           ;source/driver/timer/src/tmr0.c: 136:     {;source/driver/timer/src/tmr0.c: 137:        
+      +                           Timer0_OverflowCallback();
+  2372   000AC4  D802               	call	i2u5_48
+  2373   000AC6  EF6F  F005         	goto	i2u5_49
+  2374   000ACA                     i2u5_48:
+  2375   000ACA  0005               	push	
+  2376   000ACC  6EFA               	movwf	pclath,c
+  2377   000ACE  5033               	movf	_Timer0_OverflowCallback^0,w,c
+  2378   000AD0  6EFD               	movwf	tosl,c
+  2379   000AD2  5034               	movf	(_Timer0_OverflowCallback+1)^0,w,c
+  2380   000AD4  6EFE               	movwf	tosh,c
+  2381   000AD6  50F8               	movf	tblptru,w,c
+  2382   000AD8  6EFF               	movwf	tosu,c
+  2383   000ADA  50FA               	movf	pclath,w,c
+  2384   000ADC  0012               	return		;indir
+  2385   000ADE                     i2u5_49:
+  2386   000ADE                     i2l255:
+  2387   000ADE  0012               	return		;funcret
+  2388   000AE0                     __end_of_Timer0_OverflowISR:
+  2389                           	callstack 0
+  2390                           
+  2391 ;; *************** function _Timer0_OverflowCallback@main$F694 *****************
+  2392 ;; Defined at:
+  2393 ;;		line 243 in file "source/main.c"
+  2394 ;; Parameters:    Size  Location     Type
+  2395 ;;		None
+  2396 ;; Auto vars:     Size  Location     Type
+  2397 ;;		None
+  2398 ;; Return value:  Size  Location     Type
+  2399 ;;                  1    wreg      void 
+  2400 ;; Registers used:
+  2401 ;;		wreg, status,2
+  2402 ;; Tracked objects:
+  2403 ;;		On entry : 0/0
+  2404 ;;		On exit  : 0/0
+  2405 ;;		Unchanged: 0/0
+  2406 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  2407 ;;      Params:         0       0       0       0       0       0       0
+  2408 ;;      Locals:         0       0       0       0       0       0       0
+  2409 ;;      Temps:          0       0       0       0       0       0       0
+  2410 ;;      Totals:         0       0       0       0       0       0       0
+  2411 ;;Total ram usage:        0 bytes
+  2412 ;; Hardware stack levels used: 1
+  2413 ;; This function calls:
+  2414 ;;		Nothing
+  2415 ;; This function is called by:
+  2416 ;;		_main
+  2417 ;;		_Timer0_OverflowISR
+  2418 ;; This function uses a non-reentrant model
+  2419 ;;
+  2420                           
+  2421                           	psect	text25
+  2422   000C52                     __ptext25:
+  2423                           	callstack 0
+  2424   000C52                     _Timer0_OverflowCallback@main$F694:
+  2425                           	callstack 25
+  2426   000C52                     
+  2427                           ;source/main.c: 245:     bIsMainLoopTimingIsOver = 1;
+  2428   000C52  0E01               	movlw	1
+  2429   000C54  6E24               	movwf	_bIsMainLoopTimingIsOver^0,c	;volatile
+  2430   000C56  0012               	return		;funcret
+  2431   000C58                     __end_of_Timer0_OverflowCallback@main$F694:
+  2432                           	callstack 0
+  2433                           
+  2434                           	psect	rparam
+  2435   000000                     
+  2436                           	psect	temp
+  2437   00003B                     btemp:
+  2438                           	callstack 0
+  2439   00003B                     	ds	1
+  2440   000000                     int$flags	set	btemp
+  2441   000000                     wtemp8	set	btemp+1
+  2442   000000                     ttemp5	set	btemp+1
+  2443   000000                     ttemp6	set	btemp+4
+  2444   000000                     ttemp7	set	btemp+8
+  2445                           
+  2446                           	psect	config
+  2447                           
+  2448                           ; Padding undefined space
+  2449   300000                     	org	3145728
+  2450   300000  FF                 	db	255
+  2451                           
+  2452                           ;Config register CONFIG1H @ 0x300001
+  2453                           ;	Oscillator Selection bits
+  2454                           ;	FOSC = INTIO67, Internal oscillator block, port function on RA6 and RA7
+  2455                           ;	Fail-Safe Clock Monitor Enable bit
+  2456                           ;	FCMEN = OFF, Fail-Safe Clock Monitor disabled
+  2457                           ;	Internal/External Oscillator Switchover bit
+  2458                           ;	IESO = OFF, Oscillator Switchover mode disabled
+  2459   300001                     	org	3145729
+  2460   300001  08                 	db	8
+  2461                           
+  2462                           ;Config register CONFIG2L @ 0x300002
+  2463                           ;	Power-up Timer Enable bit
+  2464                           ;	PWRTEN = OFF, PWRT disabled
+  2465                           ;	Brown-out Reset Enable bits
+  2466                           ;	BOREN = SBORDIS, Brown-out Reset enabled in hardware only (SBOREN is disabled)
+  2467                           ;	Brown Out Reset Voltage bits
+  2468                           ;	BORV = 18, VBOR set to 1.8 V nominal
+  2469   300002                     	org	3145730
+  2470   300002  1F                 	db	31
+  2471                           
+  2472                           ;Config register CONFIG2H @ 0x300003
+  2473                           ;	Watchdog Timer Enable bit
+  2474                           ;	WDTEN = OFF, WDT is controlled by SWDTEN bit of the WDTCON register
+  2475                           ;	Watchdog Timer Postscale Select bits
+  2476                           ;	WDTPS = 512, 1:512
+  2477   300003                     	org	3145731
+  2478   300003  12                 	db	18
+  2479                           
+  2480                           ; Padding undefined space
+  2481   300004                     	org	3145732
+  2482   300004  FF                 	db	255
+  2483                           
+  2484                           ;Config register CONFIG3H @ 0x300005
+  2485                           ;	CCP2 MUX bit
+  2486                           ;	CCP2MX = PORTC, CCP2 input/output is multiplexed with RC1
+  2487                           ;	PORTB A/D Enable bit
+  2488                           ;	PBADEN = OFF, PORTB<4:0> pins are configured as digital I/O on Reset
+  2489                           ;	Low-Power Timer1 Oscillator Enable bit
+  2490                           ;	LPT1OSC = ON, Timer1 configured for low-power operation
+  2491                           ;	HFINTOSC Fast Start-up
+  2492                           ;	HFOFST = OFF, The system clock is held off until the HFINTOSC is stable.
+  2493                           ;	MCLR Pin Enable bit
+  2494                           ;	MCLRE = ON, MCLR pin enabled; RE3 input pin disabled
+  2495   300005                     	org	3145733
+  2496   300005  85                 	db	133
+  2497                           
+  2498                           ;Config register CONFIG4L @ 0x300006
+  2499                           ;	Stack Full/Underflow Reset Enable bit
+  2500                           ;	STVREN = ON, Stack full/underflow will cause Reset
+  2501                           ;	Single-Supply ICSP Enable bit
+  2502                           ;	LVP = ON, Single-Supply ICSP enabled
+  2503                           ;	Extended Instruction Set Enable bit
+  2504                           ;	XINST = OFF, Instruction set extension and Indexed Addressing mode disabled (Legacy mo
+      +                          de)
+  2505                           ;	Background Debugger Enable bit
+  2506                           ;	DEBUG = ON, Background debugger enabled, RB6 and RB7 are dedicated to In-Circuit Debug
+  2507   300006                     	org	3145734
+  2508   300006  05                 	db	5
+  2509                           
+  2510                           ; Padding undefined space
+  2511   300007                     	org	3145735
+  2512   300007  FF                 	db	255
+  2513                           
+  2514                           ;Config register CONFIG5L @ 0x300008
+  2515                           ;	Code Protection Block 0
+  2516                           ;	CP0 = OFF, Block 0 (000800-001FFFh) not code-protected
+  2517                           ;	Code Protection Block 1
+  2518                           ;	CP1 = OFF, Block 1 (002000-003FFFh) not code-protected
+  2519                           ;	Code Protection Block 2
+  2520                           ;	CP2 = OFF, Block 2 (004000-005FFFh) not code-protected
+  2521                           ;	Code Protection Block 3
+  2522                           ;	CP3 = OFF, Block 3 (006000-007FFFh) not code-protected
+  2523   300008                     	org	3145736
+  2524   300008  0F                 	db	15
+  2525                           
+  2526                           ;Config register CONFIG5H @ 0x300009
+  2527                           ;	Boot Block Code Protection bit
+  2528                           ;	CPB = OFF, Boot block (000000-0007FFh) not code-protected
+  2529                           ;	Data EEPROM Code Protection bit
+  2530                           ;	CPD = OFF, Data EEPROM not code-protected
+  2531   300009                     	org	3145737
+  2532   300009  C0                 	db	192
+  2533                           
+  2534                           ;Config register CONFIG6L @ 0x30000A
+  2535                           ;	Write Protection Block 0
+  2536                           ;	WRT0 = OFF, Block 0 (000800-001FFFh) not write-protected
+  2537                           ;	Write Protection Block 1
+  2538                           ;	WRT1 = OFF, Block 1 (002000-003FFFh) not write-protected
+  2539                           ;	Write Protection Block 2
+  2540                           ;	WRT2 = OFF, Block 2 (004000-005FFFh) not write-protected
+  2541                           ;	Write Protection Block 3
+  2542                           ;	WRT3 = OFF, Block 3 (006000-007FFFh) not write-protected
+  2543   30000A                     	org	3145738
+  2544   30000A  0F                 	db	15
+  2545                           
+  2546                           ;Config register CONFIG6H @ 0x30000B
+  2547                           ;	Configuration Register Write Protection bit
+  2548                           ;	WRTC = OFF, Configuration registers (300000-3000FFh) not write-protected
+  2549                           ;	Boot Block Write Protection bit
+  2550                           ;	WRTB = OFF, Boot Block (000000-0007FFh) not write-protected
+  2551                           ;	Data EEPROM Write Protection bit
+  2552                           ;	WRTD = OFF, Data EEPROM not write-protected
+  2553   30000B                     	org	3145739
+  2554   30000B  E0                 	db	224
+  2555                           
+  2556                           ;Config register CONFIG7L @ 0x30000C
+  2557                           ;	Table Read Protection Block 0
+  2558                           ;	EBTR0 = OFF, Block 0 (000800-001FFFh) not protected from table reads executed in other
+      +                           blocks
+  2559                           ;	Table Read Protection Block 1
+  2560                           ;	EBTR1 = OFF, Block 1 (002000-003FFFh) not protected from table reads executed in other
+      +                           blocks
+  2561                           ;	Table Read Protection Block 2
+  2562                           ;	EBTR2 = OFF, Block 2 (004000-005FFFh) not protected from table reads executed in other
+      +                           blocks
+  2563                           ;	Table Read Protection Block 3
+  2564                           ;	EBTR3 = OFF, Block 3 (006000-007FFFh) not protected from table reads executed in other
+      +                           blocks
+  2565   30000C                     	org	3145740
+  2566   30000C  0F                 	db	15
+  2567                           
+  2568                           ;Config register CONFIG7H @ 0x30000D
+  2569                           ;	Boot Block Table Read Protection bit
+  2570                           ;	EBTRB = OFF, Boot Block (000000-0007FFh) not protected from table reads executed in ot
+      +                          her blocks
+  2571   30000D                     	org	3145741
+  2572   30000D  40                 	db	64
+  2573                           tosu	equ	0xFFF
+  2574                           tosh	equ	0xFFE
+  2575                           tosl	equ	0xFFD
+  2576                           stkptr	equ	0xFFC
+  2577                           pclatu	equ	0xFFB
+  2578                           pclath	equ	0xFFA
+  2579                           pcl	equ	0xFF9
+  2580                           tblptru	equ	0xFF8
+  2581                           tblptrh	equ	0xFF7
+  2582                           tblptrl	equ	0xFF6
+  2583                           tablat	equ	0xFF5
+  2584                           prodh	equ	0xFF4
+  2585                           prodl	equ	0xFF3
+  2586                           indf0	equ	0xFEF
+  2587                           postinc0	equ	0xFEE
+  2588                           postdec0	equ	0xFED
+  2589                           preinc0	equ	0xFEC
+  2590                           plusw0	equ	0xFEB
+  2591                           fsr0h	equ	0xFEA
+  2592                           fsr0l	equ	0xFE9
+  2593                           wreg	equ	0xFE8
+  2594                           indf1	equ	0xFE7
+  2595                           postinc1	equ	0xFE6
+  2596                           postdec1	equ	0xFE5
+  2597                           preinc1	equ	0xFE4
+  2598                           plusw1	equ	0xFE3
+  2599                           fsr1h	equ	0xFE2
+  2600                           fsr1l	equ	0xFE1
+  2601                           bsr	equ	0xFE0
+  2602                           indf2	equ	0xFDF
+  2603                           postinc2	equ	0xFDE
+  2604                           postdec2	equ	0xFDD
+  2605                           preinc2	equ	0xFDC
+  2606                           plusw2	equ	0xFDB
+  2607                           fsr2h	equ	0xFDA
+  2608                           fsr2l	equ	0xFD9
+  2609                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     0
+    Constant    12
+    Data        0
+    BSS         36
+    Persistent  8
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           94     14      58
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    INT0_InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT0_DefaultInterruptHandler(), NULL(), 
+
+    INT0_SetInterruptHandler@InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT0_DefaultInterruptHandler(), 
+
+    INT1_InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT1_DefaultInterruptHandler(), NULL(), 
+
+    INT1_SetInterruptHandler@InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT1_DefaultInterruptHandler(), 
+
+    INT2_InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT2_DefaultInterruptHandler(), NULL(), 
+
+    INT2_SetInterruptHandler@InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT2_DefaultInterruptHandler(), 
+
+    S558$4$0	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_OverflowCallback@main$F694(), 
+
+    S558TMR_INTERFACE$Initialize	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_Initialize(), 
+
+    S558TMR_INTERFACE$PeriodCountSet	PTR FTN(unsigned int ,)void  size(2) Largest target is 1
+		 -> Timer0_PeriodCountSet(), 
+
+    S558TMR_INTERFACE$Start	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_Start(), 
+
+    S558TMR_INTERFACE$Stop	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_Stop(), 
+
+    S558TMR_INTERFACE$Tasks	PTR FTN()void  size(2) Largest target is 1
+		 -> NULL(), 
+
+    S558TMR_INTERFACE$TimeoutCallbackRegister	PTR FTN(PTR FTN()void ,)void  size(2) Largest target is 1
+		 -> Timer0_OverflowCallbackRegister(), 
+
+    Timer0$Initialize	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_Initialize(), 
+
+    Timer0$PeriodCountSet	PTR FTN(unsigned int ,)void  size(2) Largest target is 1
+		 -> Timer0_PeriodCountSet(), 
+
+    Timer0$Start	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_Start(), 
+
+    Timer0$Stop	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_Stop(), 
+
+    Timer0$Tasks	PTR FTN()void  size(2) Largest target is 1
+		 -> NULL(), 
+
+    Timer0$TimeoutCallbackRegister	PTR FTN(PTR FTN()void ,)void  size(2) Largest target is 1
+		 -> Timer0_OverflowCallbackRegister(), 
+
+    Timer0_OverflowCallback	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_OverflowCallback@main$F694(), NULL(), 
+
+    Timer0_OverflowCallbackRegister@CallbackHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> Timer0_OverflowCallback@main$F694(), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->_RBT_simulateButtonPush
+    _SYSTEM_Initialize->_Timer0_Initialize
+    _INTERRUPT_Initialize->_INT0_SetInterruptHandler
+    _INTERRUPT_Initialize->_INT1_SetInterruptHandler
+    _INTERRUPT_Initialize->_INT2_SetInterruptHandler
+
+Critical Paths under _INTERRUPT_InterruptManager in COMRAM
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 4     4      0    1716
+                                             10 COMRAM     4     4      0
+                  _ADC_GetConversion
+                  _MOT_SwitchOnMotor
+          _PIN_MANAGER_RefreshConfig
+             _RBT_simulateButtonPush
+                  _SYSTEM_Initialize
+    _Timer0_OverflowCallbackRegister
+                            ___lwdiv
+                      _detectSunRise
+                       _detectSunSet
+                     _getAdcFiltered
+                _manageSoftTimerTick
+ ---------------------------------------------------------------------------------
+ (1) _manageSoftTimerTick                                  0     0      0       0
+       _MOT_manageMotorSoftwareTimer
+ ---------------------------------------------------------------------------------
+ (2) _MOT_manageMotorSoftwareTimer                         0     0      0       0
+                 _MOT_SwitchOffMotor
+ ---------------------------------------------------------------------------------
+ (3) _MOT_SwitchOffMotor                                   0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _getAdcFiltered                                       7     5      2     291
+                                              2 COMRAM     7     5      2
+ ---------------------------------------------------------------------------------
+ (1) _detectSunSet                                         1     1      0      15
+                                              2 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _detectSunRise                                        1     1      0      15
+                                              2 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ (1) ___lwdiv                                              7     3      4     466
+                                              2 COMRAM     7     3      4
+ ---------------------------------------------------------------------------------
+ (1) _Timer0_OverflowCallbackRegister                      2     0      2      98
+                                              2 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ (1) _SYSTEM_Initialize                                    0     0      0     294
+                     _ADC_Initialize
+                   _CLOCK_Initialize
+               _INTERRUPT_Initialize
+             _PIN_MANAGER_Initialize
+                  _Timer0_Initialize
+                     _WDT_Initialize
+ ---------------------------------------------------------------------------------
+ (2) _WDT_Initialize                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _Timer0_Initialize                                    2     2      0       0
+                                              2 COMRAM     2     2      0
+ ---------------------------------------------------------------------------------
+ (2) _PIN_MANAGER_Initialize                               0     0      0       0
+          _PIN_MANAGER_RefreshConfig
+ ---------------------------------------------------------------------------------
+ (3) _PIN_MANAGER_RefreshConfig                            0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _INTERRUPT_Initialize                                 0     0      0     294
+           _INT0_SetInterruptHandler
+           _INT1_SetInterruptHandler
+           _INT2_SetInterruptHandler
+ ---------------------------------------------------------------------------------
+ (3) _INT2_SetInterruptHandler                             2     0      2      98
+                                              2 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ (3) _INT1_SetInterruptHandler                             2     0      2      98
+                                              2 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ (3) _INT0_SetInterruptHandler                             2     0      2      98
+                                              2 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ (2) _CLOCK_Initialize                                     0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _ADC_Initialize                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _RBT_simulateButtonPush                               8     5      3     397
+                                              2 COMRAM     8     5      3
+ ---------------------------------------------------------------------------------
+ (1) _MOT_SwitchOnMotor                                    1     1      0       0
+                                              2 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _ADC_GetConversion                                    5     3      2      22
+                                              2 COMRAM     5     3      2
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (4) _INTERRUPT_InterruptManager                           2     2      0       0
+                                              0 COMRAM     2     2      0
+                 _Timer0_OverflowISR
+ ---------------------------------------------------------------------------------
+ (5) _Timer0_OverflowISR                                   0     0      0       0
+                                NULL *
+  _Timer0_OverflowCallback@main$F694 *
+ ---------------------------------------------------------------------------------
+ (6) _Timer0_OverflowCallback@main$F694                    0     0      0       0
+ ---------------------------------------------------------------------------------
+ (6) NULL(Fake)                                            0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 6
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ADC_GetConversion
+   _MOT_SwitchOnMotor
+   _PIN_MANAGER_RefreshConfig
+   _RBT_simulateButtonPush
+   _SYSTEM_Initialize
+     _ADC_Initialize
+     _CLOCK_Initialize
+     _INTERRUPT_Initialize
+       _INT0_SetInterruptHandler
+       _INT1_SetInterruptHandler
+       _INT2_SetInterruptHandler
+     _PIN_MANAGER_Initialize
+       _PIN_MANAGER_RefreshConfig
+     _Timer0_Initialize
+     _WDT_Initialize
+   _Timer0_OverflowCallbackRegister
+   ___lwdiv
+   _detectSunRise
+   _detectSunSet
+   _getAdcFiltered
+   _manageSoftTimerTick
+     _MOT_manageMotorSoftwareTimer
+       _MOT_SwitchOffMotor
+
+ _INTERRUPT_InterruptManager (ROOT)
+   _Timer0_OverflowISR
+     NULL(Fake) *
+     _Timer0_OverflowCallback@main$F694 *
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             5FF      0       0      29        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITCOMRAM           5E      0       0       0        0.0%
+COMRAM              5E      E      3A       1       61.7%
+BITBIGSFRlh         21      0       0      21        0.0%
+BITBIGSFRllllll     1C      0       0      27        0.0%
+BITBIGSFRhhhlhh     18      0       0      17        0.0%
+BITBIGSFRhhhh        D      0       0      16        0.0%
+BITBIGSFRhhll        B      0       0      20        0.0%
+BITBIGSFRllllhh      7      0       0      25        0.0%
+BITBIGSFRlllhh       4      0       0      23        0.0%
+BITBIGSFRlllhl       4      0       0      24        0.0%
+BITBIGSFRllh         2      0       0      22        0.0%
+BITBIGSFRllllhl      1      0       0      26        0.0%
+BITBIGSFRhhlh        1      0       0      19        0.0%
+BITBIGSFRhhhll       1      0       0      18        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      3A      28        0.0%
+DATA                 0      0      3A       3        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Wed May 22 23:40:15 2024
+
+                          _i16uMotorSwitchDelay 0011                                              l34 0A86  
+                                            l19 0C12                                              l44 0C44  
+                                            l37 0AA6                                              l81 0B12  
+                                            u10 0B26                                              u11 0B22  
+                                            u20 0B40                                              u21 0B3C  
+                                            u80 09C6                                              u81 09C2  
+                                            u90 09DC                                              u91 09D8  
+                          ??_Timer0_OverflowISR 0025                                 _timer0ReloadVal 001D  
+                     _i16uLuminosityAdcFiltered 0019                                             l100 0C3A  
+                                           l113 0C30                                             l126 0C26  
+                                           l401 081A                                             l233 0B8C  
+                                           l322 062A                                             l403 0852  
+                                           l164 0BFA                                             l405 0820  
+                                           l341 07B6                                             l430 0BAC  
+                                           l182 0BE0                                             l342 07B8  
+                                           l407 0822                                             l167 0B6C  
+                                           l360 08DE                                             l417 086E  
+                                           l433 0C58                                             l337 078E  
+                                           l418 08A6                                             l258 0C1C  
+                                           l419 08AA                                             l187 0C50  
+                                           l371 0A0A                                             l363 093A  
+                                           l435 0C5A                                             l428 0B8E  
+                                           l372 0A0C                                             l380 0A66  
+                                           l444 0B44                                             l348 07F4  
+                                           l381 0A68                                             l439 0B26  
+                                           l384 0C4A                                             l395 0894  
+                                           l399 0818                                             l945 09AE  
+                                           l938 09A6                                             u100 09F2  
+                                           u101 09EE                                             u120 0A22  
+                                           u121 0A1E                                             u130 0A38  
+                                           u131 0A34                                             u140 0A4E  
+                                           u141 0A4A                                             u410 0A94  
+                                           u411 0A90                                             u420 08D4  
+                                           u500 06DE                                             u421 08D0  
+                                           u501 06DA                                             u430 0910  
+                                           u510 070E                                             u431 090C  
+                                           u511 070A                                             u440 08A6  
+                                           u520 0756                                             u441 08A2  
+                                           u521 0752                                             u450 0956  
+                                           u451 0952                                             u460 0974  
+                                           u540 078E                                             u461 0970  
+                                           u541 078A                                             u470 0990  
+                                           u550 07A0                                             u534 0770  
+                                           u607 085A                                             u471 098C  
+                                           u551 079C                                             u535 076C  
+                                           u560 07B0                                             u480 0668  
+                                           u617 0876                                             u561 07AC  
+                                           u481 0664                                             u570 07D6  
+                                           u490 06AC                                             u627 0886  
+                                           u571 07D2                                             u491 06A8  
+                                           u580 07F4                                             u637 0BA0  
+                                           u581 07F0                                             u597 0650  
+                    ??_INT0_SetInterruptHandler 0029                                             tosl 0FFD  
+                                           wreg 0FE8                         RBT_simulateButtonPush@i 002E  
+                     ??_Timer0_OverflowCallback 0025                     ??_PIN_MANAGER_RefreshConfig 0027  
+                                          l1130 0BFC                                            l1132 0C10  
+                                          l1134 0C3C                                            l1126 0B46  
+                                          l1150 0BF6                                            l1230 09C6  
+                                          l1128 0B6A                                            l1152 0B6E  
+                                          l1160 0C4C                                            l1232 09DC  
+                                          l1154 0B70                                            l1234 09F2  
+                                          l1226 09B0                                            l1170 0B40  
+                                          l1500 0A6C                                            l1244 0B90  
+                                          l1148 0BE2                                            l1156 0B84  
+                                          l1236 09FA                                            l1228 09B4  
+                                          l1164 0B14                                            l1502 0A7E  
+                                          l1246 0B9A                                            l1158 0B86  
+                                          l1238 0A02                                            l1166 0B28  
+                                          l1504 0A80                                            l1512 0BC8  
+                                          l1280 0A22                                            l1520 08B0  
+                                          l1168 0B2E                                            l1600 0622  
+                                          l1506 0A84                                            l1514 0BDC  
+                                          l1282 0A38                                            l1522 08C4  
+                                          l1610 063A                                            l1602 0624  
+                                          l1508 0A94                                            l1516 0C14  
+                                          l1284 0A4E                                            l1276 0A0E  
+                                          l1540 0932                                            l1532 08EA  
+                                          l1524 08D4                                            l1620 0672  
+                                          l1612 064E                                            l1286 0A56  
+                                          l1278 0A12                                            l1534 08FE  
+                                          l1526 08DA                                            l1518 08AC  
+                                          l1294 0C46                                            l1630 06B0  
+                                          l1622 0676                                            l1614 0656  
+                                          l1560 0868                                            l1552 0828  
+                                          l1544 0800                                            l1288 0A5E  
+                                          l1536 0900                                            l1640 06F4  
+                                          l1632 06C2                                            l1624 0684  
+                                          l1616 0658                                            l1608 062C  
+                                          l1562 086A                                            l1554 0854  
+                                          l1546 0804                                            l1482 0C32  
+                                          l1490 0AE6                                            l1538 0910  
+                                          l1650 0746                                            l1642 06F8  
+                                          l1634 06CA                                            l1626 0698  
+                                          l1618 066C                                            l1564 086C  
+                                          l1556 0864                                            l1548 0810  
+                                          l1484 0C28                                            l1492 0AF2  
+                                          l1580 0966                                            l1572 093C  
+                                          l1660 07A0                                            l1652 0756  
+                                          l1644 070E                                            l1636 06DE  
+                                          l1628 06AC                                            l1566 0892  
+                                          l1558 0866                                            l1486 0C1E  
+                                          l1494 0AF4                                            l1590 099A  
+                                          l1582 0974                                            l1574 0944  
+                                          l1670 07D6                                            l1662 07B0  
+                                          l1654 075E                                            l1646 072A  
+                                          l1638 06E2                                            l1496 0B02  
+                                          l1488 0AE0                                            l1592 09A0  
+                                          l1584 097A                                            l1576 0956  
+                                          l1672 07DE                                            l1664 07BA  
+                                          l1656 077A                                            l1648 0742  
+                                          l1682 083C                                            l1498 0B04  
+                                          l1586 0990                                            l1578 095E  
+                                          l1674 07E0                                            l1666 07C2  
+                                          l1658 077C                                            l1594 060E  
+                                          l1588 0998                                            l1668 07C6  
+                                          l1676 07E4                                            l1596 0612  
+                                          l1598 0616                                            _IOCB 0F7D  
+                                          _LATA 0F89                                            _LATB 0F8A  
+                                          _LATC 0F8B                                            _LATD 0F8C  
+                                          _LATE 0F8D                                            i2l90 0040  
+                                          _WPUB 0F7C                             _manageSoftTimerTick 0C46  
+                                          _main 060E                                            fsr2h 0FDA  
+                                          fsr2l 0FD9                                            btemp 003B  
+                     ?_INT2_SetInterruptHandler 0027                                            prodl 0FF3  
+                                          start 004C                                    ___param_bank 0000  
+             RBT_simulateButtonPush@i8uNbOfPush 0027                            ?_manageSoftTimerTick 0025  
+                                         ?_main 0025                                           _ANSEL 0F7E  
+                                         _T0CON 0FD5                                 __end_of___lwdiv 09B0  
+                                         i2l255 0ADE                                           i2l354 0C56  
+                                         _TMR0H 0FD7                                           _TMR0L 0FD6  
+                                         _TRISA 0F92                                           _TRISB 0F93  
+                                         _TRISC 0F94                                           _TRISD 0F95  
+                                         _TRISE 0F96                             main@i8uNbOfLedToSet 0022  
+                                _WDT_Initialize 0C4C                                           main@i 0032  
+                      _INT1_SetInterruptHandler 0C28                                           pclath 0FFA  
+                                         pclatu 0FFB                                           ttemp5 003C  
+                                         ttemp6 003F                                           ttemp7 0043  
+                                         status 0FD8                                           wtemp8 003C  
+                      ??_RBT_simulateButtonPush 002A                                 __initialization 0BAE  
+                          __end_of_detectSunSet 0A6A                                    __end_of_main 07FE  
+                     _PIN_MANAGER_RefreshConfig 0B46                     ?_INTERRUPT_InterruptManager 0025  
+                         ??_manageSoftTimerTick 0027                                          ??_main 002F  
+                                 __activetblptr 0002                          __end_of_WDT_Initialize 0C52  
+                                        _ADCON0 0FC2                                          _ADCON1 0FC1  
+                                        _ADCON2 0FC0                                          _ADRESH 0FC4  
+                                        _ADRESL 0FC3                                          _ANSELH 0F7F  
+                                        i2l1162 0C52                                          i2l1330 0012  
+                                        i2l1332 0020                                          i2l1190 0AB2  
+                                        i2l1334 002E                                          i2l1192 0AC4  
+                                        i2l1184 0AA8                                          i2l1336 003C  
+                                        i2l1186 0AAA                                          i2l1188 0AAE  
+                                        _OSCCON 0FD3                                  _getAdcFiltered 08AC  
+                                        _WDTCON 0FD1                                          i2u4_40 0AC4  
+                                        i2u4_41 0AC0                                          i2u5_48 0ACA  
+                                        i2u5_49 0ADE                                          _Timer0 0601  
+                                     ??___lwdiv 002B                                          clear_0 0BB4  
+                                        isa$std 0001                          detectSunSet@bReturnVal 0027  
+                             ?_CLOCK_Initialize 0025                    _INT2_DefaultInterruptHandler 0000  
+                            ??_CLOCK_Initialize 0027                                    __mediumconst 0000  
+                               ?_WDT_Initialize 0025                                          tblptru 0FF8  
+                      ADC_GetConversion@channel 002B        INT2_SetInterruptHandler@InterruptHandler 0027  
+      INT1_SetInterruptHandler@InterruptHandler 0027        INT0_SetInterruptHandler@InterruptHandler 0027  
+                        __end_of_getAdcFiltered 093C                               _SYSTEM_Initialize 0BC8  
+       __end_of_Timer0_OverflowCallbackRegister 0C1E               ??_Timer0_OverflowCallbackRegister 0029  
+              ?_Timer0_OverflowCallbackRegister 0027                 _Timer0_OverflowCallbackRegister 0C14  
+                                    __accesstop 0060                         __end_of__initialization 0BBA  
+                            ?_SYSTEM_Initialize 0025                                   ___rparam_used 0001  
+                                __pcstackCOMRAM 0025                           __end_of_detectSunRise 0A0E  
+                           ??_SYSTEM_Initialize 0029                   ?_MOT_manageMotorSoftwareTimer 0025  
+              __end_of_INT2_SetInterruptHandler 0C28                       __end_of_SYSTEM_Initialize 0BE2  
+                               ?_getAdcFiltered 0027                           _INT0_InterruptHandler 0039  
+                                    __pnvCOMRAM 0033                         detectSunRise@bReturnVal 0027  
+                     _ti16uLuminosityAdcHistory 0001                      ??_INT1_SetInterruptHandler 0029  
+                       _bIsMainLoopTimingIsOver 0024                                         i2u20_40 003C  
+                                       i2u20_41 0038                          _RBT_simulateButtonPush 07FE  
+                                       i2u18_40 0020                                         i2u18_41 001C  
+                                       i2u19_40 002E                                         i2u19_41 002A  
+                                       _OSCTUNE 0F9B                                    _detectSunSet 0A0E  
+                 getAdcFiltered@i16uAdcfiltered 002B                       ?_INT0_SetInterruptHandler 0027  
+                                       __Hparam 0000                                         __Lparam 0000  
+                                   _Timer0_Stop 0000                               _Timer0_Initialize 0B6E  
+                          _i16uCntLuminosityLow 0017                                         ___lwdiv 093C  
+                                  __psmallconst 0600                                         __pcinit 0BAE  
+                            ?_Timer0_Initialize 0025                                         __ramtop 0600  
+                                       __ptext0 060E                                         __ptext1 0C46  
+                                       __ptext2 0B14                                         __ptext3 0C58  
+                                       __ptext4 08AC                                         __ptext5 0A0E  
+                                       __ptext6 09B0                                         __ptext7 093C  
+                                       __ptext8 0C14                                         __ptext9 0BC8  
+                      ?_Timer0_OverflowCallback 0025                                       _T0CONbits 0FD5  
+     __end_of_Timer0_OverflowCallback@main$F694 0C58               _Timer0_OverflowCallback@main$F694 0C52  
+                      ??_PIN_MANAGER_Initialize 0027                  ??_MOT_manageMotorSoftwareTimer 0027  
+                           ??_Timer0_Initialize 0027                            end_of_initialization 0BBA  
+                      _INT2_SetInterruptHandler 0C1E         RBT_simulateButtonPush@i8uBackupLedArray 002D  
+                                 __Lmediumconst 0000                       __end_of_Timer0_Initialize 0B8E  
+                   __end_of_manageSoftTimerTick 0C4C                                         postdec2 0FDD  
+                                       postinc0 0FEE                                         postinc2 0FDE  
+                              ??_WDT_Initialize 0027                           _INT1_InterruptHandler 0037  
+                                     _PORTBbits 0F81  Timer0_OverflowCallbackRegister@CallbackHandler 0027  
+                                     _TRISBbits 0F93                      __end_of_MOT_SwitchOffMotor 0C5C  
+                                     _i16uDebug 0013                                  __end_of_Timer0 060D  
+                  __end_of_INTERRUPT_Initialize 0B14                    _INT0_DefaultInterruptHandler 0000  
+                                _ADC_Initialize 0BFC                                ??_getAdcFiltered 0029  
+                           start_initialization 0BAE                          __end_of_ADC_Initialize 0C14  
+                       ?_RBT_simulateButtonPush 0027                                     __pbssCOMRAM 0001  
+              __end_of_INT0_SetInterruptHandler 0C3C                           _INT2_InterruptHandler 0035  
+        RBT_simulateButtonPush@i16uPushDuration 0028                                ___lwdiv@dividend 0027  
+                        _PIN_MANAGER_Initialize 0BE2                                       __pintcode 0008  
+                    __end_of_Timer0_OverflowISR 0AE0                                        ?___lwdiv 0027  
+                               ?_ADC_Initialize 0025                  __end_of_RBT_simulateButtonPush 08AC  
+                  ??_INTERRUPT_InterruptManager 0025                                     __smallconst 0600  
+                    ??_INT2_SetInterruptHandler 0029                                ___lwdiv@quotient 002B  
+                                 _eDoorPosition 0023                            _INTERRUPT_Initialize 0AE0  
+                              _CLOCK_Initialize 0C3C                                        _LATBbits 0F8A  
+                     ?_INT1_SetInterruptHandler 0027                     _i16uLuminosityAdcUnFiltered 001B  
+                                      _PIR1bits 0F9E                                        _RCONbits 0FD0  
+                                 _detectSunRise 09B0                                      _ADCON0bits 0FC2  
+                            main@bBpManualPress 0020                      ?_PIN_MANAGER_RefreshConfig 0025  
+                                   _INTCON2bits 0FF1                                     _INTCON3bits 0FF0  
+                         ?_INTERRUPT_Initialize 0025                        _INT0_SetInterruptHandler 0C32  
+                                      __Hrparam 0000                                    _Timer0_Start 0000  
+          __end_of_MOT_manageMotorSoftwareTimer 0B46                    _MOT_manageMotorSoftwareTimer 0B14  
+                                      __Lrparam 0000                               _ADC_GetConversion 0A6A  
+                                ?_detectSunRise 0025                              _MOT_SwitchOffMotor 0C58  
+                            ?_ADC_GetConversion 0027                                 getAdcFiltered@i 002D  
+                         _i16uCntLuminosityHigh 0015                             ?_MOT_SwitchOffMotor 0025  
+                           ??_ADC_GetConversion 0029                                 ___lwdiv@divisor 0029  
+                               ___lwdiv@counter 002D                                        __ptext10 0C4C  
+                                      __ptext11 0B6E                                        __ptext20 07FE  
+                                      __ptext12 0BE2                                        __ptext21 0B8E  
+                                      __ptext13 0B46                                        __ptext22 0A6A  
+                                      __ptext14 0AE0                                        __ptext15 0C1E  
+                                      __ptext24 0AA8                                        __ptext16 0C28  
+                                      __ptext25 0C52                                        __ptext17 0C32  
+                                      __ptext18 0C3C                                        __ptext19 0BFC  
+             __end_of_PIN_MANAGER_RefreshConfig 0B6E                            main@i8uBarGraphValue 0031  
+                          ??_MOT_SwitchOffMotor 0027                 RBT_simulateButtonPush@eButtonId 002C  
+                     __end_of_ADC_GetConversion 0AA8                                        isa$xinst 0000  
+                                      int$flags 003B              __end_of_INTERRUPT_InterruptManager 004C  
+                    _INTERRUPT_InterruptManager 0008                    _INT1_DefaultInterruptHandler 0000  
+                                    _INTCONbits 0FF2                            main@i8uBpSw1Debounce 0021  
+                                 ?_detectSunSet 0025                          ??_INTERRUPT_Initialize 0029  
+                             _MOT_SwitchOnMotor 0B8E                         _Timer0_OverflowCallback 0033  
+                                      intlevel2 0000                              ?_MOT_SwitchOnMotor 0025  
+                       ?_PIN_MANAGER_Initialize 0025                                ??_ADC_Initialize 0027  
+                           ??_MOT_SwitchOnMotor 0027                                 ??_detectSunRise 0027  
+               getAdcFiltered@i16uAdcUnfiltered 0027                        __end_of_CLOCK_Initialize 0C46  
+                     __end_of_MOT_SwitchOnMotor 0BAE                __end_of_INT1_SetInterruptHandler 0C32  
+                 getAdcFiltered@i8uHistoryIndex 001F                              _Timer0_OverflowISR 0AA8  
+                                ??_detectSunSet 0027                           _Timer0_PeriodCountSet 0000  
+                __end_of_PIN_MANAGER_Initialize 0BFC                             ?_Timer0_OverflowISR 0025  

@@ -45,7 +45,7 @@
 
 //CONFIG2H
 #pragma config WDTEN = OFF    // Watchdog Timer Enable bits->WDT is controlled by SWDTEN bit of the WDTCON register
-#pragma config WDTPS = 512    // Watchdog Timer Postscale Select bits->1:512
+#pragma config WDTPS = 512    // Watchdog Timer Postscale Select bits->1:512  (perdio = 2.11sec))
 
 //CONFIG3H
 #pragma config HFOFST = OFF    // HFINTOSC Fast Start-up->The system clock is held off until the HFINTOSC is stable.

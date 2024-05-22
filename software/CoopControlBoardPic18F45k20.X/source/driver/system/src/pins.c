@@ -12,7 +12,7 @@
 */
 
 /*
-� [2024] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -69,19 +69,29 @@ void PIN_MANAGER_RefreshConfig(void)
 
     /**
     ANSELx registers (ADC pin)
+     * ANS0 : RA0
+     * ANS1 : RA1
+     * ANS2 : RA2
+     * ANS3 : RA3
+     * ANS4 : RA5
+     * ANS5 : RE0
+     * ANS6 : RE1
+     * ANS7 : RE2
+     * 
+     * ANS8 : RB2
+     * ANS9 : RB3
+     * ANS10 : RB1
+     * ANS11 : RB4
+     * ANS12 : RB0
     */
-    ANSELH = 0x1F;
+    ANSEL = 0x03; // Activate analog AN0 (RA0) and AN1 (RA1). Other are set for digital input
+    ANSELH = 0x00; // AN8-12 are digital inputs (AN12 on RB0)
 
     /**
     WPUx registers (Weak Pullup)
     */
-    /* disable internal pullup on all pins */
-    WPUA = 0x00;
+    /* disable internal pullup on all pins (only configurable on port B) */
     WPUB = 0x00; 
-    WPUC = 0x00; 
-    WPUD = 0x00; 
-    WPUE = 0x00; 
-
     /**
     ODx registers
     */

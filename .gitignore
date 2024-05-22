@@ -34,7 +34,7 @@
 *.app
 *.i*86
 *.x86_64
-*.hex
+
 
 # Debug files
 *.dSYM/
@@ -50,3 +50,12 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+*.bak
+/software/CoopControlBoardPic18F45k20.X/build
+*.i
+*.p1
+*.cmf
+*.hxl
+*.rlf
+*.sdb
+*.sym
