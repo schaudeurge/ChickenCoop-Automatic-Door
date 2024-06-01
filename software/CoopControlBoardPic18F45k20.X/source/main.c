@@ -45,9 +45,9 @@
 #define SUNRISE_ADC_THRESHOLD       650     // ADC value for threshold above which the SunRise is detected
 #define SUNSET_ADC_THRESHOLD		500		// ADC value for threshold under which the SunSet is detected
 
-//#define SUN_TIME_FILTER (2*60000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 2 min based on the main loop timer
-//todo debug : change for 
-#define SUN_TIME_FILTER (5000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 5 sec based on the main loop timer
+#define SUN_TIME_FILTER (2*60000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 2 min based on the main loop timer
+// for debug usage: accelerate filter timing 
+// #define SUN_TIME_FILTER (5000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 5 sec based on the main loop timer
 
 /* definition for led display */
 #define LED_ARRAY_TIME_STEP     (SUN_TIME_FILTER/8)
@@ -112,7 +112,7 @@ int main(void)
     for( i=0 ; i<NB_OF_ADC_AVG ; i++ )
     {   
         CLRWDT(); // periodic watchdog clear to avoid timeout reset
-        //i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_POT); //debug : use potentiometer instead of photo resistor
+        //i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_POT); //for debug usage: use potentiometer instead of photo resistor
         i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGHT);
         i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosityAdcUnFiltered);
         __delay_ms(1);
@@ -173,7 +173,7 @@ int main(void)
             else{}
             DISPLAY_LED_ARRAY = i8uBarGraphValue;
                 
-            /* -- Keep the BP pressed for manual switch on of the motor power relay  */
+            /* -- Keep the BP pressed for manual switch on of the motor power relay (allow manual user command) */
             if ( Read_Button_SW1() == BUTTON_SW1_PRESS )
             {                 
                 /* debounce button */
@@ -184,9 +184,11 @@ int main(void)
                 else
                 {
                     /* Button is press: swith on the relay */
-                    SWITCH_ON_MOTOR_RELAY();                    
+                    MOT_SwitchOnMotor();
                     DISPLAY_LED_ARRAY = 0xFF; // All Led On
                     bBpManualPress = 1;
+                    
+                    eDoorPosition = DOOR_POSITION_UNKNOWN; // door position is now unknown because it may have been move manually
                 }
             }
             else // Bp release
@@ -196,7 +198,7 @@ int main(void)
                 {
                     bBpManualPress = 0; // clear flag
                     DISPLAY_LED_ARRAY = 0x00; // All Led Off
-                    SWITCH_OFF_MOTOR_RELAY();
+                    MOT_SwitchOffMotor();
                 }
                 else{}
             }

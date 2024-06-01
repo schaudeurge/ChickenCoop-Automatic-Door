@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
-                                                                                               Sat Jun 01 11:30:30 2024
+                                                                                               Sat Jun 01 11:30:15 2024
 
 Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
      1                           	processor	18F45K20
@@ -121,44 +121,44 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    107                           	callstack 0
    108   000000                     _TMR0L	set	4054
    109   000000                     _TMR0H	set	4055
-   110   000000                     _IOCB	set	3965
-   111   000000                     _ADCON0	set	4034
-   112   000000                     _ADRESL	set	4035
-   113   00060D  00                 	db	0	; dummy byte at the end
-   114   000000                     
-   115                           	psect	nvCOMRAM
-   116   000039                     __pnvCOMRAM:
-   117                           	callstack 0
-   118   000039                     _Timer0_OverflowCallback:
-   119                           	callstack 0
-   120   000039                     	ds	2
-   121   00003B                     _INT2_InterruptHandler:
-   122                           	callstack 0
-   123   00003B                     	ds	2
-   124   00003D                     _INT1_InterruptHandler:
-   125                           	callstack 0
-   126   00003D                     	ds	2
-   127   00003F                     _INT0_InterruptHandler:
-   128                           	callstack 0
-   129   00003F                     	ds	2
-   130   000000                     _TRISBbits	set	3987
-   131   000000                     _LATBbits	set	3978
-   132   000000                     _T0CON	set	4053
-   133   000000                     _ADCON0bits	set	4034
-   134   000000                     _WPUB	set	3964
-   135   000000                     _ANSEL	set	3966
-   136   000000                     _LATA	set	3977
-   137   000000                     _OSCTUNE	set	3995
-   138   000000                     _PIR1bits	set	3998
-   139   000000                     _ADCON2	set	4032
-   140   000000                     _ADCON1	set	4033
-   141   000000                     _RCONbits	set	4048
-   142   000000                     _OSCCON	set	4051
-   143   000000                     _ADRESH	set	4036
-   144   000000                     _T0CONbits	set	4053
-   145   000000                     _INTCON3bits	set	4080
-   146   000000                     _INTCON2bits	set	4081
-   147   000000                     _INTCONbits	set	4082
+   110   000000                     _T0CONbits	set	4053
+   111   000000                     _IOCB	set	3965
+   112   000000                     _INTCON3bits	set	4080
+   113   000000                     _INTCON2bits	set	4081
+   114   000000                     _INTCONbits	set	4082
+   115   000000                     _ADCON0	set	4034
+   116   000000                     _ADRESL	set	4035
+   117   00060D  00                 	db	0	; dummy byte at the end
+   118   000000                     
+   119                           	psect	nvCOMRAM
+   120   000039                     __pnvCOMRAM:
+   121                           	callstack 0
+   122   000039                     _Timer0_OverflowCallback:
+   123                           	callstack 0
+   124   000039                     	ds	2
+   125   00003B                     _INT2_InterruptHandler:
+   126                           	callstack 0
+   127   00003B                     	ds	2
+   128   00003D                     _INT1_InterruptHandler:
+   129                           	callstack 0
+   130   00003D                     	ds	2
+   131   00003F                     _INT0_InterruptHandler:
+   132                           	callstack 0
+   133   00003F                     	ds	2
+   134   000000                     _TRISBbits	set	3987
+   135   000000                     _LATBbits	set	3978
+   136   000000                     _ADCON0bits	set	4034
+   137   000000                     _T0CON	set	4053
+   138   000000                     _WPUB	set	3964
+   139   000000                     _ANSEL	set	3966
+   140   000000                     _LATA	set	3977
+   141   000000                     _OSCTUNE	set	3995
+   142   000000                     _PIR1bits	set	3998
+   143   000000                     _ADCON2	set	4032
+   144   000000                     _ADCON1	set	4033
+   145   000000                     _RCONbits	set	4048
+   146   000000                     _OSCCON	set	4051
+   147   000000                     _ADRESH	set	4036
    148   000000                     _WDTCON	set	4049
    149   000000                     _TRISA	set	3986
    150   000000                     _LATE	set	3981
@@ -2796,7 +2796,7 @@ Auto Spaces:
     BANK2           256      0       0
     BANK3           256      0       0
     BANK4           256      0       0
-    BANK5           256      0       0
+    BANK5           239      0       0
 
 Pointer List with Targets:
 
@@ -3066,46 +3066,62 @@ Call Graph Tables:
 
  Address spaces:
 Name               Size   Autos  Total    Cost      Usage
-BIGRAM             5FF      0       0      29        0.0%
+BIGRAM             5EE      0       0      29        0.0%
 EEDATA             100      0       0       0        0.0%
-BITBANK5           100      0       0      14        0.0%
-BANK5              100      0       0      15        0.0%
-BITBANK4           100      0       0      12        0.0%
-BANK4              100      0       0      13        0.0%
-BITBANK3           100      0       0      10        0.0%
-BANK3              100      0       0      11        0.0%
-BITBANK2           100      0       0       8        0.0%
-BANK2              100      0       0       9        0.0%
-BITBANK1           100      0       0       6        0.0%
-BANK1              100      0       0       7        0.0%
-BITBANK0            A0      0       0       4        0.0%
-BANK0               A0      0       0       5        0.0%
+BITBANK4           100      0       0      11        0.0%
+BANK4              100      0       0      12        0.0%
+BITBANK3           100      0       0       9        0.0%
+BANK3              100      0       0      10        0.0%
+BITBANK2           100      0       0       7        0.0%
+BANK2              100      0       0       8        0.0%
+BITBANK1           100      0       0       5        0.0%
+BANK1              100      0       0       6        0.0%
+BITBANK5            EF      0       0      13        0.0%
+BANK5               EF      0       0      14        0.0%
+BITBANK0            A0      0       0       3        0.0%
+BANK0               A0      0       0       4        0.0%
 BITCOMRAM           5E      0       0       0        0.0%
 COMRAM              5E     14      40       1       68.1%
-BITBIGSFRlh         21      0       0      21        0.0%
-BITBIGSFRllllll     1C      0       0      27        0.0%
-BITBIGSFRhhhlhh     18      0       0      17        0.0%
-BITBIGSFRhhhh        D      0       0      16        0.0%
-BITBIGSFRhhll        B      0       0      20        0.0%
-BITBIGSFRllllhh      7      0       0      25        0.0%
-BITBIGSFRlllhh       4      0       0      23        0.0%
-BITBIGSFRlllhl       4      0       0      24        0.0%
-BITBIGSFRllh         2      0       0      22        0.0%
-BITBIGSFRllllhl      1      0       0      26        0.0%
-BITBIGSFRhhlh        1      0       0      19        0.0%
-BITBIGSFRhhhll       1      0       0      18        0.0%
+BITBIGSFR_1lh       21      0       0      21        0.0%
+BITBIGSFRlll        1C      0       0      27        0.0%
+BITBIGSFR_1hhl       B      0       0      20        0.0%
+BITBIGSFR_5h         9      0       0      15        0.0%
+BITBIGSFRlhh         7      0       0      25        0.0%
+BITBIGSFRhh          4      0       0      23        0.0%
+BITBIGSFRhl          4      0       0      24        0.0%
+BITBIGSFR_2h         3      0       0      18        0.0%
+BITBIGSFR_4          3      0       0      16        0.0%
+BITBIGSFR_3          3      0       0      17        0.0%
+BITBIGSFRlhl         1      0       0      26        0.0%
+BITBIGSFR_1hhh       1      0       0      19        0.0%
+BITBIGSFR_1ll        1      0       0      22        0.0%
+BIGSFR_5             0      0       0     200        0.0%
+BIGSFR_4             0      0       0     200        0.0%
+BIGSFR_3             0      0       0     200        0.0%
+BIGSFR_2             0      0       0     200        0.0%
+BIGSFR_1             0      0       0     200        0.0%
 BIGSFR               0      0       0     200        0.0%
+BITSFR_5             0      0       0     200        0.0%
+SFR_5                0      0       0     200        0.0%
+BITSFR_4             0      0       0     200        0.0%
+SFR_4                0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
 BITSFR               0      0       0     200        0.0%
 SFR                  0      0       0     200        0.0%
 STACK                0      0       0       2        0.0%
 NULL                 0      0       0       0        0.0%
 ABS                  0      0      40      28        0.0%
-DATA                 0      0      40       3        0.0%
+DATA                 0      0      40      30        0.0%
 CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
-Symbol Table                                                                                   Sat Jun 01 11:30:30 2024
+Symbol Table                                                                                   Sat Jun 01 11:30:15 2024
 
                           _i16uMotorSwitchDelay 0011                                              l34 0B3E  
                                             l19 0CCA                                              l44 0D08  

@@ -6,9 +6,10 @@
             <file>file:/C:/GitHub%20Repo/ChickenCoop-Automatic-Door/software/CoopControlBoardPic18F45k20.X/source/remoteButton.c</file>
             <file>file:/C:/GitHub%20Repo/ChickenCoop-Automatic-Door/software/CoopControlBoardPic18F45k20.X/source/driver/system/src/pins.c</file>
             <file>file:/C:/GitHub%20Repo/ChickenCoop-Automatic-Door/software/CoopControlBoardPic18F45k20.X/source/driver/adc/src/adc.c</file>
+            <file>file:/C:/GitHub%20Repo/ChickenCoop-Automatic-Door/software/CoopControlBoardPic18F45k20.X/source/motor.h</file>
             <file>file:/C:/GitHub%20Repo/ChickenCoop-Automatic-Door/software/CoopControlBoardPic18F45k20.X/source/main.c</file>
-            <file>file:/C:/Program%20Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18F-K_DFP/1.13.292/xc8/pic/include/proc/pic18f45k20.h</file>
             <file>file:/C:/GitHub%20Repo/ChickenCoop-Automatic-Door/software/CoopControlBoardPic18F45k20.X/source/driver/system/pins.h</file>
+            <file>file:/C:/GitHub%20Repo/ChickenCoop-Automatic-Door/software/CoopControlBoardPic18F45k20.X/source/motor.c</file>
         </group>
     </open-files>
 </project-private>

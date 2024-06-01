@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/production\CoopControlBoardPic18F45k20.X.production.hex">
+  <executable name="dist/default/debug\CoopControlBoardPic18F45k20.X.debug.hex">
     <memory name="program">
       <units>bytes</units>
       <length>32768</length>
-      <used>1896</used>
-      <free>30872</free>
+      <used>1898</used>
+      <free>30870</free>
     </memory>
     <memory name="data">
       <units>bytes</units>

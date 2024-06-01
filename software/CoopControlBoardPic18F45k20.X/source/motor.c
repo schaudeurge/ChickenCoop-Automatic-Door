@@ -39,7 +39,7 @@ uint16_t i16uMotorSwitchDelay = 0;
 void MOT_SwitchOnMotor(void)
 {
     SWITCH_ON_MOTOR_RELAY(); // Switch On motor power to receive the radio order and rotate
-    i16uMotorSwitchDelay = DELAY_TICK_30SEC; // start delay timer to switch Off the motor at the end of the movement
+    i16uMotorSwitchDelay = DELAY_TICK_30SEC; // start delay timer to switch Off the motor at the end of the movement (30sec = timing need for the door to completely close/open)
     CLRWDT(); // clear watchdog before delay to avoid reset
     __delay_ms(100); // some delay to let the motor power supply establish
 }
@@ -53,7 +53,9 @@ void MOT_SwitchOnMotor(void)
  */
 void MOT_SwitchOffMotor(void)
 {
+    i16uMotorSwitchDelay = 0; // force reset of timer used to keep the relay On
     SWITCH_OFF_MOTOR_RELAY();
+    
 }
 
 /**
