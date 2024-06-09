@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
-                                                                                               Sat Jun 01 11:30:15 2024
+                                                                                               Sun Jun 09 12:50:33 2024
 
 Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
      1                           	processor	18F45K20
@@ -357,7 +357,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    343 ;;
    344 ;; *************** function _main *****************
    345 ;; Defined at:
-   346 ;;		line 95 in file "source/main.c"
+   346 ;;		line 101 in file "source/main.c"
    347 ;; Parameters:    Size  Location     Type
    348 ;;		None
    349 ;; Auto vars:     Size  Location     Type
@@ -402,39 +402,39 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    388   00060E                     _main:
    389                           	callstack 25
    390   00060E                     
-   391                           ;source/main.c: 101:     uint8_t i = 0;
+   391                           ;source/main.c: 107:     uint8_t i = 0;
    392   00060E  0E00               	movlw	0
    393   000610  6E38               	movwf	main@i^0,c
    394   000612                     
-   395                           ;source/main.c: 104:     SYSTEM_Initialize();
+   395                           ;source/main.c: 110:     SYSTEM_Initialize();
    396   000612  EC40  F006         	call	_SYSTEM_Initialize	;wreg free
    397   000616                     
-   398                           ;source/main.c: 105:     Timer0_OverflowCallbackRegister(Timer0_OverflowCallback);
+   398                           ;source/main.c: 111:     Timer0_OverflowCallbackRegister(Timer0_OverflowCallback);
    399   000616  0E16               	movlw	low _Timer0_OverflowCallback@main$F694
    400   000618  6E27               	movwf	Timer0_OverflowCallbackRegister@CallbackHandler^0,c
    401   00061A  0E0D               	movlw	high _Timer0_OverflowCallback@main$F694
    402   00061C  6E28               	movwf	(Timer0_OverflowCallbackRegister@CallbackHandler+1)^0,c
    403   00061E  EC6C  F006         	call	_Timer0_OverflowCallbackRegister	;wreg free
    404   000622                     
-   405                           ;source/main.c: 108:     (INTCONbits.GIE = 1);
+   405                           ;source/main.c: 114:     (INTCONbits.GIE = 1);
    406   000622  8EF2               	bsf	242,7,c	;volatile
    407   000624                     
-   408                           ;source/main.c: 109:     (INTCONbits.PEIE = 1);
+   408                           ;source/main.c: 115:     (INTCONbits.PEIE = 1);
    409   000624  8CF2               	bsf	242,6,c	;volatile
    410                           
-   411                           ;source/main.c: 112:     for( i=0 ; i<8 ; i++ )
+   411                           ;source/main.c: 118:     for( i=0 ; i<8 ; i++ )
    412   000626  0E00               	movlw	0
    413   000628  6E38               	movwf	main@i^0,c
    414   00062A                     l322:
    415   00062A  0004               	clrwdt		;# 
    416   00062C                     
-   417                           ;source/main.c: 116:         i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGHT);
+   417                           ;source/main.c: 122:         i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGHT);
    418   00062C  0E01               	movlw	1
    419   00062E  EC91  F005         	call	_ADC_GetConversion
    420   000632  C027  F01B         	movff	?_ADC_GetConversion,_i16uLuminosityAdcUnFiltered
    421   000636  C028  F01C         	movff	?_ADC_GetConversion+1,_i16uLuminosityAdcUnFiltered+1
    422   00063A                     
-   423                           ;source/main.c: 117:         i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosityAd
+   423                           ;source/main.c: 123:         i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosityAd
       +                          cUnFiltered);
    424   00063A  C01B  F027         	movff	_i16uLuminosityAdcUnFiltered,getAdcFiltered@i16uAdcUnfiltered
    425   00063E  C01C  F028         	movff	_i16uLuminosityAdcUnFiltered+1,getAdcFiltered@i16uAdcUnfiltered+1
@@ -442,14 +442,14 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    427   000646  C027  F019         	movff	?_getAdcFiltered,_i16uLuminosityAdcFiltered
    428   00064A  C028  F01A         	movff	?_getAdcFiltered+1,_i16uLuminosityAdcFiltered+1
    429   00064E                     
-   430                           ;source/main.c: 118:         _delay((unsigned long)((1)*(1000000/4000.0)));
+   430                           ;source/main.c: 124:         _delay((unsigned long)((1)*(1000000/4000.0)));
    431   00064E  0E53               	movlw	83
    432   000650                     u657:
    433   000650  2EE8               	decfsz	wreg,f,c
    434   000652  D7FE               	bra	u657
    435   000654  0000               	nop	
    436   000656                     
-   437                           ;source/main.c: 119:     }
+   437                           ;source/main.c: 125:     }
    438   000656  2A38               	incf	main@i^0,f,c
    439   000658  0E07               	movlw	7
    440   00065A  6438               	cpfsgt	main@i^0,c
@@ -461,23 +461,23 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    446   000668  EF02  F004         	goto	l1732
    447   00066C                     l1668:
    448                           
-   449                           ;source/main.c: 126:         {;source/main.c: 127:             bIsMainLoopTimingIsOver =
+   449                           ;source/main.c: 132:         {;source/main.c: 133:             bIsMainLoopTimingIsOver =
       +                           0;
    450   00066C  0E00               	movlw	0
    451   00066E  6E24               	movwf	_bIsMainLoopTimingIsOver^0,c	;volatile
    452   000670  0004               	clrwdt		;# 
    453   000672                     
-   454                           ;source/main.c: 129:             PIN_MANAGER_RefreshConfig();
+   454                           ;source/main.c: 135:             PIN_MANAGER_RefreshConfig();
    455   000672  ECFF  F005         	call	_PIN_MANAGER_RefreshConfig	;wreg free
    456   000676                     
-   457                           ;source/main.c: 134:             i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGH
+   457                           ;source/main.c: 140:             i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_LIGH
       +                          T);
    458   000676  0E01               	movlw	1
    459   000678  EC91  F005         	call	_ADC_GetConversion
    460   00067C  C027  F01B         	movff	?_ADC_GetConversion,_i16uLuminosityAdcUnFiltered
    461   000680  C028  F01C         	movff	?_ADC_GetConversion+1,_i16uLuminosityAdcUnFiltered+1
    462   000684                     
-   463                           ;source/main.c: 135:             i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosi
+   463                           ;source/main.c: 141:             i16uLuminosityAdcFiltered = getAdcFiltered(i16uLuminosi
       +                          tyAdcUnFiltered);
    464   000684  C01B  F027         	movff	_i16uLuminosityAdcUnFiltered,getAdcFiltered@i16uAdcUnfiltered
    465   000688  C01C  F028         	movff	_i16uLuminosityAdcUnFiltered+1,getAdcFiltered@i16uAdcUnfiltered+1
@@ -485,7 +485,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    467   000690  C027  F019         	movff	?_getAdcFiltered,_i16uLuminosityAdcFiltered
    468   000694  C028  F01A         	movff	?_getAdcFiltered+1,_i16uLuminosityAdcFiltered+1
    469   000698                     
-   470                           ;source/main.c: 138:             if ( detectSunRise() == 1 )
+   470                           ;source/main.c: 144:             if ( detectSunRise() == 1 )
    471   000698  EC34  F005         	call	_detectSunRise	;wreg free
    472   00069C  06E8               	decf	wreg,f,c
    473   00069E  A4D8               	btfss	status,2,c
@@ -495,11 +495,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    477   0006A8  EF65  F003         	goto	l1684
    478   0006AC                     u550:
    479   0006AC                     
-   480                           ;source/main.c: 139:             {;source/main.c: 140:                 MOT_SwitchOnMotor
+   480                           ;source/main.c: 145:             {;source/main.c: 146:                 MOT_SwitchOnMotor
       +                          ();
    481   0006AC  EC23  F006         	call	_MOT_SwitchOnMotor	;wreg free
    482   0006B0                     
-   483                           ;source/main.c: 141:                 RBT_simulateButtonPush(REMOTE_BUTTON_UP,3,500);
+   483                           ;source/main.c: 147:                 RBT_simulateButtonPush(REMOTE_BUTTON_UP,3,500);
    484   0006B0  0E03               	movlw	3
    485   0006B2  6E27               	movwf	RBT_simulateButtonPush@i8uNbOfPush^0,c
    486   0006B4  0E01               	movlw	1
@@ -509,11 +509,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    490   0006BC  0E00               	movlw	0
    491   0006BE  EC95  F004         	call	_RBT_simulateButtonPush
    492   0006C2                     
-   493                           ;source/main.c: 142:                 eDoorPosition = DOOR_POSITION_OPEN;
+   493                           ;source/main.c: 148:                 eDoorPosition = DOOR_POSITION_OPEN;
    494   0006C2  0E02               	movlw	2
    495   0006C4  6E23               	movwf	_eDoorPosition^0,c
    496                           
-   497                           ;source/main.c: 143:             }
+   497                           ;source/main.c: 149:             }
    498   0006C6  EF7C  F003         	goto	l1692
    499   0006CA                     l1684:
    500   0006CA  EC63  F005         	call	_detectSunSet	;wreg free
@@ -525,11 +525,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    506   0006DA  EF7C  F003         	goto	l1692
    507   0006DE                     u560:
    508   0006DE                     
-   509                           ;source/main.c: 145:             {;source/main.c: 146:                 MOT_SwitchOnMotor
+   509                           ;source/main.c: 151:             {;source/main.c: 152:                 MOT_SwitchOnMotor
       +                          ();
    510   0006DE  EC23  F006         	call	_MOT_SwitchOnMotor	;wreg free
    511   0006E2                     
-   512                           ;source/main.c: 147:                 RBT_simulateButtonPush(REMOTE_BUTTON_DOWN,3,500);
+   512                           ;source/main.c: 153:                 RBT_simulateButtonPush(REMOTE_BUTTON_DOWN,3,500);
    513   0006E2  0E03               	movlw	3
    514   0006E4  6E27               	movwf	RBT_simulateButtonPush@i8uNbOfPush^0,c
    515   0006E6  0E01               	movlw	1
@@ -539,12 +539,12 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    519   0006EE  0E01               	movlw	1
    520   0006F0  EC95  F004         	call	_RBT_simulateButtonPush
    521   0006F4                     
-   522                           ;source/main.c: 148:                 eDoorPosition = DOOR_POSITION_CLOSE;
+   522                           ;source/main.c: 154:                 eDoorPosition = DOOR_POSITION_CLOSE;
    523   0006F4  0E01               	movlw	1
    524   0006F6  6E23               	movwf	_eDoorPosition^0,c
    525   0006F8                     l1692:
    526                           
-   527                           ;source/main.c: 156:             if ( i16uCntLuminosityLow > i16uCntLuminosityHigh )
+   527                           ;source/main.c: 162:             if ( i16uCntLuminosityLow > i16uCntLuminosityHigh )
    528   0006F8  5017               	movf	_i16uCntLuminosityLow^0,w,c
    529   0006FA  5C15               	subwf	_i16uCntLuminosityHigh^0,w,c
    530   0006FC  5018               	movf	(_i16uCntLuminosityLow+1)^0,w,c
@@ -556,7 +556,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    536   00070A  EF9B  F003         	goto	l1696
    537   00070E                     u570:
    538   00070E                     
-   539                           ;source/main.c: 157:             {;source/main.c: 158:                 i8uNbOfLedToSet =
+   539                           ;source/main.c: 163:             {;source/main.c: 164:                 i8uNbOfLedToSet =
       +                           (uint8_t) (i16uCntLuminosityLow / ((2*60000/10)/8));
    540   00070E  C017  F027         	movff	_i16uCntLuminosityLow,___aldiv@dividend
    541   000712  C018  F028         	movff	_i16uCntLuminosityLow+1,___aldiv@dividend+1
@@ -574,11 +574,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    553   00072E  5027               	movf	?___aldiv^0,w,c
    554   000730  6E22               	movwf	main@i8uNbOfLedToSet^0,c
    555                           
-   556                           ;source/main.c: 159:             }
+   556                           ;source/main.c: 165:             }
    557   000732  EFAD  F003         	goto	l1698
    558   000736                     l1696:
    559                           
-   560                           ;source/main.c: 161:             {;source/main.c: 162:                 i8uNbOfLedToSet =
+   560                           ;source/main.c: 167:             {;source/main.c: 168:                 i8uNbOfLedToSet =
       +                           (uint8_t) (i16uCntLuminosityHigh / ((2*60000/10)/8));
    561   000736  C015  F027         	movff	_i16uCntLuminosityHigh,___aldiv@dividend
    562   00073A  C016  F028         	movff	_i16uCntLuminosityHigh+1,___aldiv@dividend+1
@@ -597,11 +597,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    575   000758  6E22               	movwf	main@i8uNbOfLedToSet^0,c
    576   00075A                     l1698:
    577                           
-   578                           ;source/main.c: 164:             i8uBarGraphValue = 0;
+   578                           ;source/main.c: 170:             i8uBarGraphValue = 0;
    579   00075A  0E00               	movlw	0
    580   00075C  6E37               	movwf	main@i8uBarGraphValue^0,c
    581   00075E                     
-   582                           ;source/main.c: 165:             if (i8uNbOfLedToSet != 0 )
+   582                           ;source/main.c: 171:             if (i8uNbOfLedToSet != 0 )
    583   00075E  5022               	movf	main@i8uNbOfLedToSet^0,w,c
    584   000760  B4D8               	btfsc	status,2,c
    585   000762  EFB5  F003         	goto	u581
@@ -610,14 +610,14 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    588   00076A  EFD3  F003         	goto	l337
    589   00076E                     u580:
    590   00076E                     
-   591                           ;source/main.c: 166:             {;source/main.c: 167:                 for ( i=0 ; i<i8u
+   591                           ;source/main.c: 172:             {;source/main.c: 173:                 for ( i=0 ; i<i8u
       +                          NbOfLedToSet ; i++ )
    592   00076E  0E00               	movlw	0
    593   000770  6E38               	movwf	main@i^0,c
    594   000772  EFCA  F003         	goto	l1708
    595   000776                     l1704:
    596                           
-   597                           ;source/main.c: 168:                 {;source/main.c: 170:                     i8uBarGra
+   597                           ;source/main.c: 174:                 {;source/main.c: 176:                     i8uBarGra
       +                          phValue += (1<<i);
    598   000776  C038  F035         	movff	main@i,??_main
    599   00077A  0E01               	movlw	1
@@ -633,7 +633,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    609   00078E  5036               	movf	(??_main+1)^0,w,c
    610   000790  2637               	addwf	main@i8uBarGraphValue^0,f,c
    611   000792                     
-   612                           ;source/main.c: 171:                 }
+   612                           ;source/main.c: 177:                 }
    613   000792  2A38               	incf	main@i^0,f,c
    614   000794                     l1708:
    615   000794  5022               	movf	main@i8uNbOfLedToSet^0,w,c
@@ -646,10 +646,10 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    622   0007A6                     u600:
    623   0007A6                     l337:
    624                           
-   625                           ;source/main.c: 174:             LATD = i8uBarGraphValue;
+   625                           ;source/main.c: 181:             LATD = i8uBarGraphValue;
    626   0007A6  C037  FF8C         	movff	main@i8uBarGraphValue,3980	;volatile
    627                           
-   628                           ;source/main.c: 177:             if ( PORTBbits.RB0 == 0 )
+   628                           ;source/main.c: 185:             if ( PORTBbits.RB0 == 0 )
    629   0007AA  B081               	btfsc	129,0,c	;volatile
    630   0007AC  EFDA  F003         	goto	u611
    631   0007B0  EFDC  F003         	goto	u610
@@ -657,7 +657,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    633   0007B4  EFF0  F003         	goto	l1722
    634   0007B8                     u610:
    635   0007B8                     
-   636                           ;source/main.c: 178:             {;source/main.c: 180:                 if( i8uBpSw1Debou
+   636                           ;source/main.c: 186:             {;source/main.c: 188:                 if( i8uBpSw1Debou
       +                          nce < (100/10) )
    637   0007B8  0E0A               	movlw	10
    638   0007BA  6021               	cpfslt	main@i8uBpSw1Debounce^0,c
@@ -667,37 +667,37 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    642   0007C4  EFE7  F003         	goto	l1714
    643   0007C8                     u620:
    644   0007C8                     
-   645                           ;source/main.c: 181:                 {;source/main.c: 182:                     i8uBpSw1D
+   645                           ;source/main.c: 189:                 {;source/main.c: 190:                     i8uBpSw1D
       +                          ebounce++;
    646   0007C8  2A21               	incf	main@i8uBpSw1Debounce^0,f,c
    647                           
-   648                           ;source/main.c: 183:                 }
+   648                           ;source/main.c: 191:                 }
    649   0007CA  EF00  F004         	goto	l1730
    650   0007CE                     l1714:
    651                           
-   652                           ;source/main.c: 185:                 {;source/main.c: 187:                     MOT_Switc
+   652                           ;source/main.c: 193:                 {;source/main.c: 195:                     MOT_Switc
       +                          hOnMotor();
    653   0007CE  EC23  F006         	call	_MOT_SwitchOnMotor	;wreg free
    654   0007D2                     
-   655                           ;source/main.c: 188:                     LATD = 0xFF;
+   655                           ;source/main.c: 196:                     LATD = 0xFF;
    656   0007D2  688C               	setf	140,c	;volatile
    657   0007D4                     
-   658                           ;source/main.c: 189:                     bBpManualPress = 1;
+   658                           ;source/main.c: 197:                     bBpManualPress = 1;
    659   0007D4  0E01               	movlw	1
    660   0007D6  6E20               	movwf	main@bBpManualPress^0,c
    661   0007D8                     
-   662                           ;source/main.c: 191:                     eDoorPosition = DOOR_POSITION_UNKNOWN;
+   662                           ;source/main.c: 199:                     eDoorPosition = DOOR_POSITION_UNKNOWN;
    663   0007D8  0E00               	movlw	0
    664   0007DA  6E23               	movwf	_eDoorPosition^0,c
    665   0007DC  EF00  F004         	goto	l1730
    666   0007E0                     l1722:
    667                           
-   668                           ;source/main.c: 195:             {;source/main.c: 196:                 i8uBpSw1Debounce 
+   668                           ;source/main.c: 203:             {;source/main.c: 204:                 i8uBpSw1Debounce 
       +                          = 0;
    669   0007E0  0E00               	movlw	0
    670   0007E2  6E21               	movwf	main@i8uBpSw1Debounce^0,c
    671   0007E4                     
-   672                           ;source/main.c: 197:                 if ( bBpManualPress == 1 )
+   672                           ;source/main.c: 205:                 if ( bBpManualPress == 1 )
    673   0007E4  0420               	decf	main@bBpManualPress^0,w,c
    674   0007E6  A4D8               	btfss	status,2,c
    675   0007E8  EFF8  F003         	goto	u631
@@ -706,24 +706,24 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    678   0007F0  EF00  F004         	goto	l1730
    679   0007F4                     u630:
    680   0007F4                     
-   681                           ;source/main.c: 198:                 {;source/main.c: 199:                     bBpManual
+   681                           ;source/main.c: 206:                 {;source/main.c: 207:                     bBpManual
       +                          Press = 0;
    682   0007F4  0E00               	movlw	0
    683   0007F6  6E20               	movwf	main@bBpManualPress^0,c
    684                           
-   685                           ;source/main.c: 200:                     LATD = 0x00;
+   685                           ;source/main.c: 208:                     LATD = 0x00;
    686   0007F8  0E00               	movlw	0
    687   0007FA  6E8C               	movwf	140,c	;volatile
    688   0007FC                     
-   689                           ;source/main.c: 201:                     MOT_SwitchOffMotor();
+   689                           ;source/main.c: 209:                     MOT_SwitchOffMotor();
    690   0007FC  EC66  F006         	call	_MOT_SwitchOffMotor	;wreg free
    691   000800                     l1730:
    692                           
-   693                           ;source/main.c: 207:             manageSoftTimerTick();
+   693                           ;source/main.c: 215:             manageSoftTimerTick();
    694   000800  EC85  F006         	call	_manageSoftTimerTick	;wreg free
    695   000804                     l1732:
    696                           
-   697                           ;source/main.c: 125:         while ( bIsMainLoopTimingIsOver == 1 )
+   697                           ;source/main.c: 131:         while ( bIsMainLoopTimingIsOver == 1 )
    698   000804  0424               	decf	_bIsMainLoopTimingIsOver^0,w,c	;volatile
    699   000806  B4D8               	btfsc	status,2,c
    700   000808  EF08  F004         	goto	u641
@@ -739,7 +739,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    710                           
    711 ;; *************** function _manageSoftTimerTick *****************
    712 ;; Defined at:
-   713 ;;		line 371 in file "source/main.c"
+   713 ;;		line 379 in file "source/main.c"
    714 ;; Parameters:    Size  Location     Type
    715 ;;		None
    716 ;; Auto vars:     Size  Location     Type
@@ -773,7 +773,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    744   000D0A                     _manageSoftTimerTick:
    745                           	callstack 25
    746   000D0A                     
-   747                           ;source/main.c: 373:     MOT_manageMotorSoftwareTimer();
+   747                           ;source/main.c: 381:     MOT_manageMotorSoftwareTimer();
    748   000D0A  ECE6  F005         	call	_MOT_manageMotorSoftwareTimer	;wreg free
    749   000D0E  0012               	return		;funcret
    750   000D10                     __end_of_manageSoftTimerTick:
@@ -897,7 +897,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    868                           
    869 ;; *************** function _getAdcFiltered *****************
    870 ;; Defined at:
-   871 ;;		line 257 in file "source/main.c"
+   871 ;;		line 265 in file "source/main.c"
    872 ;; Parameters:    Size  Location     Type
    873 ;;  i16uAdcUnfil    2    2[COMRAM] unsigned short 
    874 ;; Auto vars:     Size  Location     Type
@@ -932,11 +932,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    903   0009D8                     _getAdcFiltered:
    904                           	callstack 27
    905   0009D8                     
-   906                           ;source/main.c: 261:     uint8_t i = 0;
+   906                           ;source/main.c: 269:     uint8_t i = 0;
    907   0009D8  0E00               	movlw	0
    908   0009DA  6E2D               	movwf	getAdcFiltered@i^0,c
    909   0009DC                     
-   910                           ;source/main.c: 264:     ti16uLuminosityAdcHistory[i8uHistoryIndex] = i16uAdcUnfiltered;
+   910                           ;source/main.c: 272:     ti16uLuminosityAdcHistory[i8uHistoryIndex] = i16uAdcUnfiltered;
    911   0009DC  501F               	movf	getAdcFiltered@i8uHistoryIndex^0,w,c
    912   0009DE  0D02               	mullw	2
    913   0009E0  50F3               	movf	243,w,c
@@ -946,7 +946,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    917   0009E8  C027  FFDE         	movff	getAdcFiltered@i16uAdcUnfiltered,postinc2
    918   0009EC  C028  FFDD         	movff	getAdcFiltered@i16uAdcUnfiltered+1,postdec2
    919   0009F0                     
-   920                           ;source/main.c: 267:     if( i8uHistoryIndex < (uint8_t)(8 -1) )
+   920                           ;source/main.c: 275:     if( i8uHistoryIndex < (uint8_t)(8 -1) )
    921   0009F0  0E07               	movlw	7
    922   0009F2  601F               	cpfslt	getAdcFiltered@i8uHistoryIndex^0,c
    923   0009F4  EFFE  F004         	goto	u451
@@ -955,30 +955,30 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    926   0009FC  EF03  F005         	goto	l1554
    927   000A00                     u450:
    928   000A00                     
-   929                           ;source/main.c: 268:     {;source/main.c: 269:         i8uHistoryIndex++;
+   929                           ;source/main.c: 276:     {;source/main.c: 277:         i8uHistoryIndex++;
    930   000A00  2A1F               	incf	getAdcFiltered@i8uHistoryIndex^0,f,c
    931                           
-   932                           ;source/main.c: 270:     }
+   932                           ;source/main.c: 278:     }
    933   000A02  EF05  F005         	goto	l356
    934   000A06                     l1554:
    935                           
-   936                           ;source/main.c: 272:     {;source/main.c: 273:         i8uHistoryIndex = 0;
+   936                           ;source/main.c: 280:     {;source/main.c: 281:         i8uHistoryIndex = 0;
    937   000A06  0E00               	movlw	0
    938   000A08  6E1F               	movwf	getAdcFiltered@i8uHistoryIndex^0,c
    939   000A0A                     l356:
    940                           
-   941                           ;source/main.c: 277:     i16uAdcfiltered = 0;
+   941                           ;source/main.c: 285:     i16uAdcfiltered = 0;
    942   000A0A  0E00               	movlw	0
    943   000A0C  6E2C               	movwf	(getAdcFiltered@i16uAdcfiltered+1)^0,c
    944   000A0E  0E00               	movlw	0
    945   000A10  6E2B               	movwf	getAdcFiltered@i16uAdcfiltered^0,c
    946                           
-   947                           ;source/main.c: 278:     for(i=0; i<8 ; i++)
+   947                           ;source/main.c: 286:     for(i=0; i<8 ; i++)
    948   000A12  0E00               	movlw	0
    949   000A14  6E2D               	movwf	getAdcFiltered@i^0,c
    950   000A16                     l1560:
    951                           
-   952                           ;source/main.c: 279:     {;source/main.c: 280:       i16uAdcfiltered += ti16uLuminosityA
+   952                           ;source/main.c: 287:     {;source/main.c: 288:       i16uAdcfiltered += ti16uLuminosityA
       +                          dcHistory[i];
    953   000A16  502D               	movf	getAdcFiltered@i^0,w,c
    954   000A18  0D02               	mullw	2
@@ -991,7 +991,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    961   000A26  50DD               	movf	postdec2,w,c
    962   000A28  222C               	addwfc	(getAdcFiltered@i16uAdcfiltered+1)^0,f,c
    963   000A2A                     
-   964                           ;source/main.c: 281:     }
+   964                           ;source/main.c: 289:     }
    965   000A2A  2A2D               	incf	getAdcFiltered@i^0,f,c
    966   000A2C  0E07               	movlw	7
    967   000A2E  642D               	cpfsgt	getAdcFiltered@i^0,c
@@ -1001,7 +1001,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    971   000A38  EF0B  F005         	goto	l1560
    972   000A3C                     u460:
    973   000A3C                     
-   974                           ;source/main.c: 282:     i16uAdcfiltered = (uint16_t)(i16uAdcfiltered >> 3);
+   974                           ;source/main.c: 290:     i16uAdcfiltered = (uint16_t)(i16uAdcfiltered >> 3);
    975   000A3C  C02B  F029         	movff	getAdcFiltered@i16uAdcfiltered,??_getAdcFiltered
    976   000A40  C02C  F02A         	movff	getAdcFiltered@i16uAdcfiltered+1,??_getAdcFiltered+1
    977   000A44  90D8               	bcf	status,0,c
@@ -1016,7 +1016,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    986   000A56  C029  F02B         	movff	??_getAdcFiltered,getAdcFiltered@i16uAdcfiltered
    987   000A5A  C02A  F02C         	movff	??_getAdcFiltered+1,getAdcFiltered@i16uAdcfiltered+1
    988   000A5E                     
-   989                           ;source/main.c: 284:     return i16uAdcfiltered;
+   989                           ;source/main.c: 292:     return i16uAdcfiltered;
    990   000A5E  C02B  F027         	movff	getAdcFiltered@i16uAdcfiltered,?_getAdcFiltered
    991   000A62  C02C  F028         	movff	getAdcFiltered@i16uAdcfiltered+1,?_getAdcFiltered+1
    992   000A66  0012               	return		;funcret
@@ -1025,7 +1025,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    995                           
    996 ;; *************** function _detectSunSet *****************
    997 ;; Defined at:
-   998 ;;		line 332 in file "source/main.c"
+   998 ;;		line 340 in file "source/main.c"
    999 ;; Parameters:    Size  Location     Type
   1000 ;;		None
   1001 ;; Auto vars:     Size  Location     Type
@@ -1059,11 +1059,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1029   000AC6                     _detectSunSet:
   1030                           	callstack 27
   1031   000AC6                     
-  1032                           ;source/main.c: 334:     _Bool bReturnVal = 0;
+  1032                           ;source/main.c: 342:     _Bool bReturnVal = 0;
   1033   000AC6  0E00               	movlw	0
   1034   000AC8  6E27               	movwf	detectSunSet@bReturnVal^0,c
   1035   000ACA                     
-  1036                           ;source/main.c: 337:     if ( eDoorPosition != DOOR_POSITION_CLOSE)
+  1036                           ;source/main.c: 345:     if ( eDoorPosition != DOOR_POSITION_CLOSE)
   1037   000ACA  0423               	decf	_eDoorPosition^0,w,c
   1038   000ACC  B4D8               	btfsc	status,2,c
   1039   000ACE  EF6B  F005         	goto	u121
@@ -1072,9 +1072,9 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1042   000AD6  EF8B  F005         	goto	l1288
   1043   000ADA                     u120:
   1044   000ADA                     
-  1045                           ;source/main.c: 338:     {;source/main.c: 340:         if ( i16uLuminosityAdcFiltered < 
-      +                          500 )
-  1046   000ADA  0EF4               	movlw	244
+  1045                           ;source/main.c: 346:     {;source/main.c: 348:         if ( i16uLuminosityAdcFiltered < 
+      +                          499 )
+  1046   000ADA  0EF3               	movlw	243
   1047   000ADC  5C19               	subwf	_i16uLuminosityAdcFiltered^0,w,c
   1048   000ADE  0E01               	movlw	1
   1049   000AE0  581A               	subwfb	(_i16uLuminosityAdcFiltered+1)^0,w,c
@@ -1085,7 +1085,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1054   000AEC  EF8B  F005         	goto	l1288
   1055   000AF0                     u130:
   1056   000AF0                     
-  1057                           ;source/main.c: 341:         {;source/main.c: 343:             if ( i16uCntLuminosityLow
+  1057                           ;source/main.c: 349:         {;source/main.c: 351:             if ( i16uCntLuminosityLow
       +                           < (2*60000/10) )
   1058   000AF0  0EE0               	movlw	224
   1059   000AF2  5C17               	subwf	_i16uCntLuminosityLow^0,w,c
@@ -1098,29 +1098,29 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1066   000B02  EF87  F005         	goto	l1286
   1067   000B06                     u140:
   1068   000B06                     
-  1069                           ;source/main.c: 344:             {;source/main.c: 345:                 i16uCntLuminosity
+  1069                           ;source/main.c: 352:             {;source/main.c: 353:                 i16uCntLuminosity
       +                          Low++;
   1070   000B06  4A17               	infsnz	_i16uCntLuminosityLow^0,f,c
   1071   000B08  2A18               	incf	(_i16uCntLuminosityLow+1)^0,f,c
   1072                           
-  1073                           ;source/main.c: 346:             }
+  1073                           ;source/main.c: 354:             }
   1074   000B0A  EF8F  F005         	goto	l376
   1075   000B0E                     l1286:
   1076                           
-  1077                           ;source/main.c: 348:             {;source/main.c: 350:                 bReturnVal = 1;
+  1077                           ;source/main.c: 356:             {;source/main.c: 358:                 bReturnVal = 1;
   1078   000B0E  0E01               	movlw	1
   1079   000B10  6E27               	movwf	detectSunSet@bReturnVal^0,c
   1080   000B12  EF8F  F005         	goto	l376
   1081   000B16                     l1288:
   1082                           
-  1083                           ;source/main.c: 354:         {;source/main.c: 355:             i16uCntLuminosityLow = 0;
+  1083                           ;source/main.c: 362:         {;source/main.c: 363:             i16uCntLuminosityLow = 0;
   1084   000B16  0E00               	movlw	0
   1085   000B18  6E18               	movwf	(_i16uCntLuminosityLow+1)^0,c
   1086   000B1A  0E00               	movlw	0
   1087   000B1C  6E17               	movwf	_i16uCntLuminosityLow^0,c
   1088   000B1E                     l376:
   1089                           
-  1090                           ;source/main.c: 362:  return bReturnVal;
+  1090                           ;source/main.c: 370:  return bReturnVal;
   1091   000B1E  5027               	movf	detectSunSet@bReturnVal^0,w,c
   1092   000B20  0012               	return		;funcret
   1093   000B22                     __end_of_detectSunSet:
@@ -1128,7 +1128,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1095                           
   1096 ;; *************** function _detectSunRise *****************
   1097 ;; Defined at:
-  1098 ;;		line 293 in file "source/main.c"
+  1098 ;;		line 301 in file "source/main.c"
   1099 ;; Parameters:    Size  Location     Type
   1100 ;;		None
   1101 ;; Auto vars:     Size  Location     Type
@@ -1162,11 +1162,11 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1129   000A68                     _detectSunRise:
   1130                           	callstack 27
   1131   000A68                     
-  1132                           ;source/main.c: 295:  _Bool bReturnVal = 0;
+  1132                           ;source/main.c: 303:  _Bool bReturnVal = 0;
   1133   000A68  0E00               	movlw	0
   1134   000A6A  6E27               	movwf	detectSunRise@bReturnVal^0,c
   1135   000A6C                     
-  1136                           ;source/main.c: 298:     if ( eDoorPosition != DOOR_POSITION_OPEN)
+  1136                           ;source/main.c: 306:     if ( eDoorPosition != DOOR_POSITION_OPEN)
   1137   000A6C  0E02               	movlw	2
   1138   000A6E  1823               	xorwf	_eDoorPosition^0,w,c
   1139   000A70  B4D8               	btfsc	status,2,c
@@ -1176,9 +1176,9 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1143   000A7A  EF5D  F005         	goto	l1238
   1144   000A7E                     u80:
   1145   000A7E                     
-  1146                           ;source/main.c: 299:     {;source/main.c: 301:         if ( i16uLuminosityAdcFiltered > 
-      +                          650 )
-  1147   000A7E  0E8B               	movlw	139
+  1146                           ;source/main.c: 307:     {;source/main.c: 309:         if ( i16uLuminosityAdcFiltered > 
+      +                          550 )
+  1147   000A7E  0E27               	movlw	39
   1148   000A80  5C19               	subwf	_i16uLuminosityAdcFiltered^0,w,c
   1149   000A82  0E02               	movlw	2
   1150   000A84  581A               	subwfb	(_i16uLuminosityAdcFiltered+1)^0,w,c
@@ -1189,7 +1189,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1155   000A90  EF5D  F005         	goto	l1238
   1156   000A94                     u90:
   1157   000A94                     
-  1158                           ;source/main.c: 302:         {;source/main.c: 304:             if ( i16uCntLuminosityHig
+  1158                           ;source/main.c: 310:         {;source/main.c: 312:             if ( i16uCntLuminosityHig
       +                          h < (2*60000/10) )
   1159   000A94  0EE0               	movlw	224
   1160   000A96  5C15               	subwf	_i16uCntLuminosityHigh^0,w,c
@@ -1202,22 +1202,22 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1167   000AA6  EF59  F005         	goto	l1236
   1168   000AAA                     u100:
   1169   000AAA                     
-  1170                           ;source/main.c: 305:             {;source/main.c: 306:                 i16uCntLuminosity
+  1170                           ;source/main.c: 313:             {;source/main.c: 314:                 i16uCntLuminosity
       +                          High++;
   1171   000AAA  4A15               	infsnz	_i16uCntLuminosityHigh^0,f,c
   1172   000AAC  2A16               	incf	(_i16uCntLuminosityHigh+1)^0,f,c
   1173                           
-  1174                           ;source/main.c: 307:             }
+  1174                           ;source/main.c: 315:             }
   1175   000AAE  EF61  F005         	goto	l367
   1176   000AB2                     l1236:
   1177                           
-  1178                           ;source/main.c: 309:             {;source/main.c: 311:                 bReturnVal = 1;
+  1178                           ;source/main.c: 317:             {;source/main.c: 319:                 bReturnVal = 1;
   1179   000AB2  0E01               	movlw	1
   1180   000AB4  6E27               	movwf	detectSunRise@bReturnVal^0,c
   1181   000AB6  EF61  F005         	goto	l367
   1182   000ABA                     l1238:
   1183                           
-  1184                           ;source/main.c: 315:         {;source/main.c: 316:             i16uCntLuminosityHigh = 0
+  1184                           ;source/main.c: 323:         {;source/main.c: 324:             i16uCntLuminosityHigh = 0
       +                          ;
   1185   000ABA  0E00               	movlw	0
   1186   000ABC  6E16               	movwf	(_i16uCntLuminosityHigh+1)^0,c
@@ -1225,7 +1225,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   1188   000AC0  6E15               	movwf	_i16uCntLuminosityHigh^0,c
   1189   000AC2                     l367:
   1190                           
-  1191                           ;source/main.c: 323:         return bReturnVal;
+  1191                           ;source/main.c: 331:         return bReturnVal;
   1192   000AC2  5027               	movf	detectSunRise@bReturnVal^0,w,c
   1193   000AC4  0012               	return		;funcret
   1194   000AC6                     __end_of_detectSunRise:
@@ -2556,7 +2556,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   2504                           
   2505 ;; *************** function _Timer0_OverflowCallback@main$F694 *****************
   2506 ;; Defined at:
-  2507 ;;		line 245 in file "source/main.c"
+  2507 ;;		line 253 in file "source/main.c"
   2508 ;; Parameters:    Size  Location     Type
   2509 ;;		None
   2510 ;; Auto vars:     Size  Location     Type
@@ -2590,7 +2590,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
   2538   000D16                     _Timer0_OverflowCallback@main$F694:
   2539                           	callstack 25
   2540   000D16                     
-  2541                           ;source/main.c: 247:     bIsMainLoopTimingIsOver = 1;
+  2541                           ;source/main.c: 255:     bIsMainLoopTimingIsOver = 1;
   2542   000D16  0E01               	movlw	1
   2543   000D18  6E24               	movwf	_bIsMainLoopTimingIsOver^0,c	;volatile
   2544   000D1A  0012               	return		;funcret
@@ -3121,7 +3121,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
-Symbol Table                                                                                   Sat Jun 01 11:30:15 2024
+Symbol Table                                                                                   Sun Jun 09 12:50:33 2024
 
                           _i16uMotorSwitchDelay 0011                                              l34 0B3E  
                                             l19 0CCA                                              l44 0D08  

@@ -59,3 +59,4 @@ dkms.conf
 *.rlf
 *.sdb
 *.sym
+software/CoopControlBoardPic18F45k20.X/nbproject/Makefile-genesis.properties

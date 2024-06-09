@@ -24,6 +24,12 @@
 #include "remoteButton.h"
 #include "motor.h"
 
+
+/***************************
+*      COMPIL OPTION       *
+****************************/
+#define ENABLE_LED_DISPLAY // uncomment to activate the Led (may perturb the luminosity sensor inside the box due to the luminosity of the LED)
+
 /***************************
 *       DEFINITION         *
 ****************************/
@@ -42,12 +48,12 @@
  *      => which give a photo resistor value of ~2K (see abacus)
  *      => ADC = 1023 * 10 / (10+2) = 853
  */
-#define SUNRISE_ADC_THRESHOLD       650     // ADC value for threshold above which the SunRise is detected
-#define SUNSET_ADC_THRESHOLD		500		// ADC value for threshold under which the SunSet is detected
+#define SUNRISE_ADC_THRESHOLD       550     // ADC value for threshold above which the SunRise is detected (value adjusted by experience)
+#define SUNSET_ADC_THRESHOLD		499		// ADC value for threshold under which the SunSet is detected (value adjusted by experience)
 
 #define SUN_TIME_FILTER (2*60000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 2 min based on the main loop timer
 // for debug usage: accelerate filter timing 
-// #define SUN_TIME_FILTER (5000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 5 sec based on the main loop timer
+//#define SUN_TIME_FILTER (5000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 5 sec based on the main loop timer
 
 /* definition for led display */
 #define LED_ARRAY_TIME_STEP     (SUN_TIME_FILTER/8)
@@ -171,7 +177,9 @@ int main(void)
                 }
             }
             else{}
+#ifdef ENABLE_LED_DISPLAY
             DISPLAY_LED_ARRAY = i8uBarGraphValue;
+#endif
                 
             /* -- Keep the BP pressed for manual switch on of the motor power relay (allow manual user command) */
             if ( Read_Button_SW1() == BUTTON_SW1_PRESS )
