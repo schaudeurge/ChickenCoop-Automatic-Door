@@ -28,28 +28,30 @@
 /***************************
 *      COMPIL OPTION       *
 ****************************/
-#define ENABLE_LED_DISPLAY // uncomment to activate the Led (may perturb the luminosity sensor inside the box due to the luminosity of the LED)
+//#define ENABLE_LED_DISPLAY // uncomment to activate the Led (may perturb the luminosity sensor inside the box due to the luminosity of the LED)
 
 /***************************
 *       DEFINITION         *
 ****************************/
 /* luminosity threshold for SunRise and SunSet detection */
 // warning: take acount light from the house, street, full moon, position of the sensor, etc ...
-/* with divisor of Rdown=10K :
+/* with divisor of Rdown=150K :
  *  ADC = V/VREF * 1023
  *   with V = Vref*Rdown/(Rdown+Rphoto)
  * ADC = 1023 * Rdown/(Rdown+Rphoto)
  * 
  * Night luminosity at full moon (worst case) is < 5lux:
- *      => which give a photo resistor value of ~10.5K (see abacus)
- *      => ADC = 1023 * 10 / (10+10.5) = 499
+ *      => which give a photo resistor value of 1Mohm
+ *      => ADC = 1023 * 150 / (150+2000) = 71
  * 
  * Day luminosity with Very dark overcast (worst case) is > 100lux:
  *      => which give a photo resistor value of ~2K (see abacus)
- *      => ADC = 1023 * 10 / (10+2) = 853
+ *      => ADC = 1023 * 150 / (150+2) = 1010
+ * 
+ * 
  */
-#define SUNRISE_ADC_THRESHOLD       550     // ADC value for threshold above which the SunRise is detected (value adjusted by experience)
-#define SUNSET_ADC_THRESHOLD		499		// ADC value for threshold under which the SunSet is detected (value adjusted by experience)
+#define SUNRISE_ADC_THRESHOLD       40     // ADC value for threshold above which the SunRise is detected (value adjusted by experience, in my case the sensor is on the shadow)
+#define SUNSET_ADC_THRESHOLD		25		// ADC value for threshold under which the SunSet is detected (value adjusted by experience, in my case the sensor is on the shadow)
 
 #define SUN_TIME_FILTER (2*60000/MAIN_LOOP_BASE_TIME_IN_MS) // equivalent time of 2 min based on the main loop timer
 // for debug usage: accelerate filter timing 

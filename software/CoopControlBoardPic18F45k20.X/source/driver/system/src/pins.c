@@ -38,13 +38,13 @@
 void PIN_MANAGER_Initialize(void)
 {
    /**
-    LATx registers (output value)
+    LATx registers (default output value = low)
     */
-    LATA = 0x0;
-    LATB = 0x0;
-    LATC = 0x0;
-    LATD = 0x0;
-    LATE = 0x0;
+    LATA = 0x00;
+    LATB = 0x00;
+    LATC = 0x00;
+    LATD = 0x00;
+    LATE = 0x00;
 
     PIN_MANAGER_RefreshConfig();    
 }

@@ -21,8 +21,8 @@
  /*          definition              */
  /************************************/
 /* associate physical pin with corresponding pin of the relay */
-#define SWITCH_ON_MOTOR_RELAY()     IO_RB3_SetLow()
-#define SWITCH_OFF_MOTOR_RELAY()    IO_RB3_SetHigh()
+#define SWITCH_ON_MOTOR_RELAY()     IO_RB3_SetHigh()
+#define SWITCH_OFF_MOTOR_RELAY()    IO_RB3_SetLow()
 
  
   /*****************************/
