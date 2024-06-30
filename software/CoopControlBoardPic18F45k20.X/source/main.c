@@ -29,6 +29,10 @@
 *      COMPIL OPTION       *
 ****************************/
 //#define ENABLE_LED_DISPLAY // uncomment to activate the Led (may perturb the luminosity sensor inside the box due to the luminosity of the LED)
+#define ENABLE_PERIODIC_WATCHDOG_RESET  // uncomment to activate periodic reset. 
+                                        // Used to force motor driven periodically instead of just once a day. 
+                                        // Can be usefull if the battery is almost dead and discharge too much during the night (the door could not open on the sun rising but can do it after a bit of solar charge) 
+                                        // @note: it requieres to activate watchdog and check its period
 
 /***************************
 *       DEFINITION         *
@@ -68,6 +72,9 @@
 #define BUTTON_SW1_PRESS    LOW // Pin is at low level when Bp is pressed 
 #define DEBOUNCE_BP_DELAY   (100/MAIN_LOOP_BASE_TIME_IN_MS) // 100ms debounce
 
+/* Timing for period reset */
+#define RST_TIMING_IN_TICK (uint32_t)(5400000/MAIN_LOOP_BASE_TIME_IN_MS) // Reset every 1.5h = 90min = 5 400sec = 5 400 000 msec
+
 typedef enum
 {
     DOOR_POSITION_UNKNOWN,
@@ -83,6 +90,7 @@ uint16_t getAdcFiltered(uint16_t i16uAdcUnfiltered);
 bool detectSunRise(void);
 bool detectSunSet(void);
 void manageSoftTimerTick(void);
+void wdtRefresh(void);
 
 /*********************************
 * GLOBALE VARIABLES DECLARATION  *
@@ -132,10 +140,13 @@ int main(void)
         /* -- waiting for main loop timing synchronization (10ms) -- */
         while ( bIsMainLoopTimingIsOver == true )
         {
-            bIsMainLoopTimingIsOver = false; // clear flag            
-            CLRWDT(); // periodic watchdog clear to avoid timeout reset
+            bIsMainLoopTimingIsOver = false; // clear the main loop flag
+            
+            wdtRefresh(); // Clear Watchdog
             PIN_MANAGER_RefreshConfig(); // Refresh pin config for EMC robustness
             
+            /* -- Manage software timers -- */
+            manageSoftTimerTick();
             
             /* -- read luminosity sensor  -- */
             //i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_POT); //debug : use potentiometer instead of photo resistor
@@ -212,9 +223,6 @@ int main(void)
                 }
                 else{}
             }
-            
-            /* -- Manage software timers -- */
-            manageSoftTimerTick();
             
             /* -- DEBUG FUNCTIONS -- */
 #if 0
@@ -381,4 +389,30 @@ bool detectSunSet(void)
 void manageSoftTimerTick(void)
 {
     MOT_manageMotorSoftwareTimer(); // software timer for Motor
+}
+
+
+/*********************************************************************
+   @function: wdtRefresh()
+   @summary: refresh watchdog and count time for periodic reset
+   @parameters:None
+   @returns: None
+**********************************************************************/
+void wdtRefresh(void)
+{
+#ifdef ENABLE_PERIODIC_WATCHDOG_RESET
+    static uint32_t i32uTimeUntilWdgRst = 0;
+    
+    if ( i32uTimeUntilWdgRst < RST_TIMING_IN_TICK )
+    {
+        i32uTimeUntilWdgRst++;
+        CLRWDT(); // periodic watchdog clear to avoid timeout reset
+    }
+    else
+    {
+        // Timer is over, do not clear watchdog the generate a reset
+    }                
+#else
+            CLRWDT(); // periodic watchdog clear to avoid timeout reset
+#endif
 }
