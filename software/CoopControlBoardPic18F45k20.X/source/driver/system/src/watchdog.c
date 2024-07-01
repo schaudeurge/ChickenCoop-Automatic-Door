@@ -35,6 +35,6 @@
 
 void WDT_Initialize(void)
 {
-    //SWDTEN ON; 
-    WDTCON = 0x1; //Note: Watchdog period configured from Config Bit
+   //Note: Watchdog period configured from Config Bit
+   // WDTCONbits.SWDTEN = 1; // Activate watchdog // commented as already activated in the config_bits
 }

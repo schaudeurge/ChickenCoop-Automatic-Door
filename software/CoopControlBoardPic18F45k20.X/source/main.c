@@ -29,10 +29,10 @@
 *      COMPIL OPTION       *
 ****************************/
 //#define ENABLE_LED_DISPLAY // uncomment to activate the Led (may perturb the luminosity sensor inside the box due to the luminosity of the LED)
-#define ENABLE_PERIODIC_WATCHDOG_RESET  // uncomment to activate periodic reset. 
-                                        // Used to force motor driven periodically instead of just once a day. 
-                                        // Can be usefull if the battery is almost dead and discharge too much during the night (the door could not open on the sun rising but can do it after a bit of solar charge) 
-                                        // @note: it requieres to activate watchdog and check its period
+#define ENABLE_PERIODIC_RESET   // uncomment to activate periodic reset. 
+                                // Used to force motor driven periodically instead of just once a day. 
+                                // Can be usefull if the battery is almost dead and discharge too much during the night (the door could not open on the sun rising but can do it after a bit of solar charge) 
+                                // @note: it requieres to activate watchdog and check its period
 
 /***************************
 *       DEFINITION         *
@@ -90,7 +90,7 @@ uint16_t getAdcFiltered(uint16_t i16uAdcUnfiltered);
 bool detectSunRise(void);
 bool detectSunSet(void);
 void manageSoftTimerTick(void);
-void wdtRefresh(void);
+void incrementTimeUntilPeriodicRst(void);
 
 /*********************************
 * GLOBALE VARIABLES DECLARATION  *
@@ -119,7 +119,9 @@ int main(void)
     /* Initialization of hardware pin, clock and peripherals */
     SYSTEM_Initialize(); ///@todo changer config pin RemoteBp en OpenDrain
     Timer0_OverflowCallbackRegister(Timer0_OverflowCallback); // register the callback for Timer0 interrupt
-
+    
+    DISPLAY_LED_ARRAY = 0xFF; // Flash to indicate the software reset
+    
     /* Enable Interrupts */
     INTERRUPT_GlobalInterruptEnable(); 
     INTERRUPT_PeripheralInterruptEnable();
@@ -134,6 +136,8 @@ int main(void)
         __delay_ms(1);
     }
     
+    DISPLAY_LED_ARRAY = 0x00; // Led Off (end of flash to indicate software reset)
+    
     /* -- infinite loop -- */
     while(1)
     {
@@ -141,12 +145,14 @@ int main(void)
         while ( bIsMainLoopTimingIsOver == true )
         {
             bIsMainLoopTimingIsOver = false; // clear the main loop flag
-            
-            wdtRefresh(); // Clear Watchdog
+            CLRWDT(); // Clear Watchdog
             PIN_MANAGER_RefreshConfig(); // Refresh pin config for EMC robustness
             
             /* -- Manage software timers -- */
             manageSoftTimerTick();
+#ifdef ENABLE_PERIODIC_RESET
+            incrementTimeUntilPeriodicRst();
+#endif
             
             /* -- read luminosity sensor  -- */
             //i16uLuminosityAdcUnFiltered = ADC_GetConversion(AN_POT); //debug : use potentiometer instead of photo resistor
@@ -393,26 +399,22 @@ void manageSoftTimerTick(void)
 
 
 /*********************************************************************
-   @function: wdtRefresh()
-   @summary: refresh watchdog and count time for periodic reset
+   @function: IncrementTimeUntilPeriodicRst()
+   @summary: count time and generate a periodic reset
    @parameters:None
    @returns: None
 **********************************************************************/
-void wdtRefresh(void)
+void incrementTimeUntilPeriodicRst(void)
 {
-#ifdef ENABLE_PERIODIC_WATCHDOG_RESET
-    static uint32_t i32uTimeUntilWdgRst = 0;
+    static uint32_t i32uTimeUntilRst = 0;
     
-    if ( i32uTimeUntilWdgRst < RST_TIMING_IN_TICK )
+    if ( i32uTimeUntilRst < RST_TIMING_IN_TICK )
     {
-        i32uTimeUntilWdgRst++;
-        CLRWDT(); // periodic watchdog clear to avoid timeout reset
+        i32uTimeUntilRst++;
     }
     else
     {
-        // Timer is over, do not clear watchdog the generate a reset
-    }                
-#else
-            CLRWDT(); // periodic watchdog clear to avoid timeout reset
-#endif
+        i32uTimeUntilRst = 0;
+        RESET(); // Timer is over, generate a reset
+    }
 }
